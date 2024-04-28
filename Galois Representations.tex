@@ -1,0 +1,356 @@
+\section{Galois Representations}
+In this section, we briefly discuss Galois representations of the absolute Galois group of the field of rational numbers $\Q$. We will start with a brief background and introduce the required terminology. This section aims to give motivation for studying 2-dimensional representations by taking inspiration from the classical result in class field theory, the Kronecker-Weber theorem, which essentially describes one-dimensional representations of $G_\Q$. We will then describe some of the primary sources of Galois representations, namely, Elliptic curves and Modular forms. This will already give us enough background to appreciate the landmark results that stood as the stepping stones in the proof of Fermat's last theorem. 
+
+We will closely follow the book \cite{diamond2005first} and \cite{darmon1995fermat}. We will sometimes closely follow proofs from either of these sources for the sake of completeness. Due to the extreme complexity of the overall topic and to demonstrate all of this within 6 months, it was inevitable to closely follow some of the proofs but written in my own words. Having said that, I must add that in many places, I have expanded on my own, giving more details.
+
+
+
+\subsection{Motivation and Basics}
+
+To state the motivation behind Galois representations in one line would be to study the absolute Galois Group of $\Q$, $G_\Q=Gal(\overline{\Q}/\Q)$. One key idea is to look at $$\rho: G_Q \longrightarrow G,$$ where $G$ is some group that we nicely understand. This gives us our first definition of this chapter. 
+
+\begin{definition}
+A $d$-dimensional representation of $G_{\mathbb{Q}}$ is a continous homomorphism
+
+$$
+G_{\mathbb{Q}} \longrightarrow G L_{d}(K)
+$$
+
+where $K$ is a field.  
+
+
+Let us look at the following picture which depicts the current world of Arithmetic Geometry. 
+
+\end{definition}
+  \begin{center}
+      \includegraphics[width=0.67\textwidth]{Screenshot_20231027_125409_Samsung Notes.jpg}
+  \end{center} 
+
+  The main idea usually behind the representations is that we understand good chunk of information about the domain group especially when it is mapped to a group that we fully or almost completely understand. The motivation behind studying Galois representations is to create a bridge between field theory, which studies the algebraic structure of fields, and group theory, which studies the algebraic structure of symmetries. Galois representations provide a way to encode the action of Galois groups on various mathematical structures into linear algebraic terms, often as matrices acting on vector spaces. This encoding allows complex symmetries to be understood and manipulated using the well-developed tools of linear algebra. \\
+
+To briefly current scheme of Arithmetic geometry without going into too many details, \textbf{Shimura Varieties} are a class of higher-dimensional spaces that generalize elliptic curves and provide a geometric setting for studying arithmetic properties of automorphic forms. They serve as a bridge between complex analysis and number theory. \textbf{Automorphic Forms} are complex functions that are symmetric with respect to the action of a discrete group. They are central to the Langlands program, which predicts a correspondence between automorphic forms and Galois representations. \textbf{Galois Representations} provide a way to represent Galois groups, which are fundamental in understanding the symmetries of the roots of polynomials. Galois representations can be associated with automorphic forms, which is a key aspect of the Langlands correspondence. \textbf{L-Functions} are complex functions that encode number-theoretic information in their coefficients and zeros. Hasse-Weil L-functions, for instance, are associated with algebraic varieties and are predicted to correspond to automorphic L-functions. \textbf{Motives} are an abstract formulation of various cohomology theories. The Langlands program can be seen as an attempt to realize a correspondence between motives (arising from algebraic geometry) and automorphic forms. \textbf{The Langlands program} suggests that there's a deep connection between Galois groups and automorphic forms (as represented by Galois representations and automorphic L-functions), mediated through geometric objects like Shimura varieties and abstract objects like motives. \\
+
+
+As one could, see from this how important this is for us to study Galois representations and thus we shift our focus to basic definitions and understanding more about Galois representations. 
+
+\vspace{1cm}
+    
+Let us proceed with recalling that the absolute Galois group of a field $\mathbb{F}$, $G_{F}$ is profinite. Specifically, it is determined by $G_\mathbb{F}=\lim \operatorname{Gal}(L / \mathbb{F})$, where $L$ iterates over the finite Galois extensions of $F$ that are contained in $\overline{\mathbb{F}}$. This gives $G_{\mathbb{F}}$ an inherent topology known as the so-called Krull topology.
+
+Considering a prime $\ell$ that is different than that of characteristic of $\mathbb{F}$, we consider  $\epsilon_{\ell}: G_{\mathbb{F}} \rightarrow \mathbb{Z}_{\ell}^{\times}$. It represents the $\ell$-adic cyclotomic character. Put in simpler terms: for every $\sigma \in G_{\mathbb{F}}$, if $\zeta$ is an $\ell$-power root of unity in $\bar{F}$, then $\sigma(\zeta)=\zeta^{\epsilon_{\ell}(\sigma)}$. When the context indicates the choice of $\ell$, we can simply use $\epsilon$.\\
+
+
+\begin{definition}
+    Consider a Galois number field $\mathbb{F}$ and a rational prime $p$. For each maximal ideal $\mathfrak{p}$ of the ring of integers $\mathcal{O}_{\mathbb{F}}$ lying over $p$, the decomposition group $D_{\mathfrak{p}}$ is defined as the subgroup of the Galois group $\operatorname{Gal}(\mathbb{F} / \mathbb{Q})$ that fixes $\mathfrak{p}$ as a set:
+
+$$
+D_{\mathfrak{p}}=\left\{\sigma \in \operatorname{Gal}(\mathbb{F} / \mathbb{Q}): \mathfrak{p}^{\sigma}=\mathfrak{p}\right\}.
+$$
+
+\end{definition}
+
+The order of the decomposition group is $e f$, where $e$ is the ramification index and $f$ is the residue class degree. Consequently, its index in $\operatorname{Gal}(\mathbb{F} / \mathbb{Q})$ is the decomposition index $g$. The action of $D_{\mathfrak{p}}$ on the residue field $\mathbb{f}_{\mathfrak{p}}=\mathcal{O}_{\mathbb{F}} / \mathfrak{p}$ is given by:
+
+$$
+(x+\mathfrak{p})^{\sigma}=x^{\sigma}+\mathfrak{p}, \quad x \in \mathcal{O}_{\mathbb{F}}, \sigma \in D_{\mathfrak{p}}.
+$$
+\begin{definition}
+   The inertia group $I_{\mathfrak{p}}$ of $\mathfrak{p}$ is defined as the kernel of this action:
+
+$$
+I_{\mathfrak{p}}=\left\{\sigma \in D_{\mathfrak{p}}: x^{\sigma} \equiv x (\bmod \mathfrak{p}) \text { for all } x \in \mathcal{O}_{\mathbb{F}}\right\}.
+$$
+ 
+\end{definition}
+
+The order of the inertia group is $e$, and it is trivial for all $\mathfrak{p}$ lying over any unramified prime $p$. \\
+
+\begin{definition}
+    Let $\mathbb{F} / \mathbb{Q}$ be a Galois extension. Let $p$ be a rational prime and let $\mathfrak{p}$ be a maximal ideal of $\mathcal{O}_{\mathbb{F}}$ lying over $p$. A Frobenius element of $\operatorname{Gal}(\mathbb{F} / \mathbb{Q})$ is any element Frob $_{\mathfrak{p}}$ satisfying the condition
+
+$$
+x^{\text {Frob }_{\mathfrak{p}}} \equiv x^{p}(\bmod \mathfrak{p}) \quad \text { for all } x \in \mathcal{O}_{\mathbb{F}} .
+$$
+
+\end{definition}
+
+Note that when $p$ is unramified, we have that order of the Inertia group 1 and thus giving the uniqueness of Frobenius element. 
+
+We can also take motivation from the above defintions and define these groups also over a fixed algebraic closure of $\Q$. 
+
+\begin{definition}
+    For a family of elements, let $p \in \mathbb{Z}$ be any prime and let $\mathfrak{p} \subset \overline{\mathbb{Z}}$ be any maximal ideal over $p$. Let $\mathfrak{p}$ be the kernel of the reduction map $\overline{\mathbb{Z}} \longrightarrow \overline{\mathbb{F}}_{p}$. \\
+    
+    The decomposition group of $\mathfrak{p}$ is
+
+$$
+D_{\mathfrak{p}}=\left\{\sigma \in G_{\mathbb{Q}}: \mathfrak{p}^{\sigma}=\mathfrak{p}\right\} .
+$$
+
+\end{definition}
+
+The reduction map
+
+$$
+D_{\mathfrak{p}} \longrightarrow G_{\mathbb{F}_{p}}
+$$
+
+is surjective. An absolute Frobenius element over $p$ is any preimage Frob $\mathfrak{p} \in D_{\mathfrak{p}}$ of the Frobenius automorphism $\sigma_{p} \in G_{\mathbb{F}_{p}}$. Thus Frob $\mathfrak{p}_{\mathfrak{p}}$ is defined only up to the kernel of the reduction map which brings  us to the next definition. 
+
+\begin{definition}
+     The inertia group of $\mathfrak{p}$ is defined as,
+
+$$
+I_{\mathfrak{p}}=\left\{\sigma \in D_{\mathfrak{p}}: x^{\sigma} \equiv x(\bmod \mathfrak{p}) \text { for all } x \in \overline{\mathbb{Z}}\right\} .
+$$
+\end{definition}
+
+\begin{definition}
+    Let $d$ be a positive integer. A d-dimensional $\ell$-adic Galois representation is a continuous homomorphism
+
+$$
+\rho: G_{\mathbb{Q}} \longrightarrow \mathrm{GL}_{d}(\mathbb{L})
+$$
+
+where $\mathbb{L}$ is a finite extension field of $\mathbb{Q}_{\ell}$. If $\rho^{\prime}: G_{\mathbb{Q}} \longrightarrow \mathrm{GL}_{d}(\mathbb{L})$ is another such representation and there is a matrix $m \in \mathrm{GL}_{d}(\mathbb{L})$ such that $\rho^{\prime}(\sigma)=m^{-1} \rho(\sigma) m$ for all $\sigma \in G_{\mathbb{Q}}$ then $\rho$ and $\rho^{\prime}$ are equivalent. Equivalence is denoted by $\rho \sim \rho^{\prime}$.
+\end{definition}
+
+\begin{remark}
+    This defintion comes from the motivation that dirichlet characters lead to homomorphisms from the Absolute galois group of $\Q$ into $\C*$ of certain type and all such homomorphism come from Dirichlet characters. One can more generally show that any continuous homomorphism \( \rho \) from the absolute Galois group \( G_{\mathbb{Q}} \) to the general linear group of degree \( d \) over the complex numbers, denoted \( \mathrm{GL}_{d}(\mathbb{C}) \) has finite image. Extending this notion, the image of a Dirichlet character \( \chi \) is situated within a number field \( \mathbb{K} \), and consequently, it can be associated with a field \( \mathbb{K}_{\lambda} \), in which \( \lambda \) is an ideal above a specified rational prime \( \ell \). Thus, the multiplicative group of the complex numbers, \( \mathbb{C}^{*} \), can be replaced by \( \mathbb{K}_{\lambda}^{*} \) within the framework of diagram (9.11), \cite{diamond2005first}. Following this substitution, the continuity of the representation \( \rho_{\chi} \): \( G_{\mathbb{Q}} \rightarrow \mathbb{K}_{\lambda}^{*} \) is preserved. \\
+\end{remark}
+Before going to the next section, we define the last important defintion in this section, which will facilitate the discussions from this point onwards. 
+
+\begin{definition}
+    Let $\rho$ be a Galois representation and let $p$ be prime. Then $\rho$ is unramified at $p$ if $I_{\mathfrak{p}} \subset \operatorname{ker} \rho$ for any maximal ideal $\mathfrak{p} \subset \overline{\mathbb{Z}}$ lying over $p$.
+
+\end{definition}
+
+\begin{definition}
+    An algebraic extension $F / \mathbb{Q}$ is termed unramified at $p$ if all conjugates of $I_{p}$ lie within $G_{F} \subset G_{\mathbb{Q}}$. Conversely, it's termed ramified otherwise.
+\end{definition} \\
+
+If $F / \mathbb{Q}$ is Galois and unramified at $p$, a distinct conjugacy class $\left[\operatorname{Frob}_{p}\right] \subset \operatorname{Gal}(F / \mathbb{Q})$ arises.
+
+Replacing the $p$-adic completion with an Archimedean one, there's a unique conjugacy class $[c]$ in $G_{\mathbb{Q}}$ corresponding to complex conjugation for some embeddings of $\overline{\mathbb{Q}}$ into $\mathbb{C}$. For a chosen $c$, its stabiliser is $G_{\infty}$.
+\\
+We state a couple of important results without proofs which help us in the understanding of the absolute Galois group of $Q$. See, \cite{darmon1995fermat} for more details.  
+
+\begin{theorem}
+A finite extension $F / \mathbb{Q}$ is ramified only at finitely many primes.
+    
+\end{theorem}
+
+\begin{theorem}[Chebotarev Density theorem]
+    For a Galois extension $F / \mathbb{Q}$ unramified outside a finite set of primes $S$, the set $\bigcup_{p \notin S}\left[\mathrm{Frob}_{p}\right]$ is dense in $\mathrm{Gal}(F / \mathbb{Q})$.
+
+\end{theorem}: 
+
+\begin{theorem}[Kronecker-Weber]
+    
+There is an isomorphism:
+$$
+\prod_{p} \epsilon_{p}: G_{\mathbb{Q}}^{\mathrm{ab}} \stackrel{\sim}{\rightarrow} \prod_{p} \mathbb{Z}_{p}^{\times}
+$$
+
+\end{theorem}
+
+The Local Kronecker-Weber theorem, state that the following map is an isomorphism:
+
+$$
+\varrho \times \epsilon_{p}: G_{\mathbb{Q}_{p}}^{\mathrm{ab}} \longrightarrow G_{\mathbb{F}_{p}} \times \mathbb{Z}_{p}^{\times}
+$$
+\\
+
+Where, $G^{\text {ab }}$ denotes the abelianisation of a profinite group $G$. Under this mapping, $I_{p}$ is mapped to $\mathbb{Z}_{p}^{\times}$, and for positive $u$, $I_{p}^{u}$ is mapped to $\left(1+p^{\lceil u\rceil} \mathbb{Z}_{p}\right) \subset \mathbb{Z}_{p}^{\times}$, where $\lceil u\rceil$ denotes the ceiling function. For cases where $\ell \neq p$, the map $\epsilon_{\ell}$ is trivial on $I_{p}$ and sends Frob $_{p}$ to $p \in \mathbb{Z}_{\ell}^{\times}$.\
+
+\textbf{Note:}
+We're primarily interested in representations into fields with a natural topology, emphasizing continuous maps. A one-dimensional representation inherently has an abelian image. Kronecker-Weber theorem essentially characterizes these representations and their behaviour on decomposition groups at all primes. The goal of this chapter is to study some of the things which were done to expand upon this for two-dimensional representations of $G_{\mathbb{Q}}$.
+
+
+\subsection{Elliptic curves, Modular forms and Galois representations}
+The idea behind this section is to introduce the connection of elliptic curves to Galois representations. We  start by introducing $\ell$-adic module associated with an elliptic curve $E$. Recall, that $E[n](\overline{\mathbb{Q}})$ denote the group of $n$-torsion points on $E(\overline{\mathbb{Q}})$. For simplicity, we will use the notation $E[n]$. 
+
+\begin{definition}
+    Let $\ell$ be a prime number. Let $E$ be an elliptic curve. Then, the $\ell$-adic Tate module of $E$ is given by, $$\mathcal{T}_{\ell} E=\lim _{\leftarrow} E\left[\ell^{n}\right],$$ where the inverse limit runs over natural numbers.
+\end{definition}
+
+We recall that, for each $n$, we have the isomorphism between $E\left[\ell^{n}\right]$ and $\mathbb{Z} / \ell^{n} \mathbb{Z}$. This, gives $$
+\mathcal{T}_{\ell}(E) \cong \mathbb{Z}_{\ell}^{2}.
+$$
+
+Furthermore, one can easily see that Tate module is indeed a \(G_{\mathbb{Q}}\)-module. To see this quickly, note that if attach the $\ell^n$-torsion points to $\Q$, one gets a Galois number field. Thus, one can restrict from the absolute Galois group of $\Q$ to $\operatorname{Gal}(\mathbb{Q}(E[\ell^{n}]) / \mathbb{Q}).$ Furthermore, the latter Galois group injects into $\operatorname{Aut}(E[\ell^{n}]).$ Combining and Checking compatibility, of restriction map into $Aut[E[\ell^{n}]], Aut[E[\ell^{n+1}]]$, one realises that the $\ell$-adic Tate module asosciated to $E$ is indeed a \(G_{\mathbb{Q}}\)-module.
+
+
+One has the natural isomorphism, \(\operatorname{Aut}\left(E[\ell^{n}]\right) \stackrel{\sim}{\longrightarrow} \mathrm{GL}_{2}\left(\mathbb{Z} / \ell^{n} \mathbb{Z}\right)\), and these isomorphisms combine to give \(\operatorname{Aut}\left(\operatorname{Ta}_{\ell}(E)\right) \stackrel{\sim}{\longrightarrow} \mathrm{GL}_{2}\left(\mathbb{Z}_{\ell}\right)\). Since \(G_{\mathbb{Q}}\) acts on \(\operatorname{Ta}_{\ell}(E)\), the cumulative result is a homomorphism
+
+\[
+\rho_{E, \ell}: G_{\mathbb{Q}} \longrightarrow \mathrm{GL}_{2}\left(\mathbb{Z}_{\ell}\right) \subset \mathrm{GL}_{2}\left(\mathbb{Q}_{\ell}\right).
+\]. 
+
+The continuity of this homomorphism follows from the fact that the Tate module has a natural continuous action of $G_\Q$.
+
+Thus, we get the following definition. 
+
+\begin{definition}
+    $\rho_{E, \ell}$ is a Galois representation, the 2-dimensional Galois representation associated to $E$.
+\end{definition}
+Similarly, due to the action of $G_Q$ on the group of $n$-torsion points of $E$, one gets a representation defined below.
+
+\begin{definition}
+    $$
+\bar{\rho}_{E, n}: G_{\mathbb{Q}} \rightarrow G L_{2}(\mathbb{Z} / n \mathbb{Z}) .
+$$ is representation assosciated with $E$, for $n$, a natural number. 
+
+\end{definition}
+
+We have the following global properties for these representations. 
+
+\begin{proposition}
+    \begin{enumerate}
+        \item The determinant of $\rho_{E, \ell}$ is $\epsilon_{\ell}$.
+
+\item  The representation $\rho_{E, \ell}$ is absolutely irreducible for all $\ell$ and for fixed $E$, $\bar{\rho}_{E, \ell}$ is absolutely irreducible for all but finitely many $\ell$.
+\item   Let $E$ be an elliptic curve over $\mathbb{Q}$ with conductor $N$. The Galois representation $\rho_{E, \ell}$ is unramified at every prime $p \nmid \ell N$. For any such $p$ let $\mathfrak{p} \subset \overline{\mathbb{Z}}$ be any maximal ideal over $p$. Then the characteristic equation of $\rho_{E, \ell}\left(\right.$Frob $\left._{\mathfrak{p}}\right)$ is
+
+$$
+x^{2}-a_{p}(E) x+p=0 .
+$$
+
+    \end{enumerate}
+\end{proposition}
+\begin{proof} First result follows from the existence of the non-degenerate alternating Galois-equivariant Weil pairing
+
+$$
+\mathcal{T}_{\ell} E \times \mathcal{T}_{\ell} E \longrightarrow \mathbb{Z}_{\ell}(1):=\lim _{\leftarrow} \mu_{\ell^{n}}.
+$$The second result is the main result of \cite{serre1968abelian}. The last part is proved in detail in  \cite{diamond2005first}, see for example, proposition 9.4.1
+
+    
+\end{proof}
+
+\begin{remark}
+    There is a stronger version than 2nd part of the previous proposition due to Barry Mazur which states that, for $E / \mathbb{Q}$ an elliptic curve, we have following: 
+    \begin{enumerate}
+        \item If $\ell>163$ is a prime then $\bar{\rho}_{E, \ell}$ is irreducible.
+
+        \item If $E$ is semistable then $\bar{\rho}_{E, \ell}$ is irreducible for $\ell>7$.
+        \item If $E$ is semistable and $\bar{\rho}_{E, 2}$ is trivial then $\bar{\rho}_{E, \ell}$ is irreducible for $\ell>3$.\end{enumerate} 
+        
+Note that the irreducibility result in the second part is stronger than in the general case and requires $E$ to have semistable reduction everywhere. The condition that \( \bar{\rho}_{E, 2} \) is trivial adds additional constraints on the curve and its torsion structure, which can be used to deduce the irreducibility of \( \bar{\rho}_{E, \ell} \) for the remaining primes \( \ell \) greater than 3. Furthermore, once we look at this result and the results due to Serre \cite{serre1968abelian}, the cumulative result is that if $E$ is semistable everywhere, then $\bar{\rho}_{E, \ell}$ is surjective for $\ell>7$(See, \cite{mazur1978rational}, Theorem 4).
+
+\end{remark}
+
+
+Now, we briefly discuss the local behaviour of these representations before going further to discuss the connection of Galois representations with Modular curves and in turn with Modular forms. 
+
+\begin{theorem}
+    Suppose E has good reduction at a prime $p$. If $\ell \neq p$, then $\rho_{E, \ell}$ is unramified at $p$, and we have the formula
+
+$$
+\operatorname{tr} \rho_{E, \ell}\left(\operatorname{Frob}_{p}\right)=p+1-\# \bar{E}_{p}\left(\mathbb{F}_{p}\right) .
+$$
+
+In particular $\operatorname{tr} \rho_{E, \ell}\left(\right.$ Frob $\left._{p}\right)$ belongs to $\mathbb{Z}$ and is independent of $\ell \neq p$.
+
+\end{theorem}
+
+Let us now attempt to explain the connection of Galois representations with modular curves and how these representations decompose into 2-dimensional representations associated to modular forms.
+
+
+Let $N$ be a positive integer and let $\ell$ be prime. The modular curve $X_{1}(N)$ is a projective nonsingular algebraic curve over $\mathbb{Q}$. Let $g$ denote its genus. The curve $X_{1}(N)_{\mathbb{C}}$ over $\mathbb{C}$ defined by the same equations can also be viewed as a compact Riemann surface.
+\begin{definition}
+    The Picard group of the modular curve is the Abelian group of divisor classes on the points of $X_{1}(N)$,
+
+$$
+\operatorname{Pic}^{0}\left(X_{1}(N)\right)=\operatorname{Div}^{0}\left(X_{1}(N)\right) / \operatorname{Div}^{\ell}\left(X_{1}(N)\right) .
+$$
+
+\end{definition}
+\begin{definition}
+    The $\ell$-adic Tate module of $X_{1}(N)$ is
+
+$$
+\operatorname{Ta}_{\ell}\left(\operatorname{Pic}^{0}\left(X_{1}(N)\right)\right)={\lim _{n}}\left\{\operatorname{Pic}^{0}\left(X_{1}(N)\right)\left[\ell^{n}\right]\right\} .
+$$
+
+\end{definition}
+Section 7.9 from \cite{diamond2005first} discusses the identification of Picard group with the complex analytic Picard group. After following a series of observations which follow from Abel's theorem and Igusa's theorem discussed in the last chapter, we get the following isomorphisms. 
+
+$$
+i_{n}: \operatorname{Pic}^{0}\left(X_{1}(N)\right)\left[\ell^{n}\right] \longrightarrow \operatorname{Pic}^{0}\left(X_{1}(N)_{\mathbb{C}}\right)\left[\ell^{n}\right] \cong\left(\mathbb{Z} / \ell^{n} \mathbb{Z}\right)^{2 g}
+$$
+
+$$
+\pi_{n}: \operatorname{Pic}^{0}\left(X_{1}(N)\right)\left[\ell^{n}\right] \longrightarrow \operatorname{Pic}^{0}\left(\widetilde{X}_{1}(N)\right)\left[\ell^{n}\right] , p \nmid \ell N .
+$$
+Analogous to the preceding discussion, if we  select bases for the torsion subgroup \( \operatorname{Pic}^{0}(X_{1}(N))[\ell^{n}] \) compatibly for each \( n \), we have that:
+
+\[
+\operatorname{Ta}_{\ell}(\operatorname{Pic}^{0}(X_{1}(N))) \simeq \mathbb{Z}_{\ell}^{2g}.
+\]
+
+Here, the isomorphism indicates that the Tate module \( \operatorname{Ta}_{\ell} \) of the Picard group of degree zero \( \operatorname{Pic}^{0} \) of the modular curve \( X_{1}(N) \) is isomorphic to a free \( \mathbb{Z}_{\ell} \)-module of rank \( 2g \), where \( g \) denotes the genus of the modular curve \( X_{1}(N) \). 
+Following on the footsteps of the previous discussion as in the case of Elliptic curves, one gets the Galois representation associated with $X_1(N)$. 
+
+$$
+\rho_{X_{1}(N), \ell}: G_{\mathbb{Q}} \longrightarrow \mathrm{GL}_{2 g}\left(\mathbb{Z}_{\ell}\right) \subset \mathrm{GL}_{2 g}\left(\mathbb{Q}_{\ell}\right) .
+$$
+
+\begin{theorem}
+    Let $\ell$ be prime and let $N$ be a positive integer. The Galois representation $\rho_{X_{1}(N), \ell}$ is unramified at every prime $p \nmid \ell N$. For any such $p$ let $\mathfrak{p} \subset \overline{\mathbb{Z}}$ be any maximal ideal over $p$. Then $\rho_{X_{1}(N), \ell}\left(\right.$ Frob $\left._{\mathfrak{p}}\right)$ satisfies the polynomial equation
+
+$$
+x^{2}-T_{p} x+\langle p\rangle p=0
+$$
+
+\end{theorem}
+\begin{proof}[sketch]
+
+Assuming \( p \) is not a divisor of \( \ell N \) and let \( \mathfrak{p} \) be an ideal above \( p \), we have the following diagram, which gives the first claim due to the fact that the mapping on the right is an isomorphism:
+\begin{center}
+\begin{tikzcd}
+D_\mathbf{p} \arrow[rr] \arrow[dd] &  & {\operatorname{Aut}(\operatorname{Pic}^0(X_1(N))[\ell^n])} \arrow[dd] \\
+                                   &  &                                                                       \\
+G_{F_p} \arrow[rr]                 &  & {\operatorname{Aut}(\operatorname{Pic}^0(\tilde{X_1}(N))[\ell^n])}   
+\end{tikzcd}
+    
+\end{center}
+
+For the subsequent part, Eichler-Shimura relation  when restricted to \( \ell^{n} \)-torsion, gives another  commutative diagram:
+
+\begin{center}
+   \begin{tikzcd}
+\operatorname{Pic}^0(X_1(N))[\ell^n] \arrow{r}{T_p} \arrow{d} & \operatorname{Pic}^0(X_1(N))[\ell^n] \arrow{d} \\
+\operatorname{Pic}^0(\widetilde{X}_1(N))[\ell^n] \arrow{r}{\sigma_{p,*} + (\langle p \rangle \cdot \sigma_p)^*} & \operatorname{Pic}^0(\widetilde{X}_1(N))[\ell^n]
+\end{tikzcd} 
+\end{center}
+
+
+The diagram, when modified with \( \text{Frob} \mathfrak{p} + \langle p \rangle p \text{Frob}_{\mathfrak{p}}^{-1} \) across the top row, preserves commutativity. Given that the vertical mappings are isomorphisms, we infer that \( T_{p} = \text{Frob}_{\mathfrak{p}} + \langle p \rangle p \text{Frob}_{\mathfrak{p}}^{-1} \) on \( \operatorname{Pic}^{0}(X_{1}(N))[\ell^{n}] \). This holds for all \( n \), and thus, the relationship extends to \( \operatorname{Ta}_{\ell}(\operatorname{Pic}^{0}(\widetilde{X}_{1}(N))) \), from which the result follows.
+
+\end{proof}
+
+
+\subsection{Modularity}
+In this brief section, we attempt to briefly explain the Modularity theorem in terms of Galois representations. 
+
+\begin{definition}
+
+Let \( \rho: G_{\mathbb{Q}} \to \mathrm{GL}_{2}(\mathbb{Q}_{\ell}) \) be an irreducible Galois representation where \( G_{\mathbb{Q}} \) is the absolute Galois group of \( \mathbb{Q} \), and \( \mathrm{GL}_{2}(\mathbb{Q}_{\ell}) \) denotes the group of 2x2 invertible matrices over the \( \ell \)-adic numbers \( \mathbb{Q}_{\ell} \). Furthermore, let the determinant of \( \rho \) be the \( \ell \)-adic cyclotomic character \( \chi_{\ell} \). \\
+
+The representation \( \rho \) is said to be modular if the following conditions are satisfied: \\
+
+1. There exists a newform \( f \) in the space of cusp forms of weight 2 for the congruence subgroup \( \Gamma_{0}(M_{f}) \), symbolized as \( f \in \mathcal{S}_{2}(\Gamma_{0}(M_{f})) \).
+
+2. The field \( \mathbb{K}_{f, \lambda} \), which is the completion of the number field generated by the Fourier coefficients of \( f \) at a maximal ideal \( \lambda \), is identical to \( \mathbb{Q}_{\ell} \), where \( \lambda \) is an ideal in the ring of integers \( \mathcal{O}_{\mathbb{K}_{f}} \) that lies above \( \ell \).
+
+3. The representation \( \rho_{f, \lambda} \), associated with the newform \( f \) at the ideal \( \lambda \), is isomorphic to \( \rho \), denoted as \( \rho_{f, \lambda} \sim \rho \).
+
+\end{definition}
+
+Now, we are ready to the state the version of Modularity theorem that was finally proved in the works by Sir Andrew wiles and Richard Taylor in \cite{wiles1995} and \cite{taylorwiles1995b}. This was the theorem, resolution of which finally ended the wait of 350 years of all the Mathematicians across the world. 
+
+\begin{theorem}[Modularity Theorem]
+Let $E$ be an elliptic curve over $\mathbb{Q}$. Then $\rho_{E, \ell}$ is modular for some $\ell$. \end{theorem}
+\begin{proof}
+    See \cite{taylorwiles1995b}, \cite{wiles1995elliptic} and for more elementary approach in the sense of building upto the proof, see \cite{darmon1995fermat}.
+\end{proof}
