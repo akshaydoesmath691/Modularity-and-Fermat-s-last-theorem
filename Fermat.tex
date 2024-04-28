@@ -1,0 +1,297 @@
+\section{Fermat's last theorem}
+In this chapter, we will finally shift our focus towards the end goal of my thesis, namely \textbf{Fermat's last theorem}. It is one of the most enigmatic and talked-about problems in the history of mathematics: Fermat's Last Theorem. For more than three centuries, this elusive theorem originally scribbled in the margin of a book by Pierre de Fermat, has captivated the imagination of scholars and presented a formidable challenge to mathematicians.\\
+
+Our exploration begins with a short tour into the early history of the problem, revealing how Fermat's seemingly simple assertion engendered a labyrinth of complexity that many sought to unravel, yet few understood. We will then pivot to the modern era, focusing on the groundbreaking proof formulated by Andrew Wiles, a triumph that came in 1994 and effectively ended the centuries-long quest for a solution.\\
+
+Crucial to our understanding will be an in-depth look at the Eichler-Shimura relations, an indispensable component that bridges modular forms and elliptic curves. Furthermore, we'll delve into the realm of Galois representations, which adds another layer of sophistication to the existing proof. Throughout the chapter, we'll encounter a host of other landmark results and theories that offer the significant flow for the understanding needed to grasp the monumental proof of Fermat's Last Theorem. \\
+
+By the end of this chapter, I aim to make things as clear as possible, so that you'll not only have a deeper appreciation for the problem but also understand the creative thinking and ingenuity required to solve this centuries-old mathematical puzzle. Thus, I invite you to prepare yourself for an intellectually rewarding adventure that covers the contributions of legendary Mathematicians like Fermat and Wiles, Ribet, and Shimura among many others, in a way that's both engaging and accessible.
+
+The main reference for this section are \cite{darmon1995fermat} and \cite{ribet1990from} and Ribet's expository article \cite{Ribet1990}.  
+
+In this chapter, we finally bear the fruit of our efforts so far and give an overview of the Proof of Fermat's last theorem. We will explore the ingenious train of thought that was required to tackle the problem finally and how the sophisticated machinery developed throughout the text stands at the backbone of the proof of a long-standing problem that challenged generations of Mathematicians.  Later in the second section, we add a few technical details that will, in some sense, combine all of the tools we developed in the previous sections.  \\
+\textbf{Important Modern developments}\\   
+We begin by documenting some of the crucial modern developments that served as crucial steps in unfolding the proof. We also state some of the conjectures that are still open but hold very much importance and are strongly related to the flow and the key ideas that laid the foundations of the proof. \\
+
+
+\begin{center}
+\textbf{Barry Mazur and Modular curves}:\\   
+\end{center}
+  
+
+In the mid-seventies, Barry Mazur initiated a series of thoughts leading to Fermat's Last Theorem's proof, exploring Diophantine properties of modular curves. He uncovered an infinite series of naturally occurring Diophantine equations, analogous to the "trivial solutions" of Fermat's equation. These equations exhibit specific systematic rational solutions corresponding to the cusps, defined over \(\mathbb{Q}\).
+Mazur essentially resolved the analogue of Fermat's Last Theorem for modular curves. He showed that, except for the cases where \(\ell = 2, 3, 5,\) and \(7\), the curve \(X_{1}(\ell)\) contains no rational points other than the "trivial" ones, i.e., cusps. This, in particular it implied that an elliptic curve over \(\mathbb{Q}\) with a square-free conductor has no rational cyclic subgroup of order \(\ell\) over \(\mathbb{Q}\) if $\ell$ is a rational prime greater than 7.\\
+
+  \begin{center}
+\textbf{The work of Gerd Faltings}: \\    
+\end{center}
+  
+
+
+In 1985, Gerd Faltings substantiated a broad proposition initially conjectured by Mordell. This proposition states that any equation in two variables representing a curve with a genus explicitly exceeding one has, at most, a finite number of rational solutions. This validation solidified the understanding that the Fermat equation \(x^{n}+y^{n}=z^{n}\) for every exponent \(n \geq 3\) holds finitely many integer solutions, considering obvious rescaling. This insight inferred that Faltings' groundbreaking accomplishment substantiates Fermat's Last Theorem for exponents with density one.
+
+However, the certainty of Fermat's Last Theorem for an unbounded set of prime exponents remained elusive. The theorem by Faltings seemed inadequately equipped to address the nuanced inquiries posited by Fermat in his margin. Specifically, it couldn’t provide a comprehensive enumeration of rational points on all Fermat curves \(x^{n}+y^{n}=1\) and prove the absence of solutions on these curves for \(n \geq 3\), aside from the apparent ones.\\
+\vspace{1cm}
+\begin{center}
+\textbf{The spectacular Frey curve}: \\   
+\end{center}
+In 1986, Gerhard Frey postulated a potential precise connection between Fermat's Last Theorem and elliptic curve theory, particularly relating to the Shimura Taniyama conjecture. \\
+
+
+Suppose we have a solution \(a^{\ell}+b^{\ell}=c^{\ell}\) to the Fermat equation of prime degree \(\ell\), we assume without loss of generality that \(a^{\ell} \equiv-1(\bmod 4)\) and \(b^{\ell} \equiv 0(\bmod 32)\). Following the ideas from the work of Hellegouarch\cite{He}, Frey considered the elliptic curve\cite{Fr} :
+
+\[
+E: y^{2}=x(x-a^{\ell})(x+b^{\ell}).
+\]
+
+This curve is semistable: Let us recall that it has a square-free conductor. Here, \(E[\ell]\) represents the group of points of order \(\ell\) on \(E\)($\ell$-torsion points), defined over a fixed algebraic closure \(\overline{\mathbb{Q}}\) of \(\mathbb{Q}\), and \(L\) is the smallest number field(finite field extension of $\mathbb{Q}$) containing these points. What makes it special is that the field \(L\) has "\textit{very little ramification}". Namely, Using Tate’s detailed study of \(E\) at the primes dividing \(a\), \(b\), and \(c\), it was shown that \(L\) is ramified only at 2 and \(\ell\).
+
+Additionally, Mazur's work on the curve \(X_{0}(\ell)\) could be used to show that \(L\) is large, in the following sense.\\ The space \(E[\ell]\) is a 2-dimensional vector space over the finite field \(\mathbb{F}_{\ell}\) with \(\ell\) elements, and the absolute Galois group \(G_{\mathbb{Q}}=\operatorname{Gal}(\overline{\mathbb{Q}} / \mathbb{Q})\) is represented by:
+
+\[
+\bar{\rho}_{E, \ell}: \operatorname{Gal}(L / \mathbb{Q}) \hookrightarrow GL_{2}(\mathbb{F}_{\ell}).
+\]
+
+Mazur’s findings suggest that \(\bar{\rho}_{E, \ell}\) is irreducible if \(\ell>7\), considering that \(E\) is semi-stable. In fact, when combined with earlier findings by Serre, it’s implied that for \(\ell>7\), the representation \(\bar{\rho}_{E, \ell}\) is surjective, meaning that \(\mathrm{Gal}(L / \mathbb{Q})\) is actually equivalent to \(GL_{2}(\mathbb{F}_{\ell})\) in such cases.\\
+
+\begin{center}
+    \textbf{Jean Pierre Serre and Serre conjectures:}
+\end{center}
+Jean-Pierre Serre deeply examined mod \( \ell \) Galois representations \( \bar{\rho}: G_{\mathbb{Q}} \longrightarrow GL_{2}(\mathbb{F}_{\ell}) \) and, in a broader sense, the representations into \( GL_{2}(k) \), where \( k \) is an arbitrary finite field. Serre formulated highly detailed conjectures concerning the relation between these representations and modular forms mod \( \ell \). \\In relation to the representations \( \bar{\rho}_{E, \ell} \) present in Frey’s approach, Serre hypothesized that they originate from modular forms mod \( \ell \) with weight two and level two. However, such modular forms, associated with differentials on the modular curve \( X_{0}(2) \), are nonexistent as \( X_{0}(2) \) is of genus 0. Consequently, Serre’s conjectures provided implications for Fermat’s Last Theorem. The connection between fields with Galois groups within \( GL_{2}(\mathbb{F}_{\ell}) \) and modular forms mod \( \ell \) continues to be profoundly intricate, with Serre’s conjectures remaining as one of the most intriguing unresolved problems.\\
+
+\begin{center}
+    \textbf{Ribet's level lowering theorem:}
+\end{center}
+The Shimura-Taniyama conjecture establishes a fundamental connection between elliptic curves and modular forms, predicting that the representation \( \bar{\rho}_{E, \ell} \) derived from the \( \ell \)-division points of the Frey curve is connected to a modular form of weight 2, but with a notably high level. This level corresponds to the product of all the primes dividing \( a b c \), given \( a^{\ell} + b^{\ell} = c^{\ell} \) as the presumed solution to Fermat’s equation. Ribet demonstrated that if this were the scenario, then \( \bar{\rho}_{E, \ell} \) would indeed correlate with a modular form mod \( \ell \) of weight 2 and level 2, aligning with Serre’s predictions. This profound insight allowed Ribet to relate Fermat’s Last Theorem directly to the Shimura-Taniyama conjecture.
+
+
+\begin{center}
+    \textbf{From elliptic curves to Galois representations: A journey to embark upon}
+\end{center}
+
+Wiles initiated his proof of the Shimura-Taniyama conjecture by perceiving it within the broader context of associating two-dimensional Galois representations with modular forms. The conjecture suggests that, given \( E \) is an elliptic curve over \( \mathbb{Q} \), it implies that \( E \) is modular. A definition of modularity, one among many, states that there exists an integer \( N \) and an eigenform \( f = \sum a_{n} q^{n} \) of weight two on \( \Gamma_{0}(N) \) such that 
+
+\[
+\# E\left(\mathbb{F}_{p}\right)=p+1-a_{p}
+\]
+
+holds for almost all primes \( p \).
+
+Looking at this through a Galois theoretical perspective, it involves considering the two-dimensional \( \ell \)-adic representation 
+
+\[
+\rho_{E, \ell}: G_{\mathbb{Q}} \longrightarrow GL_{2}\left(\mathbb{Z}_{\ell}\right)
+\]
+
+This representation is derived from the action of \( G_{\mathbb{Q}} \) on the \( \ell \)-adic Tate module of \( E \): \( \mathcal{T}_{\ell} E= \lim _{\leftarrow} E\left[l^{n}\right](\overline{\mathbb{Q}}) \).\\ An \( \ell \)-adic representation \( \rho \) of \( G_{\mathbb{Q}} \) is considered to come from an eigenform \( f = \sum a_{n} q^{n} \) with integer coefficients \( a_{n} \) if 
+
+\[
+\operatorname{tr}\left(\rho\left(\operatorname{Frob}_{p}\right)\right)=a_{p}
+\]
+
+This holds true for almost all primes \( p \) where \( \rho \) is unramified. Here, Frob \( p \) is a Frobenius element at \( p \), and its image under \( \rho \) represents a well-defined conjugacy class.
+
+A straightforward calculation reveals(More details in the next section) that \( \# E\left(\mathbb{F}_{p}\right)=p+1-\operatorname{tr}\left(\rho_{E, \ell}\left(\operatorname{Frob}_{p}\right)\right) \) for all primes \( p \) at which \( \rho_{E, \ell} \) is unramified. This implies that \( E \) is modular if, for some prime \( \ell \), \( \rho_{E, \ell} \) is related to an eigenform. \\
+    
+
+\begin{center}
+\textbf{The beginning of the end:}    
+\end{center}
+
+Andrew Wiles succeeded in proving the Shimura-Taniyama conjecture for semi-stable elliptic curves, thereby accomplishing the final crucial step in proving Fermat’s Last Theorem. This marked the grand conclusion of the over three-and-a-half-century-long journey of Fermat’s Last Theorem, bringing it to a magnificent closure. Here in this short section we briefly explain the conclusive developments that finally solved the problem. We might also think, looking at the conjecture of Fontaine and Mazur, that the Taniyama Shimura conjecture is part of a vast picture that comprises of partly proven, partly conjectural correspondence between Modular forms and two-dimensional representations of the absolute Galois group of $\Q, G_{\Q}$. This encompasses the Serre conjectures, the Fontaine-Mazur conjecture, and the Langlands program for $G L_{2}$, and represents a first step toward a higher dimensional, non-abelian generalization of class field theory. Class field theory earlier in the century described \( G_{\mathbb{Q}}^{\mathrm{ab}} \), with the Kronecker-Weber theorem stating \( G_{\mathbb{Q}}^{\mathrm{ab}} \cong \prod_{p} \mathbb{Z}_{p}^{\times} \). This provides a full description of one-dimensional representations of \( G_{\mathbb{Q}} \). Later, moving on to the higher dimensional representations, for understanding \( G_{\mathbb{Q}} \) and its representations is a natural question to deal with. Particularising to two-dimensional representations,  Modular forms have been used to construct representations, with significant works by Langlands and Wiles suggesting these representations are parametrized by modular forms. We note a few landmarks in this direction. \\
+
+Recall that, Continuous representations \( \rho: G_{\mathbb{Q}} \rightarrow G L_{2}(\mathbb{C}) \) are termed Artin representations. Note that such representations necessarily have finite image and thus are semi-simple. They are conjectured to correspond with certain new forms. Two key results are:
+(a) (Deligne-Serre) Holomorphic weight one newforms have corresponding Artin representations.
+(b) (Langlands-Tunnell) For two-dimensional Artin representations with soluble image, a corresponding modular form exists. Moving on from $\C$ to a finite extension $K$ of $\Q_l$, we study \( \ell \)-adic representations which are continuous representations \( \rho: G_{\mathbb{Q}} \rightarrow G L_{2}(K) \) unramified outside a finite set of  primes. Given a holomorphic newform $f$ one can attach to f a system of $\ell$-adic representations, following Eichler, Shimura, Deligne and Serre. The Fontaine-Mazur conjecture predicts certain conditions under which \( \rho \) is modular. Before Wiles, only specific cases were understood. A mod \( \ell \) representation is a continuous representation \( \bar{\rho}: G_{\mathbb{Q}} \rightarrow G L_{2}\left(\overline{\mathbb{F}}_{\ell}\right) \). Serre's conjecture proposes that every odd irreducible mod \( \ell \) representation is modular. While the first part of this conjecture remains largely unproven, the second part, predicting the minimal weight and level for the mod \( \ell \) eigenform, has seen significant progress. The Galois representation \( \bar{\rho}_{E, \ell} \) from the Frey curve linked to Fermat's equation is crucial. To prove it's modular, it's enough to show that either \( \rho_{E, 3} \) or \( \rho_{E, 5} \) is modular. This ties the Shimura-Taniyama conjecture to the Fontaine-Mazur conjecture for \( \ell=3 \) and 5. Wiles' work moves in this direction, although a complete proof is still pending.
+
+\begin{center}
+\textbf{Wiles’ Endeavor: The most awaited proof of the Shimura-Taniyama Conjecture:}    
+\end{center}
+
+
+Wiles' challenge was to demonstrate that if \( \rho \) is an odd \( \ell \)-adic representation with irreducible modular reduction \( \bar{\rho} \) and behaves well when restricted to the decomposition group at \( \ell \), then \( \rho \) is modular. He proves a version of this result, which is enough to conclude that all semistable elliptic curves are modular.
+
+Wiles generalizes the problem. He examines lifts of \( \bar{\rho} \) to representations over a complete noetherian type \( \Sigma \). These lifts are well-behaved on a decomposition group at \( \ell \) and have limited ramification at primes not in \( \Sigma \). Specifically, a lift is unramified outside \( \Sigma \cup S \), where \( S \) is the set of \( \bar{\rho} \)'s ramified primes. Using Mazur's method, if \( \bar{\rho} \) is absolutely irreducible, there exists a universal representation:
+
+\[ \rho_{\Sigma}^{\text {univ }}: G_{\mathbb{Q}} \longrightarrow G L_{2}\left(R_{\Sigma}\right) \]
+
+This representation is "universal" in that if \( \rho: G_{\mathbb{Q}} \rightarrow G L_{2}(R) \) is a lift of \( \bar{\rho} \) of type \( \Sigma \), there's a unique local homomorphism \( R_{\Sigma} \longrightarrow R \) making \( \rho \) equivalent to \( \rho_{\Sigma}^{\text {univ }} \). Thus, type \( \Sigma \) lifts' equivalence classes can be identified with \( \operatorname{Hom}\left(R_{\Sigma}, R\right) \). \( R_{\Sigma} \) is termed the universal deformation ring for type \( \Sigma \) representations.
+
+Wiles also constructs a candidate for a universal modular lifting:
+
+\[ \rho_{\Sigma}^{\bmod }: G_{\mathbb{Q}} \longrightarrow G L_{2}\left(\mathbb{T}_{\Sigma}\right) \]
+
+The ring \( \mathbb{T}_{\Sigma} \) is derived from the Hecke operators' algebra acting on specific modular forms. The universal property of \( R_{\Sigma} \) provides a map \( R_{\Sigma} \rightarrow \mathbb{T}_{\Sigma} \). The task is to prove this map is an isomorphism. While proving it's a surjection is straightforward, the challenge lies in proving injectivity, essentially showing \( R_{\Sigma} \) isn't larger than \( \mathbb{T}_{\Sigma} \).
+
+Wiles, through clever commutative algebra, identified a numerical criterion for this map to be an isomorphism and for \( \mathbb{T}_{\Sigma} \) to be a local complete intersection. Wiles demonstrated this criterion was met if the minimal version \( \mathbb{T}_{\emptyset} \) of the Hecke algebra was a complete intersection. In \cite{taylorwiles1995b}, it was confirmed that \( \mathbb{T}_{\emptyset} \) is indeed a complete intersection. This concludes the proof. \\
+
+\begin{center}
+\textbf{The Technical discussion:}
+\end{center}
+Here we try to give a very brief account of the proof of Fermat's last theorem and we expect to make the discussion more formal and include some of the results together that finally finshed the proof. This section will be divided into two sections. We will mainly follow \cite{taylorwiles1995b}, \cite{ribet1990from} to establish the two parts, namely first from getting to Proof of Fermat's last theorem if Taniyama-Shimura conjecture is true and briefly explaining Wiles' some of ingenious ideas which led to Taniyama-Shimura conjecture in the case of semi-stable elliptic curves. \\
+
+\textbf{From Taniyama-Shimura conjecture to Fermat's last theorem} \\
+
+Recall that we defined the Frey elliptic curve given by the equation \( y^2 = x(x - \mathcal{A})(x + \mathcal{B}) \), where \( \mathcal{A}, \mathcal{B}, \mathcal{C} := -\mathcal{A} - \mathcal{B} \) are nonzero integers that are pairwise coprime. We will attempt to discuss this in more detail. We in particularly focus on the instances where \( \mathcal{A} = a^{\ell}, \mathcal{B} = b^{\ell}, \mathcal{C} = c^{\ell} \), under the condition that \( \ell \) is a prime not less than 5 and \( a, b, c \) are mutually coprime integers and assuming that $\mathcal{A}+\mathcal{B}+\mathcal{C}=0$, i.e the tuple $(a,b,c)$ is a solution to the equation $X^l+Y^l=Z^l$.
+
+For the curve specified, the discriminant is given by \( \Delta = 16(\mathcal{A}\mathcal{B}\mathcal{C})^2 \). Consequently, if \( p \nmid 2\mathcal{A}\mathcal{B}\mathcal{C} \), then the curve \( E \) has good reduction at \( p \). \\
+
+In the context of assumption of a solution  the equation $X^l+Y^l=Z^l$, one may, without loss of generality, assume that \( \mathcal{A} \equiv -1 \pmod{4} \) and \( \mathcal{B} \equiv 0 \pmod{32} \). 
+
+Let us substitute \( x \mapsto 4x \) and \( y \mapsto 8y + 4x \) in the equation under consideration. We have,
+\[ (8y + 4x)^2 = 4x(4x - \mathcal{A})(4x + \mathcal{B}) \]
+
+Expanding both sides gives us:
+
+\[ 64y^2 + 64xy + 16x^2 = 4x(16x^2 - 4\mathcal{A}x + 4\mathcal{B}x + \mathcal{A}\mathcal{B}) \]
+
+Further expanding and simplifying, we get:
+
+\[ 64y^2 + 64xy + 16x^2 = 64x^3 - 16\mathcal{A}x^2 + 16\mathcal{B}x^2 + 4\mathcal{A}\mathcal{B}x \]
+
+Subtracting \( 64xy + 16x^2 \) from both sides to isolate \( 64y^2 \), we have:
+
+\[ 64y^2 = 64x^3 - 16\mathcal{A}x^2 + 16\mathcal{B}x^2 + 4\mathcal{A}\mathcal{B}x - 64xy - 16x^2 \]
+
+This simplifies to:
+
+\[ 64y^2 + 64xy  = -64x^3 + 16x^2(\mathcal{B} - \mathcal{A}-1) + 4\mathcal{A}\mathcal{B}x \]
+Dividing by 64 gives, 
+\[
+y^2 + xy = x^3 + \frac{\mathcal{B} -( \mathcal{A} + 1)}{4}x^2 - \frac{\mathcal{A}\mathcal{B}}{16}x.
+\]
+Note that, due to the congruence conditions on $\mathcal{A},\mathcal{B}$, we can see that the obtained equation is in fact over integers. 
+By using the formula of discriminant defined using the coefficents of an elliptic curve given by a Weierstrass equation, we compute its disctriminant which is given by \( \Delta = 2^{-8}(\mathcal{A}\mathcal{B}\mathcal{C})^2 \) and \( c_{4} = \mathcal{A}^2 + \mathcal{A}\mathcal{B} + \mathcal{B}^2 \). \\
+Let $v_p$ denote the usual $p$-adic valuation over $\Q$, which is given by the formula $v_p(x)=m$ if $p^m$ occurs as the exact power of $p$ in the prime factorisation of $x$. 
+
+Recall that, for the equation \( y^2 = x(x - \mathcal{A})(x + \mathcal{B}) \), the discriminant is given by 16$(\mathcal{A}\mathcal{B}\mathcal{C})^2.$
+
+Thus, we get that this curve has good reduction not dividing $2(\mathcal{A}\mathcal{B}\mathcal{C})$. 
+
+It can be verified that \( c_{4} \) is coprime to \( abc \), i.e., in this case, \( v_{p}(c_{4}) = 0 \) for all primes \( p \) that are of bad reduction. This formulation yields what is termed a minimal Weierstrass model for the curve, characterized by the minimality of \( |\Delta| \). To briefly explain, one can analyze the influence of variable changes of the form \( x \mapsto u^2 x \), \( y \mapsto u^3 y \) on \( \Delta \), \( c_{4} \), and \( c_{6} \), and establish that a Weierstrass model
+is minimal if $v_{p}(\Delta)<12$ or $v_{p}\left(c_{4}\right)<4$ or $v_{p}\left(c_{6}\right)<6$ for every prime $p$.\\
+
+For the Frey elliptic curve under consideration we have as said before that, \( v_{p}(c_{4}) = 0 \) indicates that the model is indeed minimal. Therefore, if \( p \) divides \( abc \), then the Frey curve  has bad reduction at \( p \), specifically yielding a nodal reduction modulo \( p \).
+Let us briefly recall that An elliptic curve \( E \) is termed semistable at \( p \) if it has either good or multiplicative reduction at \( p \) and furthermore, \( E \) is considered semistable if it is semistable at all primes. \\
+
+
+Thus, by definition a multiplicative reduction at \( p \) occurs if and only if \( v_{p}(c_{4}) = 0 \) and \( v_{p}(\Delta) > 0 \). This can be directly be observed for the Frey curve, since $p \mid \mathcal{A}$, $p$ does not divide $\mathcal{B}$ or vice versa. Thus, at maximum only two roots of the given equation can coincide modulo any prime. This gives the semistability of the Frey curves under consideration. Via theory of Tate curves, one establishes the fact the Galois representations attached to the Semistable Frey curves are semistable. This discussion also gives its conductor,
+
+$$
+N=\prod_{p \mid(\mathcal{A}\mathcal{B}\mathcal{C})} p
+$$
+
+Once we understand the conductor of an elliptic curve, it is worth stating a connection that relates to the conductor and galois representation attached to an elliptic curve. 
+
+\begin{proposition}
+     Suppose that $p$ is prime to $l N$, where $N$ is the conductor of $E$. Then $\rho_{E, \ell}$ is unramified at $p$. Moreover we have the congruence
+
+$$
+\operatorname{trace}\left(\rho\left(\operatorname{Frob}_{p}\right)\right) \equiv a_{p} \quad \bmod l
+$$
+
+\begin{proposition}
+    Suppose that $p \neq l$ and $p \mid N$. Then $\rho_{E, \ell}$ is unramified at $p$ if and only if
+
+$$
+v_{p}(\Delta) \equiv 0 \bmod l
+$$
+Lastly before going further, we also need to take care of the case $p=\ell$. Thus, we introduce the notion of a representation being finite at a prime $p$. This notion comes from existence of a finite flat group scheme over $\Z_p$ of certain type. One can deduce an equivalence in simpler terms with respect to $v_p(\Delta)$. We will take this as our definition.
+\begin{definition}
+    The representation $\rho$ is said to be finite at a prime $p$ if $v_{p}(\Delta) \equiv 0 \bmod l$.
+
+\end{definition}
+
+\begin{remark}\label{prf}
+ One simple observation that relates to this notion of finiteness is that the representation $\rho_{E, \ell}$ for the Frey elliptic curve we defined above is finite at all odd primes. This is easy to deduce from (our) definition. 
+ Recall that $\Delta=\frac{1}{2^{8}} \cdot(A B C)^{2}=(a b c)^{2 l} / 2^{8}$, so $v_{p}(\Delta) \equiv 0 \bmod l$ for any primes other than 2. The claim follows.    
+   
+\end{remark}
+ 
+Let us now define some setup, to state Ribet's level lowering theorem and discuss some parts of its proof. 
+
+\textbf{Setup:} \\
+Let's define \( \mathbb{T} \) as \( \mathbb{T}_{N} \), a subring within \( \text{End}(S(N)) \) generated by the Hecke operators \( T_{n} \). This subring forms a free \( \mathbb{Z} \)-module with rank equal to \( g(N) \). Considering a maximal ideal \( m \) in \( \mathbb{T} \), the residue field \( k_{m} \) can be expressed as \( \mathbb{T} / m \), which is a finite field of a certain characteristic \( l \).
+
+There exists a semisimple and continuous homomorphism, which can be described as:
+
+\[
+\rho_{m}: G \rightarrow \text{GL}_2(k_{m}).
+\]
+
+This, has following properties: \\
+1. The determinant of \( \rho_{m} \) equals \( \epsilon_{l} \), mapping \( G \) into \( F_{l}^{*} \) and subsequently into \( k_{m}^{*} \).\\
+2. For all prime numbers \( p \) not dividing \( lN \), \( \rho_{m} \) remains unramified at \( p \) and the trace of \( \rho_{m}(\text{Frob}_p) \) is congruent to \( T_{p} \) modulo \( m \).
+
+Now, let's consider \( F \) as a finite field and
+
+\[
+\rho: G \rightarrow \text{GL}_2(F),
+\]
+
+as a continuous semisimple representation. \\
+
+\begin{definition}
+    We say representation \( \rho \) as modular of level \( N \) if there exists a maximal ideal \( m \) in \( \mathbb{T} \) and an embedding \( \iota: \mathbb{T} / m \hookrightarrow \bar{F} \) such that the representations in \( \bar{F} \) -
+
+\[
+\begin{aligned}
+\rho: G &\rightarrow \text{GL}_2(F)  \\
+\rho_{m}: G &\rightarrow \text{GL}_2(\mathbb{T} / m) \hookrightarrow \text{GL}_2(\bar{F}),
+\end{aligned}
+\]
+
+are isomorphic.
+\end{definition}\\
+
+\begin{remark}
+1) This equivalently relates to existence of a homomorphism \( \omega: \mathbb{T} \rightarrow \bar{F} \) satisfying:
+
+\[
+\text{trace}(\rho(\text{Frob}_p)) = \omega(T_{p}), \quad \text{det}(\rho(\text{Frob}_p)) = p
+\]
+
+for almost all primes \( p \). \\
+2)
+If \( \rho \) is identified as modular of level \( N \), we declare \( N \) as minimal for \( \rho \) if no divisor \( M \) of \( N \) exists with \( M < N \) for which \( \rho \) is also modular. When \( \rho \) is modular at some level \( N \), it necessarily implies its modularity at some minimal level \( N_{0} \) that divides \( N \). The uniqueness of \( N_{0} \) might be a more complex question, but it is not the focal point here. 
+
+3)
+ It is also clear that once \( \rho \) is modular at level \( N \), it retains this property for all levels \( N' \) that are multiples of \( N \).
+\end{remark}
+Now, we state the Taniyama Shimura conjecture and Ribet's lowering theorem and how Ribet's lowering theorem under the assumption of Taniyama-Shimura conjecture(now known as Modularity theorem).
+
+\textbf{Taniyama-Shimura Conjecture}
+
+Let $E$ be an elliptic curve over $\mathbb{Q}$, and let $N$ be its conductor. Then there is an eigenform $f \in S(N)$ which satisfies $T_p f= a_p(E)f$, for each prime $p$ not dividing $N$. \\
+
+\textbf{Ribet's level lowering theorem:}\\
+In the early 1990s, Kenneth Ribet formulated a seminal theorem elucidating the conditions under which a modular representation of level \( N \) can be effectively realized at a reduced level. In his publication \cite{ribet1990from}, Ribet highlighted that, in conjunction with his theorem, the validity of the Taniyama-Shimura conjecture would inherently prove Fermat's Last Theorem. This pivotal insight effectively narrowed the scope of resolving Fermat's Last Theorem to the proof of the Shimura-Taniyama conjecture or its equivalents. The definitive resolution of this longstanding mathematical challenge was subsequently accomplished by Andrew Wiles, marking a significant achievement in the realm of number theory. 
+
+\begin{theorem}[Ribet's level lowering theorem]
+Consider \( \rho \), an irreducible two-dimensional representation of a group \( G \) over a finite field whose characteristic \( l \) greater than 2. Suppose that \( \rho \) is modular of  a square-free level \( N \), and there exists a prime \( q \) dividing \( N \) (distinct from \( l \)) where \( \rho \) exhibits non-finiteness at prime $q$. Furthermore,  suppose \( p \) be a prime factor of \( N \) at which \( \rho \) is finite. \\
+Then \( \rho \) is modular of the reduced level \( N / p \).
+\end{theorem}
+
+\begin{theorem}
+  See, the main paper \cite{ribet1990from} by Ribet himself proving this. 
+\end{theorem}
+\end{proposition}
+\end{proposition}
+
+\begin{corollary}
+    Ribet's level-lowering theorem implies Fermat's last theorem under the assumption of Taniyama-Shimura conjecture.
+\end{corollary}
+\begin{proof}
+At the beginning of the proof, let us assume that Taniyama-Shimura conjecture is true. Let us employ the strategy of proof by contradiction, 
+There exists a counterexample to Fermat's Last Theorem, represented by the equation \( a^{l} + b^{l} + c^{l} = 0 \) for some coprime, non-zero integers \( a, b, c \) and a prime number \( l > 2 \). Given the solution, we construct the  Frey elliptic curve associated with the solution. Let's denote this curve as \( E \). By  indicates that \( E[l] \), the \( l \)-torsion subgroup of \( E \), gives rise to an irreducible representation \( \rho \) of a Galois group \( G \). By \ref{prf} this representation \( \rho \) is finite at all odd primes but not at the prime 2. We now invoke the Taniyama-Shimura Conjecture. By this conjecture, \( \rho \) is modular of level $N$, where $N$ equals the conductor of the Frey curve $E$. Additionally, from the expression of the  conductor defined earlier the level of this modular representation is square-free. Now, we apply Ribet's level lowering theorem iteratively, it follows that the modularity level of \( \rho \) is reduced to 2. This results in the existence of a non-zero weight 2 level 2 cusp form in the space \( S(2) \) with Hecke eigenvalues matching \( a_{p}(E) \) of the Frey curve. However, it is known that the dimension of \( S(2) \) is zero, creating a contradiction.\\
+Since the existence of such a cusp form is impossible, the hypothetical counterexample to Fermat's Last Theorem cannot exist. \\
+
+Thus, Fermat's Last Theorem must be true.
+
+\end{proof}
+
+For the other direction of the proof, we encourage the readers to read \cite{darmon1995fermat} or \cite{bostonFermat}. These references are at a delightful pace any Bachelors or a Masters student would enjoy. One is of course, then encouraged to go through the actual papers \cite{taylorwiles1995b}, \cite{wiles1995}. Below, I have mentioned many references which are directly or indirectly related to this topic. I hope that you will make good use of the references to learn more about this topic as I have and will keep learning. 
+
+
+    
+
