@@ -1,0 +1,1021 @@
+
+\section{Theory of curves and Modular curves}
+A critical perspective when looking at Modular curves is to see that it is a Riemann surface. We will briefly introduce what they are, and then we will further continue our journey by delving briefly into the fundamentals of algebraic curves, Riemann-Roch theory, and divisors, laying the groundwork for comprehending the concept of the Jacobian. Subsequently, having laid these foundations, we will introduce the Jacobian variety in the next chapter as a crucial geometric object associated with a given curve. We will closely follow the book \cite{diamond2005first} and Forster's book on Riemann surfaces \cite{For}. We will sometimes closely follow proofs from either of these sources for the sake of completeness. Due to the extreme complexity of the overall topic and to demonstrate all of this within 6 months, it was inevitable to closely follow some of the proofs but written in my own words. At times, the ideas are inevitably not original but closely followed. Having said that, I must add that in many places, I have expanded on my own, giving more details.
+
+\subsection{Riemann surfaces}
+\begin{definition}[Manifold]
+    An $n$-dimensional real \textbf{Manifold} is a Hausdorff topological space such that every point $a \in X$ has an open neighborhood which is homeomorphic to an open subset of $\mathbb{R}^{n}$.
+\end{definition}
+
+\begin{definition}
+    Let $X$ be a two-dimensional manifold. A complex chart on $X$ is a homeomorphism $\varphi: U \rightarrow V$ of an open subset $U \subset X$ onto an open subset $V \subset \mathbb{C}$. 
+\end{definition}
+
+\begin{definition}
+    We say two complex charts $\varphi_{i}: U_{i} \rightarrow V_{i}, i=1,2$ are said to be \textbf{holomorphically compatible} if the map
+
+$$
+\varphi_{2} \circ \varphi_{1}^{-1}: \varphi_{1}\left(U_{1} \cap U_{2}\right) \rightarrow \varphi_{2}\left(U_{1} \cap U_{2}\right)
+$$
+
+is biholomorphic 
+\end{definition}
+\begin{definition}
+    A \textbf{complex atlas} on $X$ is a collection  $\mathfrak{I}=\left\{\varphi_{i}: U_{i} \rightarrow V_{i}, i \in I\right\}$ of charts which are holomorphically compatible and which cover $X$, i.e., $\bigcup_{i \in I} U_{i}=X$. 
+
+\end{definition}
+\begin{definition}
+    We say,two complex atlases $\mathfrak{J}$ and $\mathfrak{I}$ on $X$ are called analytically equivalent if every chart of $\mathfrak{I}$ is holomorphically compatible with every chart of $\mathfrak{J}$.
+\end{definition}
+
+\begin{definition}
+    By a complex structure on a two-dimensional manifold $X$ we mean an equivalence class of analytically equivalent atlases on $X$.
+\end{definition}
+Thus a complex structure on $X$ can be given by the choice of a complex atlas.
+
+\begin{definition}
+    A \textbf{Riemann surface} is a pair $(X, \Sigma)$, where $X$ is a connected two-dimensional manifold and $\Sigma$ is a complex structure on $X$.
+
+\end{definition}
+
+\begin{example} \hspace{0.5cm}
+\begin{enumerate}
+    \item The complex Plane $\mathbb{C}$. Its complex structure is defined by the atlas whose only chart is the identity $i: \operatorname{map} \mathbb{C} \rightarrow \mathbb{C}$.
+    \item The Riemann sphere $\mathbb{P}^{1}$. Let $\mathbb{P}^{1}:=\mathbb{C} \cup\{\infty\}$, where $\infty$. Introduce the following topology on $\mathbb{P}^{1}$. The open sets are the usual open sets $U \subset \mathbb{C}$ together with sets of the form $V \cup\{\infty\}$, where $V \subset \mathbb{C}$ is the complement of a compact set $K \subset \mathbb{C}$. With this topology $\mathbb{P}^{1}$ is a compact Hausdorff topological space, homeomorphic to the 2-sphere $S^{2}$. Set
+
+$$
+\begin{aligned}
+& U_{1}:=\mathbb{P}^{1} \mid\{\infty\}=\mathbb{C} \\
+& U_{2}:=\mathbb{P}^{1} \mid\{0\}=\mathbb{C}^{*} \cup\{\infty\} .
+\end{aligned}
+$$
+
+Define maps $\varphi_{i}: U_{i} \rightarrow \mathbb{C}, i=1,2$, as follows. $\varphi_{1}$ is the identity map and
+
+$$
+\varphi_{2}(z):=\left\{\begin{array}{cl}
+1 / z & \text { for } z \in \mathbb{C}^{*} \\
+0 & \text { for } z=\infty
+\end{array}\right.
+$$
+ 
+These mappings are homeomorphisms, implying that $\mathbb{P}^{1}$ is a two-dimensional manifold. As both $U_{1}$ and $U_{2}$ are connected and share a non-empty intersection, $\mathbb{P}^{1}$ is connected as well. To define the complex structure on $\mathbb{P}^{1}$, we utilize the atlas comprising the charts $\varphi_{i}: U_{i} \rightarrow \mathbb{C}$, where $i=1,2$. The crucial task is to demonstrate that these two charts are holomorphically compatible.
+But $\varphi_{1}\left(U_{1} \cap U_{2}\right)=\varphi_{2}\left(U_{1} \cap U_{2}\right)=\mathbb{C}^{*}$, and , 
+
+$$
+\varphi_{2} \circ \varphi_{1}^{-1}: \mathbb{C}^{*} \rightarrow \mathbb{C}^{*}, \quad z \mapsto 1 / z,$$
+is biholomorphic, thus we are done.
+
+\item Another important example of a Riemann surface is that of a torus. 
+Let $\Lambda$ be a lattice and let $T=\mathbb{C}/\Lambda$ be the associated complex torus. Let $\pi: \mathbb{C} \rightarrow \mathbb{C}/\Lambda $ be the canonical projection. 
+Introduce the following topology (the quotient topology) on $\mathbb{C} / \Lambda$. A subset $U \subset \mathbb{C} / \Lambda$ is open precisely if $\pi^{-1}(U) \subset \mathbb{C}$ is open. With this topology $\mathbb{C} / \Lambda$ is a Hausdorff topological space and the quotient map $\pi: \mathbb{C} \rightarrow \mathbb{C} / \Lambda$ is continuous. Since $\mathbb{C}$ is connected, $\mathbb{C} / \Lambda$ is also connected. As well $\mathbb{C} / \Lambda$ is compact, since it is covered by the image under $\pi$ of the compact parallelogram.
+
+$$
+P:=\left\{\lambda \omega_{1}+\mu \omega_{2}: \lambda, \mu \in[0,1]\right\} .
+$$
+
+\\
+We can easily see that the map $\pi$ is open, i.e., the image of every open set $V \subset \mathbb{C}$ is open. We can see this as follows: 
+
+We will show that  show that $V':=\pi^{-1}(\pi(V))$ is open. But
+
+$$
+V'=\bigcup_{\omega \in \Lambda}(\omega+V)
+$$
+
+Since every set $\omega+V$ is open, so is $V'$. The complex structure on $\mathbb{C} / \Lambda$ is defined in the following way. Let $V \subset \mathbb{C}$ be an open set such that no two points in $V$ are equivalent under $\Lambda$. Then $U:=\pi(V)$ is open and $\pi \mid V \rightarrow U$ is a homeomorphism. Its inverse $\varphi: U \rightarrow V$ is a complex chart on $\mathbb{C} / \Lambda$.Let $\mathfrak{U}$ be the set of all charts obtained in this fashion. We have to show that any two charts $\varphi_{i}: U_{i} \rightarrow V_{i}, i=1,2$, belonging to $\mathfrak{U}$ are holomorphically compatible. Consider the map
+
+$$
+\psi:=\varphi_{2} \varphi_{1}^{-1}: \varphi_{1}\left(U_{1} \cap U_{2}\right) \rightarrow \varphi_{2}\left(U_{1} \cap U_{2}\right) .
+$$
+
+For every $z \in \varphi_{1}\left(U_{1} \cap U_{2}\right)$ one has $\pi(\psi(z))=\varphi_{1}^{-1}(z)=\pi(z)$ and thus $\psi(z)-z \in \Gamma$. Since $\Gamma$ is discrete and $\psi$ is continuous, this implies that $\psi(z)-z$ is constant on every connected component of $\varphi_{1}\left(U_{1} \cap U_{2}\right)$. Thus $\psi$ is holomorphic. Similarly $\psi^{-1}$ is also holomorphic.
+
+Lastly, let $\mathbb{C} / \Lambda$ have the complex structure defined by the complex atlas $\mathfrak{U}$. Thus we get that a torus is a Riemann surface. 
+\end{enumerate}
+    
+\end{example}
+\subsubsection*{Modular curve as a Riemann surface}
+
+Let us quickly recall that for any congruence subgroup $\Gamma$ of $\mathrm{SL}_{2}(\mathbb{Z})$ the corresponding modular curve has been defined as the quotient space $\Gamma \backslash \mathcal{H}$, the set of orbits.
+
+$$
+Y(\Gamma)=\{\Gamma \tau: \tau \in \mathcal{H}\}
+.$$ Our goal for further discussion would be to discuss that $Y(\Gamma)$ can be made into a Riemann surface that can be compactified. The resulting compact Riemann surface is denoted $X(\Gamma)$. \\
+Let us define a topology on the Modular curve $Y(\Gamma)$. \\The upper half-plane $\mathcal{H}$ inherits the Euclidean topology as a subspace of $\mathbb{R}^{2}$. \\The natural surjection
+
+$$
+\pi: \mathcal{H} \longrightarrow Y(\Gamma), \quad \pi(\tau)=\Gamma \tau
+$$
+
+gives $Y(\Gamma)$ the quotient topology, meaning a subset of $Y(\Gamma)$ is open if its inverse image under $\pi$ in $\mathcal{H}$ is open. Note that this just means tat $\pi$ an open mapping, and the following equivalence holds. 
+
+\begin{lemma}\label{4.1.9}
+$$
+\pi\left(U_{1}\right) \cap \pi\left(U_{2}\right)=\emptyset \text { in } Y(\Gamma) \quad \Longleftrightarrow \quad \Gamma\left(U_{1}\right) \cap U_{2}=\emptyset \text { in } \mathcal{H}$$
+    
+\end{lemma}
+
+\begin{proof}
+The map \(\pi: \mathcal{H} \longrightarrow Y(\Gamma)\) sends each point \(\tau\) in \(\mathcal{H}\) to its orbit \(\Gamma \tau\) in \(Y(\Gamma)\). This map is surjective and respects the group action, i.e., points in the same orbit under \(\Gamma\) are mapped to the same point in \(Y(\Gamma)\).   If \(\pi(U_{1}) \cap \pi(U_{2}) = \emptyset\) in \(Y(\Gamma)\), we have that $\{\Gamma \tau: \tau \in U_1\}\cap\{\Gamma \tau: \tau \in U_2\}=\emptyset$.
+Now assume for a contradiction that element $x \in \Gamma\left(U_{1}\right) \cap U_{2}$. Then, there exists $u \in U_1$ such that $\Gamma.u=x$. But then, group action just permutes the orbit, giving us that $\Gamma u=\Gamma x$. This gives us the contradiction to the fact that, $\{\Gamma \tau: \tau \in U_1\}\cap\{\Gamma \tau: \tau \in U_2\}=\emptyset$. \\
+Conversely, we have \(\Gamma(U_{1}) \cap U_{2} = \emptyset\) in \(\mathcal{H}\). Suppose we have some \( x \) in the intersection of \( \pi(U_1) \) and \( \pi(U_2) \), this means there exist \( u \in U_1 \) and \( u' \in U_2 \) such that \( \pi(u) = \Gamma u \) and \( \pi(u') = \Gamma u' \) are both equal to \( x \) in \( Y(\Gamma) \). In other words, \( u \) and \( u' \) belong to the same orbit under \( \Gamma \), which means there exists an element \( \gamma \in \Gamma \) such that \( \gamma u = u' \). However this contradicts the assumption that \( \Gamma(U_1) \cap U_2 = \emptyset \) in \( \mathcal{H} \).  
+
+\end{proof}
+
+
+Since $\mathcal{H}$ is connected and $\pi$ is continuous, the quotient $Y(\Gamma)$ is also connected.
+
+We now show that the Modular curve $Y(\Gamma)$ is Hausdorff. But before that, we state an important lemma, which would be key to proving this. It will be furthermore useful when defining coordinate charts on Modular curve.$Y(\Gamma)$.
+
+\begin{lemma}\label{4.1.7}
+    The action of $\mathrm{SL}_{2}(\mathbb{Z})$ on $\mathcal{H}$ is properly discontinuous, i.e. for $\tau_{1}, \tau_{2} \in \mathcal{H}$ given, there exist neighborhoods $U_{1}$ of $\tau_{1}$ and $U_{2}$ of $\tau_{2}$ in $\mathcal{H}$ with the property that
+
+$$
+\text { for all } \gamma \in \mathrm{SL}_{2}(\mathbb{Z}) \text {, if } \gamma\left(U_{1}\right) \cap U_{2} \neq \emptyset \text { then } \gamma\left(\tau_{1}\right)=\tau_{2} \text {. }
+$$
+
+Note that $\tau_{1}$ and $\tau_{2}$ in the lemma can be equal.
+
+\end{lemma}
+
+
+\begin{theorem}
+    For any congruence subgroup $\Gamma$ of $\mathrm{SL}_{2}(\mathbb{Z})$, the modular curve $Y(\Gamma)$ is Hausdorff.
+\begin{proof}
+    Let $\pi\left(\tau_{1}\right)$ and $\pi\left(\tau_{2}\right)$ be distinct points in $Y(\Gamma)$. Take neighborhoods $U_{1}$ of $\tau_{1}$ and $U_{2}$ of $\tau_{2}$ as in Lemma \ref{4.1.7}. Since $\gamma\left(\tau_{1}\right) \neq \tau_{2}$ for all $\gamma \in \Gamma$, the proposition says that $\Gamma\left(U_{1}\right) \cap U_{2}=\emptyset$ in $\mathcal{H}$, and so equivalence given by \ref{4.1.9}  shows that $\pi\left(U_{1}\right)$ and $\pi\left(U_{2}\right)$ are disjoint supersets of $\pi\left(\tau_{1}\right)$ and $\pi\left(\tau_{2}\right)$ in $Y(\Gamma)$. They are neighborhoods since $\pi$ is an open mapping.
+
+\end{proof}
+    
+\end{theorem}
+
+\begin{remark}
+    Additionally, Since Euclidean space has a countable basis, so does the Modular curve being a quotient of euclidean space, which agrees with definition of a Riemann surface. 
+
+
+    
+\end{remark}
+ All remains is to put local coordinates on the modular curve $Y(\Gamma).$ This simply means that finding for each point $\pi(\tau) \in Y(\Gamma)$ a neighborhood $\widetilde{U}$  and a homeomorphism $\varphi: \widetilde{U} \longrightarrow V \subset$ C such that the transition maps between the local coordinate systems are holomorphic.
+\\
+\textbf{Note:} At a point $\pi(\tau)$ where $\tau \in \mathcal{H}$ is fixed only by the identity transformation in $\Gamma$, i.e., only by the matrices $\Gamma \cap\{ \pm I\}$, this is simple: a small enough neighborhood $U$ of $\tau$ in $\mathcal{H}$ is homeomorphic under $\pi$ to its image $\pi(U)$ in $Y(\Gamma)$, as Lemma \ref{4.1.7} guarantees such a neighborhood with no $\Gamma$-equivalent points. So a local inverse $\varphi: \pi(U) \longrightarrow U$ could serve as the local coordinate map. The problem occurs mainly at elliptic points, i.e at points where their isotropy subgroup is non-trivial. \cite{diamond2005first} uses proposition \ref{2.7.11} to remedy this and to put local coordinates on $Y(\gamma)$. We encourage the readers to see \cite{diamond2005first} (Ch 2, Sections 2.1, 2.2) for more details about the complex structure on the modular curve $Y(\gamma)$.
+\bigskip
+
+
+Let $\Gamma$ be a congruence subgroup of $\mathrm{SL}_{2}(\mathbb{Z})$. To compactify the modular curve $Y(\Gamma)=\Gamma \backslash \mathcal{H}$, define $\mathcal{H}^{*}=\mathcal{H} \cup \mathbb{Q} \cup\{\infty\}$ and take the extended quotient
+
+$$
+X(\Gamma)=\Gamma \backslash \mathcal{H}^{*}=Y(\Gamma) \cup \Gamma \backslash(\mathbb{Q} \cup\{\infty\}) .
+$$
+
+The points $\Gamma s$ in $\Gamma \backslash(\mathbb{Q} \cup\{\infty\})$ are also called the cusps of $X(\Gamma)$. For the congruence subgroups $\Gamma_{0}(N), \Gamma_{1}(N)$, and $\Gamma(N)$ we write $X_{0}(N), X_{1}(N)$, and $X(N)$.
+
+Recall from \ref{2.7.4}, \ref{2.7.5} that the modular curve $X(1)=\mathrm{SL}_{2}(\mathbb{Z}) \backslash \mathcal{H}^{*}$ has one cusp. For any congruence subgroup $\Gamma$ of $\mathrm{SL}_{2}(\mathbb{Z})$ the modular curve $X(\Gamma)$ has finitely many cusps.
+ 
+\\
+\textbf{Topology}:
+The topology on $\mathcal{H}^{*}$ consisting of its intersections with open complex disks (including disks $\{z:|z|>r\} \cup\{\infty\}$ ) contains too many points of $\mathbb{Q} \cup\{\infty\}$ in each neighborhood to make the quotient $X(\Gamma)$ Hausdorff. Instead, to put an appropriate topology on $X(\Gamma)$ start by defining for any $M>0$ a neighborhood
+
+$$
+\mathcal{N}_{M}=\{\tau \in \mathcal{H}: \operatorname{Im}(\tau)>M\} .
+$$
+
+Adjoin to the usual open sets in $\mathcal{H}$ more sets in $\mathcal{H}^{*}$ to serve as a base of neighborhoods of the cusps, the sets
+
+$$
+\alpha\left(\mathcal{N}_{M} \cup\{\infty\}\right): M>0, \alpha \in \mathrm{SL}_{2}(\mathbb{Z}),
+$$
+
+and take the resulting topology on $\mathcal{H}^{*}$. Since fractional linear transformations are conformal and take circles to circles, if $\alpha(\infty) \in \mathbb{Q}$ then $\alpha\left(\mathcal{N}_{M} \cup\{\infty\}\right)$ is a disk tangent to the real axis. \\
+Under this topology each $\gamma \in \mathrm{SL}_{2}(\mathbb{Z})$ is a homeomorphism of $\mathcal{H}^{*}$. Finally, give $X(\Gamma)$ the quotient topology and extend natural projection to $\pi: \mathcal{H}^{*} \longrightarrow X(\Gamma)$.
+
+\begin{proposition}
+    The modular curve $X(\Gamma)$ is Hausdorff, connected, and compact.
+\end{proposition}
+\begin{proof}
+    See,\cite{diamond2005first}, Proposition 2.4.2.
+\end{proof}
+
+\begin{theorem}[\textbf{Modularity theorem}]
+
+
+   Let $E$ be a complex elliptic curve with $j(E) \in \mathbb{Q}$. Then for some positive integer $N$ there exists a surjective holomorphic function of compact Riemann surfaces from the modular curve $X_{0}(N)$ to the elliptic curve $E$,
+
+$$
+X_{0}(N) \longrightarrow E
+$$
+ 
+\end{theorem}
+
+\subsection{Divisors, Differentials, Riemann-roch theorem}
+
+\begin{definition}
+Let $C$ be a non-singular algebraic curve over a field $k$. We define the divisor group \(\operatorname{Div}(C)\) for a curve \( C \) as the set of formal sums:
+
+\[
+\operatorname{Div}(C) = \left\{ \sum_{P \in C} n_{P}(P) : n_{P} \in \mathbb{Z}, \text{ with almost all  but finitely many } n_{P} = 0 \right\}.
+\]
+
+\end{definition}
+
+
+Consider the localisation $\overline{\mathbb{k}}[C]_{P}$ of $\overline{\mathbb{k}}[C]$ at a point $P$. This is a local ring at $P$, and it has a unique maximal ideal $M_P$. 
+Any generator of $M_P$ is called a uniformizer at $P$. Let $t$ be a uniformizer. \\
+For any element $F$ of this local ring we have that $F$ takes the form $F=t^{e} u$ where $e \in \mathbb{N}$ and $u \in \overline{\mathbb{k}}[C]_{P}^{*}$. This representation of $F$ is unique, for if $F=t^{e} u=t^{e^{\prime}} u^{\prime}$ with $e \geq e^{\prime}$ then $t^{e-e^{\prime}} u=u^{\prime}$, showing that $e=e^{\prime}$ and $u=u^{\prime}$. This defines a function on the co-ordinate ring of $C$ known as valuation at $P$.
+
+\begin{definition}
+    The valuation at $P$ on the coordinate ring is the function
+
+$$
+\nu_{P}: \overline{\mathbb{k}}[C] \longrightarrow \mathbb{N} \cup\{+\infty\}, \quad \nu_{P}(f)= \begin{cases}+\infty & \text { if } f=0 \\ e & \text { if } f=t^{e} u\end{cases}
+$$
+
+This extends to the function field,
+
+$$
+\nu_{P}: \overline{\mathbb{k}}(C) \longrightarrow \mathbb{Z} \cup\{+\infty\}, \quad \nu_{P}(F)=\nu_{P}(f)-\nu_{P}(g), F=f / g
+$$
+
+where it is well defined. 
+\end{definition}
+
+
+
+
+\begin{definition}
+    For a divisor $\mathcal{D}=\sum_{P \in C} n_{P}(P)$, we define the degree of a divisor $\text{deg}(\mathcal{D})= \sum_{P \in C} n_{P}$. 
+\end{definition}
+\begin{remark}
+
+1. The notation \( (P) \) is used to distinguish the divisorial representation of a point \( P \) on the curve. For example, this distinction is particularly pertinent in the context of elliptic curves, where we distinguish between the divisor \( \sum n_{P}(P) \) in \(\operatorname{Div}(E)\) and the elliptic curve point \( \sum[n_{P}]P \) in \(\mathcal{E}\).  \\
+2. The coefficients \( n_{P} \) in a divisor can be negative, leading to a negative representation for \( n_{P} < 0 \) as \( \left[n_{P}\right]P = -\left[-n_{P}\right]P \).\\
+3. It is clear that since $n_P=0$ for all but finitely many points $P$ on a curve $C$, the degree of a divisor is well-defined. \\
+4. To explain the intuition in a crude sense, divisors on a curve $C$ encapsulate the distribution of zeros and poles of meromorphic functions defined on $C$ and that divisors capture zeros and poles of a function on the curve $C$. Conventionally, the integers $n_P$ denote the multiplicities of the zeroes and poles and that positive $n_P$ denotes that $P$ is a zero of multiplicity $n_P$ and similarly, negative $n_P$ denote $P$ is a pole of multiplicity $-n_P$. \\
+5. Geometrically, divisors provide a way to visualize the behavior of functions defined on $C$. Imagine walking along the curve: when you encounter a point in the divisor, you're either stepping on a zero or jumping over a pole, and the multiplicity tells you how significant that step or jump is.
+
+\end{remark}
+  
+For a general curve \( C \) that is a curve which is not necessarily an elliptic curve we also have following notions: 
+\begin{definition}
+The subgroup of divisors of degree zero is defined as:
+
+\[
+\operatorname{Div}^{0}(C) = \left\{ \sum n_{P}(P) \in \operatorname{Div}(C) : \sum n_{P} = 0 \right\}.
+\]
+    
+\end{definition}
+
+\begin{definition}
+The divisor associated with a nonzero function \( F \) in the function field of \( C \) is given by:
+
+\[
+\operatorname{div}(F) = \sum \nu_{P}(F)(P), \quad F \in \overline{\mathbb{k}}(C)^{*}.
+\]
+    
+\end{definition}
+
+\begin{remark}
+1. The divisors of this form are termed principal divisors, collectively denoted as \(\operatorname{Div}^{\ell}(C)\). \\
+A key property of principal divisors is that they are of degree zero.    
+\end{remark}
+ This reminds us of Riemann surface theory which asserts the balance of zeroes and poles of \( F \):
+
+\[
+\operatorname{div}(F) = \sum_{P \in F^{-1}(0)} e_{P}(F)(P) - \sum_{P \in F^{-1}(\infty)} e_{P}(F)(P),
+\]
+
+leading to the conclusion that \(\operatorname{deg}(\operatorname{div}(F)) = 0\). The homomorphism property of the map \( \operatorname{div} \) from the function field \(\overline{\mathbb{k}}(C)^{*}\) to \(\operatorname{Div}^{0}(C)\) is established in \cite{diamond2005first}, Proposition 7.2.4. \\
+Consequently, \(\operatorname{Div}^{\ell}(C)\) forms a subgroup of \(\operatorname{Div}^{0}(C)\). 
+
+\begin{definition}
+The Picard group of \( C \), specifically the degree zero Picard group \(\operatorname{Pic}^{0}(C)\), is then defined as the quotient of these two groups:
+
+\[
+\operatorname{Pic}^{0}(C) = \operatorname{Div}^{0}(C) / \operatorname{Div}^{\ell}(C).
+\]
+    
+\end{definition}
+
+\begin{definition}
+    If $h: C \longrightarrow C^{\prime}$ is a nonconstant morphism. Then its induced forward and reverse maps of Picard groups and are given by,
+
+$$
+h_{*}: \operatorname{Pic}^{0}(C) \longrightarrow \operatorname{Pic}^{0}\left(C^{\prime}\right) \text { and } h^{*}: \operatorname{Pic}^{0}\left(C^{\prime}\right) \longrightarrow \operatorname{Pic}^{0}(C),
+$$
+
+given by
+
+$$
+h_{*}\left(\left[\sum_{P} n_{P}(P)\right]\right)=\left[\sum_{P} n_{P}(h(P))\right]
+$$
+
+and
+
+$$
+h^{*}\left(\left[\sum_{Q} n_{Q}(Q)\right]\right)=\left[\sum_{Q} n_{Q} \sum_{P \in h^{-1}(Q)} e_{P}(h)(P)\right]
+$$
+\end{definition}
+Here the square brackets denote equivalence class modulo $\operatorname{Div}^{\ell}(C)$ or $\operatorname{Div}^{\ell}\left(C^{\prime}\right)$ as appropriate. 
+
+\begin{definition}
+    A holomorphic (or meromorphic) differential form on an open set $U$ of $\mathbb{C}$ is an expression of the form $f(z) d z$ with $f$ holomorphic (or meromorphic).
+\end{definition}
+
+\begin{definition}
+    Let $f: U \longrightarrow \mathbb{C}$ be a holomorphic map. Then $d f:=\frac{d f}{d z} d z$ is called the associated differential form to $f$.
+
+\end{definition}
+
+\begin{definition}
+    Let $X$ be a compact Riemann Surface and $\left(U_{i}, z_{i}\right)_{i \in I}$ a complex structure. A holomorphic differential form on $X$ is given by a family $\left(\alpha_{i}\right)_{i \in I}$ of differential forms $\alpha_{i}=f_{i}\left(z_{i}\right) d z_{i}$ on $z_{i}\left(U_{i}\right), \forall i \in I$ such that if $\omega_{i j}:=z_{i} \circ$ $z_{j}^{-1}: z_{j}\left(U_{i} \cap U_{j}\right) \rightarrow z_{i}\left(U_{i} \cap U_{j}\right)$ denote the holomorphic maps given by
+the definition of a complex structure. Then $\omega_{i j}^{*}\left(\alpha_{i}\right)=\alpha_{j}$ (or equivalently, $\left.f_{j}\left(z_{j}\right) d z_{j}=f_{i}\left(\omega_{i j}\left(z_{j}\right)\right) \omega_{i j}^{\prime}\left(z_{j}\right) d z_{j}\right)$.
+
+\end{definition}
+
+Note, that the theory of divisors also applies for the case of Riemann surfaces. See \cite{diamond2005first}, Section 3.2, 3.3. There is also an analogous definition for 1-differential forms over a Variety $X$ in \cite{hindry-silverman-diophantine}, section A.1.4. This also helps us discussing differentials on curves. The discussion over curves is then analogous to what we do over Riemann surfaces. 
+
+
+The construction is analogous and similar properties are also true with some minor modifications here and there. 
+
+We can also define a divisor of a differential form. 
+Let $\omega$ be a differential form on a riemann surface $X$. Let $P \in X$ and $(U, z)$ be a local chart at $P$. Then $\omega:=f(z) d z$ on $U$. Note that $v_{z(P)}(f\circ z^{-1})$ is independent of local chart.\\
+
+To see this, consider two local charts, \( (U_1, z_1) \) and \( (U_2, z_2) \), at a point \( P \). Within these charts, let the differential forms be represented as \( \omega_1 = f_1(z_1)dz_1 \) on \( U_1 \) and \( \omega_2 = f_2(z_2)dz_2 \) on \( U_2 \).
+
+We define a transition map between these charts by:
+
+\[
+w_{1,2}: z_2(U_1 \cap U_2) \to z_1(U_1 \cap U_2),
+\]
+
+where \( w_{1,2} = z_1 \circ z_2^{-1} \). This map is biholomorphic, which implies that its derivative \( w_{1,2}' \) does not vanish anywhere within its domain.
+
+With this setup, we can relate \( \omega_2 \) to \( \omega_1 \) through the formula:
+
+\[
+f_2(z_2)dz_2 = f_1(w_{1,2}(z_2))w_{1,2}'(z_2)dz_1.
+\]
+
+This relationship suggests that the valuation of \( f_2 \) at \( z_2(P) \), denoted \( v_{z_2(P)}(f_2) \), is equal to the valuation of \( f_1 \) at \( z_1(P) \), denoted \( v_{z_1(P)}(f_1) \). This equality is fundamental as it allows for the definition of the valuation of a differential form \( \omega \) at the point \( P \), denoted as \( v_P(\omega) \), to be independent of the local chart used.
+
+Therefore, we define \( v_P(\omega) = v_P(f) \), where \( f \) is the function representing \( \omega \) in any local chart around \( P \).
+
+The divisor of the differential form \( \omega \) is then defined as the formal sum of its valuations at each point on the Riemann surface, expressed as:
+
+\[
+\operatorname{div}(\omega) := \sum_{P \in X} v_P(\omega) \cdot [P].
+\]
+One nice property is the equivalence class of div$(\omega)$ is independent of choice of differential $\omega$. This gives us definition of a canonical divisor. 
+
+\begin{definition}
+   We write $K=\operatorname{div}(\omega)$, and we say the $K$ is a canonical divisor.  
+\end{definition}
+
+Let $X$ be a compact Riemann surface, $D \in \operatorname{Div}(X)$.\\
+We define,
+$\mathscr{L}(D)=$ $\{f \in \mathcal{C}(X) \mid \operatorname{div}(f)+D \geq 0\} \cup\{0\}$. 
+
+We now define a couple of results without proof. For more details see \cite{diamond2005first}. 
+
+\begin{theorem}
+    The dimension of $\mathscr{L}(D)$ is finite for all $D \in \operatorname{Div}(X)$.
+
+If $g \in \mathcal{M}(X)$ and $D^{\prime}=D+\operatorname{div}(g)$. Then the map
+
+$$
+\mathscr{L}(D) \longrightarrow \mathscr{L}\left(D^{\prime}\right) ; f \mapsto f g^{-1}
+$$
+
+is an isomorphism between $\mathscr{L}(D)$ and $\mathscr{L}\left(D^{\prime}\right)$. Therefore, $\operatorname{dim} \mathscr{L}(D)=$ $\operatorname{dim} \mathscr{L}\left(D^{\prime}\right)$. 
+\end{theorem}
+
+\begin{theorem}[The Riemann-Roch theorem]
+    There exists $g=g_{X} \in \mathbb{N}$ such that for any $D \in \operatorname{Div}(X)$,
+
+$$
+\ell(D)-\ell(K-D)=\operatorname{deg} D+1-g
+$$
+
+where $\ell(D)=\operatorname{dim} \mathscr{L}(D), K$ is the canonical divisor, i.e, $K=\operatorname{div}(\omega)$ where $\omega$ is a differential form on $X$.
+
+\end{theorem}
+
+\begin{remark}
+ 1. $\mathscr{L}(0) \cong \mathbb{C} \cong\{$ constant functions $f: X \longrightarrow \mathbb{C}\}$ as any holomorphic map on a compact Riemann surface is constant. Therefore, $\ell(0)=1$.\\
+2. $\operatorname{deg} K=2 g-2$; This follows by applying Riemann-Roch theorem on the canonical divisor $K$. \\
+3.$\ell(K)=g$. This means, the space of holomorphic differential forms on $X$ is of dimension $g$. This follows by applying Riemann-Roch on the 0 divisor. Another interpretation of this result is that $$\mathscr{L}(K)\cong\{\text { holomorphic differential forms on } X\}$$
+  
+\end{remark}
+
+Another application is that we get a Weierstrass equation for an elliptic curve. Recall \ref{1.1.5}. We finally give its proof sketch now. 
+
+
+\textbf{Proof Sketch of Proposition 1.1.5}.
+Consider \( k \) to be an algebraically closed field, and let \( n \) be a positive integer. According to the Riemann-Roch Theorem, the Riemann-roch space \( \mathscr{L}(n(O)) \) is of dimension \( n \) over \( k \). Constant functions contribute to a one-dimensional subspace. Therefore, it is possible to find elements \( u, v \in k(E) \) such that \( \{1, u\} \) is a basis for \( \mathscr{L}(2(O)) \) and similary \( \{1, u, v\} \) for \( \mathscr{L}(3(O)) \). It follows that \( u \) has a pole of order precisely two at \( O \), and \( v \) has a pole of order exactly three at \( O \). This infers that the collection \( \{1, u, v, u^2, uv, v^2, u^3\} \) belongs to \( \mathscr{L}(6(O)) \), which defines a six-dimensional vector space, thereby indicating that these elements are linearly dependent. As such, there must be scalars \( a_{1}, \ldots, a_{7} \in k \), not all zero, for which \( a_{1} + a_{2} u + a_{3} v + a_{4} u^2 + a_{5} uv + a_{6} v^2 + a_{7} u^3 = 0 \).
+
+Given that each term has a unique pole order at \( O \) apart from the last two, it must be that \( a_{6}a_{7} \neq 0 \). By selecting appropriate substitutions for \( a_{i} \), and due to the basis conditions on \( u \) and \( v \), \( O \) is mapped to \( [0: 1: 0] \) in the projective space.
+
+Let this curve be denoted as \( C \), and we have a rational map \( f: E \rightarrow C \) which, due to the smooth nature of \( E \), is a morphism. The function \( u: E \rightarrow \mathbb{P}^{1}_k \) is of degree two as \( u \) has a pole of order two at \( O \) and no other, thus \( [k(E): k(u)]=2 \). In parallel, \( [k(E): k(v)]=3 \), hence \( [k(E): k(u, v)]=1 \). Therefore, \( f \) is a degree one morphism. If \( C \) is smooth, then \( f \) is an isomorphism being a degree one morphism between smooth curves. It remains to ascertain the behavior when \( C \) is singular. Employing Weierstrass equations, it can be demonstrated that under such circumstances, there is a rational map \( g: C \rightarrow \mathbb{P}^{1}_k \) of degree one, and the composition \( g \circ f \) yields a degree one morphism from \( E \) to \( \mathbb{P}^{1}_k \). However, as \( E \) has genus one and \( \mathbb{P}^{1}_k \) has genus zero, this results in a contradiction, hence completing the proof of the initial assertion.
+
+For any smooth Weierstrass equation and the associated ecurve \( E \), with \( O \) defined as \( [0: 1: 0] \), we observe that \( (E, O) \) is an elliptic curve assuming \( E \) is of genus one. Indeed, the differential \( \Lambda = d u / (2 v + a_{1} u + a_{3}) \) has no zeroes or poles on \( E \), implying \( \text{div} \(\Lambda\) = 0 \). The claim follows from Remark 4.3.16, Part 2. \qedsymbol
+
+This proof also applies when \( k \) is not algebraically closed, suggesting that for any elliptic curve over any field \( k \), a corresponding Weierstrass equation with coefficients in \( k \) can be formulated.
+
+As a short application we will compute an equation of the modular curve $X_0(38)$. In chapter 2 we showed that the genus of this curve is 4.\\
+
+Let $\omega_{1}, \ldots, \omega_{4}$ be a basis for $\Omega_{\mathrm{hol}}^{1}(X_0(38))$. As the canonical divisor is very ample (and $X_0(38)$ can be shown to be non-hyperelliptic), the induced map
+$$
+\begin{aligned}
+\phi: C & \rightarrow \mathbb{P}^{g-1} \\
+P & \mapsto\left[\omega_{1}(P): \cdots: \omega_{g}(P)\right] .
+\end{aligned}
+$$
+will embed $C$ into $P^{3}$.\\
+
+Note that their exists an isomorphism between the space of weight 2 cusp forms $\mathcal{S}_{2}(\Gamma_0(38))$ and the space differential 1-forms $\Omega_{\mathrm{hol}}^{1}(X_0(38))$. 
+
+In Chapter 5 we will compute a basis $f_1, f_2, f_3$ and $f_4$ of weight 2 cusp forms of level 38. As any non-hyperelliptic genus 4 curve can be written down as a complete intersection of a cubic and a quadric (see, e.g. Example 5.5.2 from \cite{Har}), finding these kinds of relations between the $f_i$ will give us an equation of the curve. (This method was cleverly used by Galbraith in \cite{Galbraith1996}.)
+
+As per our computations, we have $f_1(\tau),f_2(\tau)$ newforms of level 38 and $g_1(\tau), g_1(2\tau)$, $g_1$ being newform of level 19. 
+
+We can just plug in the following commands in Magma: 
+\begin{verbatim}
+M := ModularSymbols(38);
+M_cusp := CuspidalSubspace(M);
+M_dec := NewformDecomposition(M_cusp);
+Relations(CuspidalSubspace(ModularForms(Gamma0(38))), 3, 20);
+Relations(CuspidalSubspace(ModularForms(Gamma0(38))), 2, 20);
+\end{verbatim}
+
+To get the relations of degree 2 and degree 3: 
+
+Degree 3:
+    $a^2*c - a*b^2 - a*b*d - a*d^2 - b^2*c - b^2*d - b*c*d - b*d^2 - c^3 -
+        2*c^2*d - 2*c*d^2 - d^3,\\
+        
+    a^2*d + a*d^2 - b^3 + 3*b^2*c + 2*b^2*d - 3*b*c^2 - 4*b*c*d - 2*b*d^2 + c^3
+        + 2*c^2*d + 2*c*d^2 + d^3,\\
+        
+    a*b*c - b^3 - b^2*d - b*c^2 - b*c*d - b*d^2,
+    a*c^2 - b^2*c - b*c*d - c^3 - c^2*d - c*d^2,
+    a*c*d - b^2*d - b*d^2 - c^2*d - c*d^2 - d^3 \\
+    $
+
+Degree 2:
+    $a*c - b^2 - b*d - c^2 - c*d - d^2$
+
+A quick check in Magma shows that the curve given by:
+
+\begin{align*} 
+x^2w + xw^2 - y^3 + 3y^2z + 2y^2w - 3yz^2 - 4yzw - 2yw^2 + z^3
+        + 2z^2w + 2zw^2 + w^3, \\
+xz - y^2 - yw - z^2 - zw - w^2
+\end{align*}
+defines a curve of genus 4 which has bad reduction at the primes 19 and 2.
+\vspace{5cm}
+
+\subsection{Algebraic Curves in arbitrary characteristic}
+
+Here in this section, the goal is to briefly define the setup and basic notions required to further discuss Algebraic curves in arbitrary characteristics. From this point onward, till the end of this chapter, we will very closely follow some sections of \cite{diamond2005first}, chapter 8 to introduce the terminology and state some important results about curves and their reductions.\\ Algebraic curves are characterized using polynomials \( \varphi_{1}, \ldots, \varphi_{m} \) to form an ideal \( I \) in the polynomial ring over the algebraically closed field \( \overline{k} \). To be precise, Given polynomials $\varphi_{1}, \ldots, \varphi_{m} \in k\left[x_{1}, \ldots, x_{n}\right]$ such that the ideal
+
+$$
+I=\left\langle\varphi_{1}, \ldots, \varphi_{m}\right\rangle \subset \overline{k}\left[x_{1}, \ldots, x_{n}\right]
+$$
+
+is prime, let
+
+$$
+C=\left\{P \in \overline{k}^{n}: \varphi(P)=0 \text { for all } \varphi \in I\right\} .
+$$
+
+The function field of this curve denoted as \( \overline{k}(C) \), is derived by taking the quotient field of the coordinate ring $\overline{k}[C]=\overline{k}\left[x_{1}, \ldots, x_{n}\right] / I$. 
+
+The relationship between curves and their function fields given by Curves-Fields Correspondence, remains consistent as in the case over $\C$ . See \cite{diamond2005first}, chapter 7 for more details. \\
+The map
+
+$$
+C \mapsto k(C)
+$$
+
+induces a bijection from the set of isomorphism classes over $k$ of nonsingular projective algebraic curves over $k$ to the set of conjugacy classes over $k$ of function fields over k. And for any two nonsingular projective algebraic curves $C$ and $C^{\prime}$ over $k$, the map
+
+$$
+\left(h: C \longrightarrow C^{\prime}\right) \mapsto\left(h^{*}: k\left(C^{\prime}\right) \longrightarrow k(C)\right)
+$$
+
+is a bijection from the set of surjective morphisms over $k$ from $C$ to $C^{\prime}$ to the set of $k$-injections of $k\left(C^{\prime}\right)$ in $k(C)$. See \cite{diamond2005first},Chapter 7 for more details. \\
+
+Let us, for now, shift our attention towards algebraic curves in characteristic \( p \), where \( p \) is a prime number. Here, \( \mathbb{F}_{p} \) denotes the field consisting of \( p \) elements and its algebraic closure is denoted \( \overline{\mathbb{F}}_{p} \). Recall that, for every power \( q \) of \( p \), there exists a unique field \( \mathbb{F}_{q} \) contained in \( \overline{\mathbb{F}}_{p} \). 
+
+\begin{definition}[Frobenius map]
+The Frobenius map on $\overline{\mathbb{F}}_{p}$ is
+
+$$
+\sigma_{p}: \overline{\mathbb{F}}_{p} \longrightarrow \overline{\mathbb{F}}_{p}, \quad x \mapsto x^{p}
+$$
+
+    
+\end{definition}
+
+\begin{remark} We recall some of the properties from basic algebra. 
+\begin{enumerate}
+    \item The inverse of the Frobenius map is an automorphism of \( \overline{\mathbb{F}}_{p} \), but it isn't a polynomial function.
+    \item The fixed points of this inverse are the elements of \( \mathbb{F}_{p} \), which are roots in \( \overline{\mathbb{F}}_{p} \) of the polynomial \( x^{p} = x \).
+    \item In general, the fixed points of \( \sigma_{p}^{e} \), where \( \sigma_{p}^{e} \) denotes the $e$-fold composition with itself,  are given by \( \mathbb{F}_{q} \), where \( q = p^{e} \).
+    \item The group of automorphisms of \( \overline{\mathbb{F}}_{p} \) is not cyclic.  
+    \end{enumerate}
+\end{remark} 
+
+
+
+\begin{definition}
+    The Frobenius map on $\overline{\mathbb{F}}_{p}^{n}$ is
+
+$$
+\sigma_{p}: \overline{\mathbb{F}}_{p}^{n} \longrightarrow \overline{\mathbb{F}}_{p}^{n}, \quad\left(x_{1}, \ldots, x_{n}\right) \mapsto\left(x_{1}^{p}, \ldots, x_{n}^{p}\right) .
+$$
+
+\end{definition}
+
+\begin{remark}
+Due to the property \( (x+y)^{p} = x^{p} + y^{p} \) in characteristic \( p \), the Frobenius map is a field automorphism. Surjectivity of the Frobenius map is evident as we are working over a fixed algebraic closure of $\mathbb{F}_{p}$ and thus given any $n$-tuple in $\overline{\mathbb{F}}_{p}^{n}$, we can always find its inverse image under $\sigma_{p}$. The injectivity is also clear due to the property 1 mentioned at the beginning of this remark. In conclusion, This is a bijection, and its fixed points are $\mathbb{F}_{p}^{n}$. \\
+Moreover, it induces a well defined bijection at the level of projective spaces,    
+\end{remark}
+
+
+$$
+\sigma_{p}: \mathbb{P}^{n}\left(\overline{\mathbb{F}}_{p}\right) \longrightarrow \mathbb{P}^{n}\left(\overline{\mathbb{F}}_{p}\right), \quad\left[x_{0}, x_{1}, \ldots, x_{n}\right] \mapsto\left[x_{0}^{p}, x_{1}^{p}, \ldots, x_{n}^{p}\right]
+$$
+
+with fixed points $\mathbb{P}^{n}\left(\mathbb{F}_{p}\right)$.
+
+
+Furthermore, consider a homogeneous polynomial \(\varphi(x)\) defined as:
+
+\[
+\varphi(x) = \sum_{e} a_{e} x^{e}
+\]
+
+where \(x^{e}\) is a compact notation for \(x_{0}^{e_{0}} \cdots x_{n}^{e_{n}}\). This polynomial belongs to the space \(\overline{\mathbb{F}}_{p}\left[x_{0}, x_{1}, \ldots, x_{n}\right]\). If we apply the Frobenius map to the coefficients of this polynomial, we get another polynomial \(\varphi^{\sigma_{p}}(x)\), written as:
+
+\[
+\varphi^{\sigma_{p}}(x) = \sum_{e} a_{e}^{\sigma_{p}} x^{e}
+\]
+
+An important relationship (See \cite{diamond2005first} Exercise 8.2.2)(Note that we are working over a field of characteristic $p$) between these two polynomials is:
+
+\[
+\varphi^{\sigma_{p}}\left(x^{\sigma_{p}}\right) = \varphi(x)^{\sigma_{p}}
+\]
+
+Now, let's imagine a projective curve \(C\), defined over \(\overline{\mathbb{F}}_{p}\) by a set of polynomials \(\varphi_{i}\). The curve \(C^{\sigma_{p}}\) corresponds to the set of polynomials \(\varphi_{i}^{\sigma_{p}}\). The Frobenius map, \(\sigma_{p}\), establishes a transformation from curve \(C\) to \(C^{\sigma_{p}}\). Specifically, for any point \(P\) in the projective space \(\mathbb{P}^{n}\left(\overline{\mathbb{F}}_{p}\right)\) where all polynomials \(\varphi_{i}(P)\) evaluate to zero, the transformed polynomials \(\varphi_{i}^{\sigma_{p}}\) will also evaluate to zero at the point \(P^{\sigma_{p}}\).
+
+Additionally, when curve \(C\) is defined over \(\mathbb{F}_{p}\), then \(C^{\sigma_{p}}\) coincides with \(C\). This means that the Frobenius map \(\sigma_{p}\) defines a self-morphism on curve \(C\).
+
+This leads to the following defintion.
+
+\begin{definition}
+    Let $C$ be a projective curve over $\overline{\mathbb{F}}_{p}$. The Frobenius map on $C$ is
+
+$$
+\sigma_{p}: C \longrightarrow C^{\sigma_{p}}, \quad\left[x_{0}, x_{1}, \ldots, x_{n}\right] \mapsto\left[x_{0}^{p}, x_{1}^{p}, \ldots, x_{n}^{p}\right]
+$$
+
+\end{definition}
+
+\begin{example}
+\hspace{1cm}
+\begin{itemize}
+    \item The Frobenius map, applied to the projective line \(\mathbb{P}^{1}\left(\overline{\mathbb{F}}_{p}\right)\), sends \(t\) to \(t^{p}\) in its affine part. This gives rise to a function field extension, \(K / k\), defined by:
+\[
+K=\mathbb{F}_{p}(t), \quad k=\mathbb{F}_{p}(s), \quad s=t^{p}
+\] 
+So, \(K=k(t)\). The polynomial \(x^{p}-s\) is the minimal polynomial for \(t\) over \(k\). Even though the Frobenius map is bijective, seemingly of degree of 1, the actual extension degree is \(p\). This discrepancy occurs because the polynomial \((x-t)^{p}\) over \(K\) has the \(p^{th}\) root, \(t\), repeated \(p\) times.
+
+\item In a similar manner, for an elliptic curve over \(\mathbb{F}_{p}\), the Frobenius map sends \((u, v)\) to \(\left(u^{p}, v^{p}\right)\) in the affine part. This leads to another function field extension, \(k / k\), given by:
+\[
+K=\mathbb{F}_{p}(u)[v] /\langle E(u, v)\rangle, \quad k=\mathbb{F}_{p}(s)[t] /\langle E(s, t)\rangle, \quad s=u^{p}, t=v^{p}
+\]
+So, we have \(K=k(u, v)\). The polynomial \(x^{p}-s\) is the minimal polynomial of \(u\) in \(k[x]\), which factors as \((x-u)^{p}\) over \(k(u)\). Additionally, the minimal polynomial of \(v\) divides \(E(u, y)\), which is quadratic in \(y\). This results in:
+\[
+[k(u): k]=p \quad \text { and } \quad[k(u, v): k(u)] \in\{1,2\}
+\]
+A similar approach yields:
+\[
+[k(v): k]=p \quad \text { and } \quad[k(u, v): k(v)] \in\{1,3\}
+\]
+Consequently, \(k=k(u)=k(v)\) and the extension degree \( [k: k]=p \). Even in this case, the function field extension degree remains \(p\), and the extension is determined by a \(p^{th}\) root repeating \(p\) times as the root of its minimal polynomial.
+ 
+\end{itemize}
+\end{example}
+Let us now end this very brief section by introducing inducing forward and reverse maps of the Frobenius map and stating some of the properties without going into too many details but instead stating them for the sake of completeness and ease of discussing further things.  \\
+
+Given a projective curve \( C \) over \( \mathbb{F}_{p} \), the forward induced map of \( \sigma_{p} \) on \( C \) transforms divisors as:
+
+\[
+\sigma_{p, *}:(P) \mapsto\left(\sigma_{p}(P)\right)
+\]
+
+Given the bijective nature of \( \sigma_{p} \) and its ramification at all points with a degree \( p \), its reverse induced map acts as:
+
+\[
+\sigma_{p}^{*}:(P) \mapsto p\left(\sigma_{p}^{-1}(P)\right)
+\]
+The $p$ in the front comes due to the ramification. This is clear since the Frobenius map maps $x$ to $x^p$. \\
+
+If there's a map \( h \) from \( C \) to \( C^{\prime} \) over \( \mathbb{F}_{p} \), the Frobenius map commutes with \( h \). Specifically, for the Frobenius map on \( C \) as \( \sigma_{p, C} \) and on \( C^{\prime} \) as \( \sigma_{p, C^{\prime}} \):
+
+\[
+h \circ \sigma_{p, C}=\sigma_{p, C^{\prime}} \circ h.
+\]
+
+It's deduced that the forward induced map of the Frobenius map also commutes with the forward induced map of \( h \):
+
+\[
+h_{*} \circ\left(\sigma_{p, C}\right)_{*}=\left(\sigma_{p, C^{\prime}}\right)_{*} \circ h_{*}.
+\]
+
+Since the Frobenius map commutes with \( h \), its inverse does as well:
+
+\[
+h \circ \sigma_{p, C}^{-1} = \sigma_{p, C^{\prime}}^{-1} \circ h
+\]
+
+Now, for any point \( P \) in \( C \), we can compute:
+
+\[
+\left(h_{*} \circ \sigma_{p, C}^{*}\right)(P) = \left(\sigma_{p, C^{\prime}}^{*} \circ h_{*}\right)(P)
+\]
+
+Consequently, the reverse induced map of the Frobenius map commutes with the forward induced map of \( h \):
+
+\[
+h_{*} \circ \sigma_{p, C}^{*}=\sigma_{p, C^{\prime}}^{*} \circ h_{*}
+\]
+
+To summarise, both the forward and reverse induced maps of the Frobenius map have commutative properties with the map \( h \) between projective curves over \( \mathbb{F}_{p} \).
+\subsection{The reduction of algebraic curves}
+In this brief section, we aim to introduce essential notions like reduction of algebraic curves for example, at primes, etc. This will, in turn, facilitate the discussion for the reduction of Modular curves. 
+
+Let us begin with recalling the localization of the integers, \( \mathbb{Z} \), at a prime \( p \). This localized ring is denoted as:
+
+\[
+\mathbb{Z}_{(p)} = \left\{ \frac{x}{y} : x, y \in \mathbb{Z}, y \notin p\mathbb{Z} \right\}
+\]
+
+This is a subset of the rational numbers, \( \mathbb{Q} \), which contains \( \mathbb{Z} \) and is a local ring with the maximal ideal, \( p\mathbb{Z}_{(p)} \). Furthermore, recall that  
+There's a natural isomorphism between the quotient rings of \( \mathbb{Z} \) and \( \mathbb{Z}_{(p)} \) modulo \( p \):
+
+\[
+\mathbb{Z} / p\mathbb{Z} \simeq \mathbb{Z}_{(p)} / p\mathbb{Z}_{(p)}, \quad a + p\mathbb{Z} \mapsto a + p\mathbb{Z}_{(p)}
+\]
+
+This leads to a well-defined reduction map from the localized integers to the field with \( p \) elements:
+
+\[
+\sim: \mathbb{Z}_{(p)} \to \mathbb{F}_{p}, \quad \alpha \mapsto \tilde{\alpha} = \alpha + p\mathbb{Z}_{(p)}
+\]
+
+Here, the map \( \sim \) is surjective and has \( p\mathbb{Z}_{(p)} \) as its kernel.
+
+This structure becomes particularly useful when attempting to reduce an algebraic curve from the field of rationals \( \mathbb{Q} \) to a curve over the finite field \( \mathbb{F}_{p} \). The key tool in this reduction process is the localization \( \mathbb{Z}_{(p)} \), which allows us to concentrate on the characteristics related to the prime \( p \).\\
+
+Let us begin with defining a few notions. 
+\begin{definition}
+    Let $C$ be a nonsingular affine algebraic curve over $\mathbb{Q}$, defined by polynomials $\varphi_{1}, \ldots, \varphi_{m} \in \mathbb{Z}_{(p)}\left[x_{1}, \ldots, x_{n}\right]$. Then $C$ has good reduction modulo $p$ (or at $p$ ) if
+
+(1) The ideal $I=\left\langle\varphi_{1}, \ldots, \varphi_{m}\right\rangle$ of $\mathbb{Z}_{(p)}\left[x_{1}, \ldots, x_{n}\right]$ is prime.
+
+(2) The reduced polynomials $\tilde{\varphi}_{1}, \ldots, \tilde{\varphi}_{m} \in \mathbb{F}_{p}\left[x_{1}, \ldots, x_{n}\right]$ define a nonsingular affine algebraic curve $\widetilde{C}$ over $\mathbb{F}_{p}$.
+\end{definition}
+Let us now quickly move on from affine curves to projective curves. Let $k$ be any field. We will use the notation $x=$ $\left(x_{0}, \ldots, x_{n}\right)$ and $x_{(i)}=\left(x_{0}, \ldots, x_{i-1}, 1, x_{i+1}, \ldots, x_{n}\right)$ for $i=0, \ldots, n$, and $\varphi_{(i)}=\varphi\left(x_{(i)}\right)$ for $\varphi \in k[x]$. 
+
+\begin{definition}
+    For any homogeneous ideal $
+I=\langle\{\varphi\}\rangle \subset k[x]
+$
+
+its $i$th dehomogenization for $i=0, \ldots, n$ is
+
+$$
+I_{(i)}=\left\langle\left\{\varphi_{(i)}\right\}\right\rangle \subset k\left[x_{(i)}\right]
+$$
+
+and its $i$th rehomogenization is
+
+$$
+I_{(i), \text { hom }}=\left\langle\left\{\varphi_{(i), \text { hom }}\right\}\right\rangle \subset k[x],
+$$
+
+where $\varphi_{(i) \text {,hom }}$ means to multiply each term of $\varphi_{(i)}$ by the smallest power of $x_{i}$ needed to make all the terms have the same total degree. Thus $\varphi=x_{i}^{e} \varphi_{(i) \text {,hom }}$ for some $e \geq 0$.
+\end{definition} 
+
+
+
+\begin{lemma}
+Given a field \( k \) and \( I \) the homogenized version of a prime ideal \( I_{(0)} \) in \( k\left[x_{(0)}\right] \) associated with an affine algebraic curve,\( I \) itself is prime. Furthermore, for every \( i \) in the range \( 0 \) to \( n \), if \( I_{(i)} \) is not equal to \( k\left[x_{(i)}\right] \), then \( I_{(i)} \) is a prime ideal and the homogenization of \( I_{(i)} \) is \( I \) and \( I_{(i)} \) describes an affine algebraic curve.
+\end{lemma}
+
+\begin{definition}
+Let \( C_{\mathrm{hom}} \) be a nonsingular projective curve over \( \mathbb{Q} \) represented by the homogenized ideal \( I \subset \mathbb{Z}_{(p)}[x] \). This curve originates from a prime ideal \( I_{(0)} \subset \mathbb{Z}_{(p)}\left[x_{(0)}\right] \) as described above. We say that \( C_{\mathrm{hom}} \) has good reduction at \( p \) if, for each \( i \) ranging from 1 to \( n \), the affine curve \( C_{i} \) defined by \( I_{(i)} \) either has good reduction at \( p \) or \( I_{(i)} \) reduces to all of \( \mathbb{F}_{p}\left[x_{(i)}\right] \), implying that \( C_{i} \) has an empty reduction at \( p \). The curve \( \widetilde{C}_{\mathrm{hom}} \), defined by the homogenization \( \left(\widetilde{I_{(0)}}\right)_{\text {hom }} \subset \mathbb{F}_{p}[x] \), is then defined as the reduction of curve \( C \) at \( p \).
+\end{definition}
+
+\textbf{Note:}\\ The reduced curve $\widetilde{C}_{\text {hom }}$ can be defined by any nonempty reduction $\widetilde{C}_{i}$ of an affine piece of $C_{\text {hom }}$, but this is not immediately obvious. See \cite{diamond2005first} Chapter 8, section 5 for more details. Furthermore, it is worth noting that Good reduction at $p$ on one affine piece of a projective curve does not guarantee good reduction of the curve. \\
+
+Lastly, we quote an important theorem without proof before moving on to the discussion of morphisms. 
+
+\begin{theorem}
+    Let $C$ be a projective algebraic curve over $\Q$ having a good reduction at a prime $p$. Then, the map from the curve to its reduced curve $f: C  \longrightarrow \widetilde{C}$ is surjective. 
+\end{theorem}
+\begin{proof}
+\cite{diamond2005first}, Section 8.4,8.5. 
+    
+\end{proof}
+
+It is also natural to think about the reduction of morphisms at primes. 
+
+Consider a morphism \( h \) between nonsingular projective algebraic curves \( C \) and \( C' \) over \( \mathbb{Q} \) with good reduction at \( p \):
+
+\[
+h: C \longrightarrow C^{\prime}
+\]
+
+To deduce a morphism \( \widetilde{h} \) for the reduced curves, let us first represent \( h \) as \( \left[h_{0}, \ldots, h_{r}\right] \). The ideal \( I_{(0)} \) in \( \mathbb{Z}_{(p)}\left[x_{(0)}\right] \) defines \( C \) upon homogenization. It's assumed that each \( h_{i} \) belongs to the subring \( R \) of the coordinate ring \( \mathbb{Q}\left[C_{0}\right] \). 
+
+The \( p \)-adic valuation of each \( h_{i} \) is:
+
+\[
+\nu_{p}\left(h_{i}\right)=\max \left\{e: h_{i} \in p^{e} R\right\}
+\]
+
+At least one \( \nu_{p}\left(h_{i}\right) \) is finite. Consequently, the valuation of \( h \) is:
+
+\[
+\nu_{p}(h)=\min \left\{\nu_{p}\left(h_{i}\right): i=0, \ldots, r\right\}
+\]
+
+Rewriting \( h \) gives:
+
+\[
+h=\left[h_{0}^{\prime}, \ldots, h_{r}^{\prime}\right]
+\]
+
+where each \( h_{i}^{\prime} \) belongs to \( R \), and at least one entry in \( R-pR \). This non-zero reduction forms the basis for \( \tilde{h} \), a rational map from \( \widetilde{C}_{0} \) to \( \widetilde{C}^{\prime} \).
+
+For each point in \( \widetilde{C}_{0} \), described as \( \widetilde{P} \) with corresponding \( P \in C_{0} \), \( \tilde{h}(\widetilde{P}) \) is non-zero for most points. If for instance \( \tilde{h}_{i}^{\prime}(\widetilde{P}) \) isn't zero, it's shown that \( \tilde{h}(\widetilde{P}) \) lies in \( \widetilde{C_{i}^{\prime}} \). For any element of the defining ideal \( \widetilde{I_{(i)}^{\prime}} \), \( \tilde{g} \) mirrors \( g \) in \( I_{(i)}^{\prime} \). Consequently, for \( \widetilde{P}, i, \) and \( \tilde{g} \), \( \tilde{g}(\tilde{h}(\widetilde{P})) \) is the reduction of \( g(h(P)) \), which is zero because \( h(P) \) is in \( C_{i}^{\prime} \).
+
+This argument proves that \( \tilde{h}(\widetilde{P}) = \widetilde{h(P)} \) for all \( P \) in \( C \) that reduce outside a finite subset of \( \widetilde{C} \). The statement remains consistent regardless of the chosen affine piece of \( C \) or the \( h_{i} \) representatives, even though the finite set might change.
+
+In conclusion, \( \tilde{h} \) is valid as a rational map from \( \widetilde{C} \) to \( \widetilde{C^{\prime}} \). As usual, by theory of algebraic curves, this rational map extends to the final reduced morphism:
+
+\[
+\tilde{h}: \widetilde{C} \longrightarrow \widetilde{C^{\prime}}
+\]
+
+\textbf{Note:}\\
+For an algebraic curve \( C \) over \( \mathbb{Q} \), its geometric genus is 0 if:
+
+1. It's isomorphic over \( \overline{\mathbb{Q}} \) to the projective line.
+2. Its function field \( \overline{\mathbb{Q}}(C) \) is isomorphic in \( \overline{\mathbb{Q}} \) to a field \( \overline{\mathbb{Q}}(t) \).
+
+Curves with genus 0 are anomalies. However, if the target curve \( C' \) possesses a positive genus, both the morphism \( h \) and its reduction \( \tilde{h} \) operate compatibly on its points and share the same degree.
+
+The following theorem, further explains this:
+\begin{theorem}
+If \( C \) and \( C' \) are nonsingular projective algebraic curves over \( \mathbb{Q} \) that have good reduction at \( p \), and \( C' \) has a positive genus, then for any morphism \( h \) from \( C \) to \( C' \), there exists a commutative diagram with $deg(h)=deg(\widetilde{h})$. 
+\begin{center}
+
+\begin{tikzcd}
+C \arrow[d] \arrow[rr, "h"]               &  & C´ \arrow[d]   \\
+\widetilde{C} \arrow[rr, "\widetilde{h}"] &  & \widetilde{C´}
+\end{tikzcd}
+\end{center}
+
+\begin{proof}
+\cite{diamond2005first}, Section 8.4,8.5. 
+    
+\end{proof}
+
+It is also natura
+\end{theorem}
+\textbf{Note:} Since $h$ is surjective by theorem 4.6.6, we get that $\widetilde{h}$ being the unique morphism that makes the diagram commute. 
+For example,the map $h: \mathbb{P}^{1} \longrightarrow \mathbb{P}^{1}$ where $h[x, y]=[p x, y]$ surjects over $\mathbb{Q}$ but it reduces at $p$ to the zero map.
+
+\begin{corollary}
+Let's consider a curve \( C^{\prime} \) with a positive genus. Then, the following is true:\\
+   (a) If a morphism \( h: C \longrightarrow C^{\prime} \) is surjective, then the reduced morphism \( \tilde{h}: \widetilde{C} \longrightarrow \widetilde{C^{\prime}} \) is also surjective.\\
+   (b) Given another morphism \( k: C^{\prime} \longrightarrow C^{\prime \prime} \) where \( C^{\prime \prime} \) also has a positive genus, the composition of their reductions holds.
+   \[
+   \widetilde{k \circ h} = \widetilde{k} \circ \widetilde{h}
+   \]\\
+   (c) If the morphism \( h \) is an isomorphism, the reduced morphism \( \tilde{h} \) retains this property and is also an isomorphism.
+\begin{proof}
+\cite{diamond2005first}, Section 8.4,8.5. 
+    
+\end{proof}
+
+\end{corollary}
+Next, we look at reduction and Picard Groups of Nonsingular Projective Curves.
+\begin{theorem}
+Given a nonsingular projective algebraic curve \( C \) over \( \mathbb{Q} \) with good reduction at \( p \), the reduction induces a mapping on degree-0 divisors:
+
+\[
+\operatorname{Div}^{0}(C) \longrightarrow \operatorname{Div}^{0}(\widetilde{C}), \quad \sum n_{P}(P) \mapsto \sum n_{P}(\widetilde{P})
+\]
+
+This mapping sends principal divisors to principal divisors, which further results in a surjective transformation of the Picard groups:
+
+\[
+\operatorname{Pic}^{0}(C) \longrightarrow \operatorname{Pic}^{0}(\widetilde{C}), \quad\left[\sum n_{P}(P)\right] \mapsto\left[\sum n_{P}(\widetilde{P})\right]
+\]
+
+Now, consider another curve \( C^{\prime} \) — also a nonsingular projective algebraic curve over \( \mathbb{Q} \) with good reduction at \( p \) — but with a positive genus. Given a morphism \( h \) from \( C \) to \( C^{\prime} \) over \( \mathbb{Q} \), there are induced forward maps:
+
+\( h_{*}: \operatorname{Pic}^{0}(C) \longrightarrow \operatorname{Pic}^{0}\left(C^{\prime}\right) \)
+and
+\( \tilde{h}_{*}: \operatorname{Pic}^{0}(\widetilde{C}) \longrightarrow \operatorname{Pic}^{0}\left(C^{\prime}\right) \)
+
+These are induced by \( h \) and \( \tilde{h} \) respectively.
+Moreover, the following diagram commutes:
+
+
+\[
+\begin{array}{ccc}
+\operatorname{Pic}^{0}(C) & \xrightarrow{h_{*}} & \operatorname{Pic}^{0}\left(C^{\prime}\right) \\
+\downarrow & & \downarrow \\
+\operatorname{Pic}^{0}(\widetilde{C}) & \xrightarrow{\tilde{h}_{*}} & \operatorname{Pic}^{0}(\widetilde{C^{\prime}})
+\end{array}
+\]
+\begin{proof}
+\cite{diamond2005first}, Section 8.4,8.5. 
+    
+\end{proof}
+
+\end{theorem}
+
+
+
+\subsection{Modular curves in characteristic $p$}
+Suppose \( N \) is a positive integer and \( p \) is a prime number that doesn't divide \( N \). We will study the reduction of modular curves \( X_{1}(N) \) and \( X_{0}(N) \) at \( p \).
+
+First, we'll tackle the reduction of the moduli space at \( p \). Let's use \( \mathfrak{p} \) to represent a maximal ideal of \( \overline{\mathbb{Q}} \) that sits above \( p \). We know that if an elliptic curve \( E \) over \( \overline{\mathbb{Q}} \) has good reduction at \( \mathfrak{p} \), its \( j \)-invariant \( j(E) \), belongs to \( \overline{\mathbb{Z}}_{(\mathfrak{p})} \). This invariant will reduce at \( \mathfrak{p} \) to \( \widetilde{j(E)} \) in \( \overline{\mathbb{F}}_{p} \). To make thing simpler, it is a convention to assume that $j$ doesn't take the valeus 0 or 1728. 
+
+To express this, we'll adjust our notation with a prime symbol. So, the appropriate restriction of the moduli space \( \mathrm{S}_{1}(N) \) over \( \mathbb{Q} \) becomes:
+
+\[
+\mathrm{S}_{1}(N)_{\mathrm{gd}}^{\prime}=\left\{[E, Q] \in \mathrm{S}_{1}(N): E \text { has good reduction at } \mathfrak{p}, \widetilde{j(E)} \notin\{0,1728\}\right\} .
+\]
+
+Considering the characteristic \( p \), the moduli space over \( \overline{\mathbb{F}}_{p} \) is given by \( \widetilde{\mathrm{S}}_{1}(N) \). This space comprises equivalence classes \( [E, Q] \), where \( E \) is an elliptic curve over \( \overline{\mathbb{F}}_{p} \) and \( Q \) is a point of order \( N \) on \( E \). We'll also again make sure \( j \) doesn't take the values 0 or 1728:
+
+\[
+\widetilde{\mathrm{S}}_{1}(N)^{\prime}=\left\{[E, Q] \in \widetilde{\mathrm{S}}_{1}(N): j(E) \notin\{0,1728\}\right\} .
+\]
+
+The reduction map is then given by:
+
+\[
+\mathrm{S}_{1}(N)_{\mathrm{gd}}^{\prime} \longrightarrow \widetilde{\mathrm{S}}_{1}(N)^{\prime}, \quad\left[E_{j}, Q\right] \mapsto\left[\widetilde{E}_{j}, \widetilde{Q}\right]
+\]
+
+An interesting observation here is that any Weierstrass equation over \( \overline{\mathbb{F}}_{p} \) can be lifted to \( \overline{\mathbb{Z}} \). Moreover, the discriminant of this lift is another lift of the discriminant. This means that if the discriminant is non-zero in one space, it remains so in the other, ensuring elliptic curves in one space correspond to elliptic curves in the other. Another proposition (\cite{diamond2005first}, Proposition 8.4.4(a)) confirms that each point of order \( N \) also has a corresponding lift. This ensures that the reduction map we derived is surjective.
+
+When discussing the reduction of \( X_{1}(N) \) at a prime \( p \), we consider the universal elliptic curve \( \widetilde{E}_{j} \) defined over \( \mathbb{F}_{p}(j) \). Due to our convention that $j$ doesn't take the values 0 or 1728, we get a nice equation for the universal elliptic curve. 
+This curve is given by:
+
+\[
+\widetilde{E}_{j}: y^{2}+x y=x^{3}-\left(\frac{36}{j-1728}\right) x-\left(\frac{1}{j-1728}\right) .
+\]
+The discriminant for this curve is \( j^{2} /(j-1728)^{3} \) and its invariant is \( j \). When we speak of the points \((x, y)\) on the curve \(\widetilde{E}_{j}\), we are referring to those that lie within the projective plane \(\mathbb{P}^{2}\left(\overline{\mathbb{F}_{p}(j)}\right)\). 
+
+Now, imagine a point \(Q\) on \(\widetilde{E}_{j}\). If this point has an order \(N\), it means that \(N\) times the point \(Q\) gives the zero point on the curve (notated as \([N] Q=0_{\widetilde{E}}\)). However, multiplying the point by any number less than \(N\) (between 0 and \(N\)) does not give the zero point. 
+
+The \(x\)-coordinate of the point \(Q\), represented as \(x(Q)\), has a minimal polynomial in the field \(\mathbb{F}_{p}(j)[x]\) denoted by \(\varphi_{1, N}\). Using this polynomial, we can define a new field:
+
+\[
+\mathbb{K}_{1}(N)=\mathbb{F}_{p}(j)[x] /\left\langle\varphi_{1, N}(x)\right\rangle .
+\]
+
+It's an interesting fact, which we accept without delving into the proof, that the intersection of the field \(\mathbb{K}_{1}(N)\) and the algebraic closure of \(\mathbb{F}_{p}\) is just \(\mathbb{F}_{p}\). This implies that our new field \(\mathbb{K}_{1}(N)\) can be thought of as a function field over \(\mathbb{F}_{p}\).
+
+The polynomial \(\varphi_{1, N}\) also helps define a planar curve, which we'll call \(\widetilde{X}_{1}(N)^{\text {planar }}\). This curve might not be smooth everywhere (it could be singular). The points on this curve can be visualized as pairs \((j, x)\) within the plane \(\overline{\mathbb{F}}_{p}^{2}\).
+
+Lastly, there exists a birational equivalence over \(\mathbb{F}_{p}\) connecting this planar curve to any non-singular projective algebraic curve with function field is isomorphic to \(\mathbb{K}_{1}(N)\).  Recall, the moduli space interpretation discussed in chapter 2. As discussed in the setup, we are essentially working over 
+
+ \begin{theorem}[Igusa's theorem]
+ For a positive integer \( N \) and a prime \( p \) (where \( p \nmid N \)), the modular curve \( X_{1}(N) \) has good reduction at \( p \). The function fields \( \mathbb{F}_{p}\left(\widetilde{X}_{1}(N)\right) \) and \( \mathbb{K}_{1}(N) \) are isomorphic. Additionally, we have the following commutative diagram:
+\begin{center}
+\begin{tikzcd}
+\mathrm{S}_{1}(N)_{\mathrm{gd}}^{\prime}  \arrow[dd] \arrow[rr, "\psi_1"] &  & X_1(N) \arrow[dd]  \\
+                                                                          &  &                    \\
+\widetilde{\mathrm{S}}_{1}(N)^{\prime} \arrow[rr, "\widetilde{\psi_1}"]   &  & \widetilde{X_1}(N)
+\end{tikzcd}    
+\end{center}
+
+\begin{theorem}
+    See, \cite{diamond2005first}, section 8.6.
+\end{theorem}
+    
+ \end{theorem}
+ 
+The diagram essentially dictates the compatibility between the reduction of modular curves and the reduction of moduli spaces. \\
+
+The main takeaway is the surjective nature of the transformations, ensuring that all necessary points in the original space have corresponding points in the reduced space.
+
+In the context of the Modularity Theorem, while we've primarily discussed \( X_{1}(N) \), a similar line of reasoning is applicable for \( X_{0}(N) \).
+\subsection{L-functions and Eicheler-Shimura relations}
+
+We briefly discuss the connection of modular forms and elliptic curves with L-functions. 
+
+\begin{definition}
+ Let $\Gamma$ be a congruence subgroup. Let $f \in M_{k}\left(\Gamma_{1}(N)\right)$ be a modular form, given by a $q$-expansion $f=\sum_{n=0}^{\infty} a_{n} q^{n}$.The $L$-function of $f$ is the function of $s \in \mathbb{C}$ given formally as
+
+$$
+L(f, s)=\sum_{n=1}^{\infty} a_{n} n^{-s}
+$$
+
+\end{definition}
+
+\begin{proposition}
+    If $f \in S_{k}\left(\Gamma_{1}(N)\right)$ is a cusp form then $L(f, s)$ converges absolutely for all $s$ such that $\mathfrak{R}(s)>k / 2+1$. If $f \in M_{k}\left(\Gamma_{1}(N)\right)$ is not a cusp form then $L(f, s)$ converges absolutely for all $s$ with $\mathfrak{R}(s)>k$.
+
+\end{proposition}
+
+\begin{proof}
+    See, \cite{Masdeu2015ModularForms}, proposition 6.1.1.
+\end{proof}
+The following theorem gives a nice criterion for an eigenform to be a newform in terms of euler product expansions. 
+\begin{theorem}
+    Let $f \in M_{k}\left(\Gamma_{0}(N), \chi\right)$ be a modular form with $q$-expansion $f=\sum_{n>0} a_{n} q^{n}$. Then $f$ is a normalized eigenform if and only if $L(f, s)$ has an Euler product expansion
+
+$$
+L(f, s)=\prod_{p \text { prime }}\left(1-a_{p} p^{-s}+\chi(p) p^{k-1-2 s}\right)^{-1}
+$$
+\end{theorem}
+
+\begin{proof}
+    See, \cite{Masdeu2015ModularForms}, 6.1.2.
+\end{proof}
+
+Now, consider an elliptic curve $E$ over $\Q$. Let $N_E$ be the conductor of $E$ defined in chapter 1. 
+
+\begin{definition}
+We define the L-function attached to ane elliptic curve $E$ via the following Euler product:
+
+$$
+L(E, s)=\prod_{p \mid N_{E}}\left(1-a_{p}(E) p^{-s}\right)^{-1} \prod_{p \nmid N_{E}}\left(1-a_{p}(E) p^{-s}+p^{1-2 s}\right)^{-1}, \quad \Re(s)>3 / 2
+$$
+
+where $a_{p}(E)=1+p-\# E\left(\mathbb{F}_{p}\right)$. 
+
+\end{definition}
+
+The Eichler-Shimura relations states that elliptic curves arise from modular forms. 
+
+\begin{theorem}
+    Let $f \in S_{2}\left(\Gamma_{0}(N)\right)$ be a normalized eigenform whose Fourier coefficients $a_{n}(f)$ are all integers. Then there exists an elliptic curve $E_{f}$ defined over $\mathbb{Q}$ such that $L\left(E_{f}, s\right)=L(f, s)$.
+
+\end{theorem}
+
+\textbf{Idea behind constructing such an elliptic curve}:
+
+Consider the differential form \( \omega_{f} = 2\pi i f(z) dz \). Define \( \mathbb{H}^{*} \) as the union of the upper half-plane \( \mathbb{H} \) and the projective line \( \mathbb{P}^{1}(\mathbb{Q}) \). For a point \( \tau \) in \( \mathbb{H}^{*} \), we associate a complex number \( \varphi(\tau) \) defined by the integral:
+
+\[
+\varphi(\tau) = \int_{\infty}^{\tau} \omega_{f} \in \mathbb{C}.
+\]
+
+Relation with the Modular Group \( \Gamma_{0}(N) \):
+
+Given \( \gamma \in \Gamma_{0}(N) \), consider the quantity \( \beta_{\gamma} \) defined as:
+
+\[
+\beta_{\gamma} = \varphi(\gamma\tau) - \varphi(\tau) = \int_{\tau}^{\gamma\tau} \omega_{f}.
+\]
+
+We can show that \( \beta_{\gamma} \) does not depend on the choice of \( \tau \) through the following calculation:
+
+\[
+\begin{aligned}
+\int_{\tau}^{\gamma\tau} \omega_{f} &= \int_{\tau}^{\infty} \omega_{f} + \int_{\infty}^{\gamma\infty} \omega_{f} + \int_{\gamma\infty}^{\gamma\tau} \omega_{f} \\
+&= \int_{\tau}^{\infty} \omega_{f} + \int_{\infty}^{\gamma\infty} \omega_{f} + \int_{\infty}^{\tau} \omega_{f} \\
+&= \int_{\infty}^{\gamma\infty} \omega_{f}.
+\end{aligned}
+\]
+
+Define \( \Lambda_{f} \) as the set of complex numbers:
+
+\[
+\Lambda_{f} = \left\{ \beta_{\gamma} = \int_{\infty}^{\gamma\infty} \omega_{f} \mid \gamma \in \Gamma_{0}(N) \right\} \subset \mathbb{C}.
+\]
+
+With \( \Lambda_{f} \), we have a well-defined mapping:
+
+\[
+\Gamma_{0}(N) \backslash \mathbb{H}^{*} \rightarrow \mathbb{C} / \Lambda_{f}.
+\]
+
+It can be demonstrated that \( \Lambda_{f} \) forms a lattice. We define \( E_{f} \) as the elliptic curve corresponding to the complex torus \( \mathbb{C} / \Lambda_{f} \).
+
+While constructing \( E_{f} \) is straightforward, proving that it is defined over \( \mathbb{Q} \) and that its L-function \( L(E_{f}, s) \) equals \( L(f, s) \) requires more advanced techniques and deeper understanding of the relationship between elliptic curves and modular forms. This is beyond the scope of this thesis.
+
+Section 8.7 \cite{diamond2005first}, also describes Eichler-Shimura relation at the level of Picard groups. We encourage the readers to go through the section 8.7 for a more algebraic and geometric discussion of Eichler-Shimura relations. 
