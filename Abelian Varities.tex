@@ -1,0 +1,808 @@
+\section{Jacobian of Curves and Abelian Varieties}
+
+
+The study of algebraic curves and their properties has been a central theme in algebraic geometry for centuries. The concept of the Jacobian was first introduced in the mid-nineteenth century by mathematicians like Carl Gustav Jacobi and Bernhard Riemann as they sought to unify the theory of elliptic functions. We will briefly discuss Abelian Varieties over $\C$ and then move on to the discussion of Jacobians, describe what they are and in the end state another version of the Modularity theorem in terms of Jacobians. \\ We will closely follow the book \cite{diamond2005first} and \cite{hindry-silverman-diophantine}. We will sometimes closely follow proofs from either of these sources for the sake of completeness. Due to the extreme complexity of the overall topic and to demonstrate all of this within 6 months, it was inevitable to closely follow some of the proofs but written in my own words. Having said that, I must add that in many places, I have expanded on my own, giving more details.
+
+
+\subsection{Abelian Varieties over $\mathbb{C}$}
+
+\begin{definition}[Abelian Variety]
+  An abelian variety is an algebraic group that is also a projective variety.
+  
+\end{definition}
+
+\begin{definition}
+    Consider a complex vector space $V=\mathbb{C}^{g}$, where $g \geq 1$, and let $\Lambda$ be a lattice of full rank. This means that $\Lambda \cong \mathbb{Z}^{2 g}$ as abstract group, and that $\mathbb{R} \otimes_{\mathbb{Z}} \Lambda=V$. The quotient
+
+$$
+X=V / \Lambda
+$$
+is a complex manifold of complex dimension $g$. Any such $X$ is called a complex torus. 
+
+\end{definition}
+\begin{remark}
+1. With the help of Lie theory, it can be shown that the set of complex points of an abelian variety forms a complex torus. In other words, the set of  complex points of an abelian variety is isomorphic to $\mathbb{C}^{g} / \Lambda$ for some lattice $\Lambda$ as complex analytic varieties.
+
+2. Let $\left(\lambda_{1}, \ldots, \lambda_{2 g}\right)$ be a $\mathbb{Z}$-basis for $\Lambda$. Then, the set $$
+\left\{\sum_{i=1}^{2 g} t_{i} \lambda_{i} \mid 0 \leq t_{i} \leq 1 \forall i\right\}
+$$
+
+is a fundamental domain for the action of $\Lambda$; therefore, $X$ is compact.
+
+\begin{definition}
+    A Hermitian form is a map
+
+$$
+H: \mathbb{C}^{g} \times \mathbb{C}^{g} \rightarrow \mathbb{C}
+$$
+
+that is linear with respect to the first set of variables and satisfies
+
+$$
+H(z, w)=\overline{H(w, z)} .
+$$
+
+\end{definition}
+
+\begin{definition}
+    A Riemann form with respect to a lattice $\Lambda$ is a Hermitian form on $\mathbb{C}^{g} \times \mathbb{C}^{g}$ whose imaginary part takes integer values when restricted to $\Lambda \times \Lambda$. A Riemann form is called nondegenerate if it is positive definite.
+
+\end{definition}
+
+    \begin{theorem}\label{5.1.5}
+        Let $\Lambda$ be a lattice in $\mathbb{C}^{g}$. The complex torus $\mathbb{C}^{g} / \Lambda$ is an abelian variety if and only if there exists a positive definite Hermitian form on $\mathbb{C}^{g} \times \mathbb{C}^{g}$ whose imaginary part takes integer values when restricted to $\Lambda \times \Lambda$.
+\begin{proof}
+    See, \cite{hindry-silverman-diophantine}(Section A.5).
+\end{proof}
+    
+    \end{theorem}
+
+\begin{corollary}
+    Every torus of  dimension one is an abelian variety. 
+\end{corollary}
+\begin{proof}
+
+Indeed, a lattice $\Lambda= \mathbb{Z} \omega_{1}+\mathbb{Z} \omega_{2}$ be a lattice in $\mathbb{C}$. 
+We define a function on $\C \times \C$ given by,
+$$
+H(z, w)=\frac{z \bar{w}}{\operatorname{Im}\left(\omega_{1} \bar{\omega}_{2}\right)}
+$$ 
+We prove that $H$ is indeed a Hermitian form.
+
+Taking the conjugate of \( H(w, z) \), we have:
+
+\[ \overline{H(w, z)} = \overline{\frac{w \bar{z}}{\text{Im}(\omega_1 \bar{\omega}_2)}} = \frac{\bar{w} z}{\overline{\text{Im}(\omega_1 \bar{\omega}_2)}} \]
+
+Since $\overline{w\bar{z}}=\bar{w}z$ and \( \text{Im}(\omega_1 \bar{\omega}_2) \) is a real number, its conjugate is itself.\\
+Thus,
+
+\[ \overline{H(w, z)} = \frac{\bar{w} z}{\text{Im}(\omega_1 \bar{\omega}_2)} = H(z, w) \]
+
+This shows that \( H \) is indeed Hermitian.
+
+
+A Hermitian form \( H \) is positive definite if \( H(z, z) > 0 \) for all \( z \neq 0 \). Let's check this for our \( H \):
+
+For any non-zero \( z \),
+
+\[ H(z, z) = \frac{z \bar{z}}{\text{Im}(\omega_1 \bar{\omega}_2)} = \frac{|z|^2}{\text{Im}(\omega_1 \bar{\omega}_2)} \]
+
+Since \( |z|^2 \) is always positive for \( z \neq 0 \), the sign of \( H(z, z) \) depends on the sign of \( \text{Im}(\omega_1 \bar{\omega}_2) \). 
+As discussed in the first chapter, generators \( \omega_1 \) and \( \omega_2 \) of a lattice $\Lambda$, are typically chosen such that \( \text{Im}(\omega_1 \bar{\omega}_2)=\text{Im}(\frac{\omega_1}{\omega_2}) > 0 \). 
+Thus,  \( H \) is positive definite, since \( \text{Im}(\omega_1 \bar{\omega}_2) \) is positive. \\
+
+
+It remains to show that $H$ is indeed a Riemann form. 
+
+
+Any two points \( z, \omega \) in the lattice \( z \) can be expressed as:
+
+\[ z = m_1 \omega_1 + m_2 \omega_2 \]
+\[ \omega = n_1 \omega_1 + n_2 \omega_2 \]
+
+where \( m_1, m_2, n_1, n_2 \) are integers. 
+
+Consider, 
+\[ H(z, \omega) = \frac{(m_1 \omega_1 + m_2 \omega_2)(\bar{n_1 \omega_1} + \bar{n_2 \omega_2})}{\text{Im}(\omega_1 \bar{\omega}_2)} \]
+
+Expanding this, we have:
+
+\[ H(z, \omega) = \frac{m_1 n_1 \omega_1 \bar{\omega}_1 + m_1 n_2 \omega_1 \bar{\omega}_2 + m_2 n_1 \omega_2 \bar{\omega}_1 + m_2 n_2 \omega_2 \bar{\omega}_2}{\text{Im}(\omega_1 \bar{\omega}_2)} \]
+
+The imaginary part of \( H(z, \omega) \) is given by:
+
+\[ \text{Im}(H(z, \omega)) = \text{Im}\left(\frac{m_1 n_1 \omega_1 \bar{\omega}_1 + m_1 n_2 \omega_1 \bar{\omega}_2 + m_2 n_1 \omega_2 \bar{\omega}_1 + m_2 n_2 \omega_2 \bar{\omega}_2}{\text{Im}(\omega_1 \bar{\omega}_2)}\right) \]
+
+Note that  as \( \omega_1 \bar{\omega}_1 \) and \( \omega_2 \bar{\omega}_2 \) are real numbers, they do not contribute to the imaginary part. Thus,
+
+\[ \text{Im}(H(z, \omega)) = \text{Im}\left(\frac{m_1 n_2 \omega_1 \bar{\omega}_2 + m_2 n_1 \omega_2 \bar{\omega}_1}{\text{Im}(\omega_1 \bar{\omega}_2)}\right) \]
+
+The key point here again as before, \( \omega_1 \bar{\omega}_2 \) and \( \omega_2 \bar{\omega}_1 \) are conjugates of each other, so their imaginary parts are negatives of each other. Therefore, the imaginary part of \( \omega_1 \bar{\omega}_2 \) is \( -\text{Im}(\omega_2 \bar{\omega}_1) \).
+
+\[ \text{Im}(H(z, \omega)) = \text{Im}\left(\frac{m_1 n_2 \omega_1 \bar{\omega}_2 - m_2 n_1 \omega_2 \bar{\omega}_1}{\text{Im}(\omega_1 \bar{\omega}_2)}\right) \]
+
+Thus, we have,
+
+$$\text{Im}(z,\omega)=m_1n_2-n_1m_2.$$
+
+Thus, \( \text{Im}(H(z, \omega)) \) is an integer for all \( z, \omega \in \Lambda \),
+
+Now, theorem \ref{5.1.5} gives us the claim. 
+\end{proof}    
+
+\begin{remark}
+
+1. Note that to make idea about period matrices clear, the period matrix related to lattice $\Lambda$ is a matrix whose columns correspond to a basis  $\Lambda$  of the lattice $\Lambda$  expanded out using a basis of V. The two relations in Theorem \ref{riemann} are called Riemann's bilinear period relations. Some texts call this a definition for a complex torus to be an abelian variety. If the dimension of the lattice is greater than one, then many tori do not admit a nonzero Riemann form. For example, let $e_{1}, e_{2}, e_{3}, e_{4}$ be vectors in $\mathbb{C}^{2}$ whose coordinates are all algebraically independent over $\mathbb{Q}$, and let $\Lambda$ be the lattice that they span. Then the torus $\mathbb{C}^{2} / \Lambda$ is not an abelian variety.\\
+
+2. 
+Let $\tau$ be a $g \times g$ symmetric matrix whose imaginary part is positive definite. The torus $\mathbb{C}^{g} /\left(\mathbb{Z}^{g}+\tau \mathbb{Z}^{g}\right)$ is an abelian variety. We will use this in the next section to show that the Jacobian variety of a curve is an abelian variety.
+\end{remark}
+
+
+
+
+
+
+
+\begin{proposition}\label{abe}
+    Let $A=V / \Lambda$ be an abelian variety, and let $B$ be an abelian subvariety of $A$. Then another abelian subvariety exists $C$ such that $B+C=A$ and $B \cap C$ is finite. In other words, the map
+
+$$
+B \times C \longrightarrow A, \quad(b, c) \longmapsto b+c
+$$
+
+is an isogeny.
+\end{proposition}
+
+\begin{proof}\cite{hindry-silverman-diophantine}
+Consider a nondegenerate Riemann form, $H$, for the given abelian variety $A$, and $E$ be its imaginary part. We naturally identify the tangent space of $A$ with $V$. This identification is made using the fact that the tangent space of an abelian variety at a point is isomorphic to the dual of the cotangent space at that point, which is in turn isomorphic to $V$ itself. The isomorphism between the tangent space and the dual cotangent space is given by the Riemann form $H$.\\
+
+We define another vector space $V_{1}$ as the tangent space of another abelian variety $B$. Additionally, we set $\Lambda_{1}$ to be the intersection of $V_{1}$ with the lattice $\Lambda$ so that $B$ can be expressed as the quotient $V_{1} / \Lambda_{1}$.
+
+Now, let's consider the vector space $V_{2}$, which is the orthogonal complement of $V_{1}$ with respect to the Riemann form $H$. In other words, it consists of all vectors in $V$ that satisfy $H(v, w) = 0$ for all $w$ in $V_{1}$. It's important to note that if $w$ belongs to $V_{1}$, then $iw$ also belongs to $V_{1}$ since $V_{1}$ is a complex vector space. Using the definition of the Riemann form, we can express $V_{2}$ alternatively as:
+
+$$
+V_{2} = \left\{v \in V \mid E(v, w) = 0 \text { for all } w \in V_{1}\right\}
+$$
+
+Now, consider the intersection $\Lambda_{2}$, which is defined as the intersection of the lattice $\Lambda$ with $V_{2}$. In other words, $\Lambda_{2}$ consists of all lattice points $x$ in $\Lambda$ such that $E(x, y) = 0$ for all $y$ in $\Lambda_{1}$. The nondegeneracy of $E$ and the fact that $\Lambda_{1}$ is a lattice in $V_{1}$ imply that $\Lambda_{2}$ has a certain rank given by:
+
+$$
+\operatorname{rank} \Lambda_{2} = \operatorname{rank} \Lambda - \operatorname{rank} \Lambda_{1} = 2 \operatorname{dim}_{\mathbb{C}} V_{2}
+$$
+This implies that $\Lambda_{2}$ is a lattice in $V_{2}$, and as a result, we can define an abelian subvariety $C$ of $A$ as $C = V_{2} / \Lambda_{2}$. Using the decomposition $V = V_{1} \oplus V_{2}$, we can deduce that $A$ can be expressed as the sum of $B$ and $C$ such that their intersection, $B \cap C$, consists of only finitely many points.
+\end{proof}
+
+\begin{definition}
+    A torus is said to be simple if it does not contain any nontrivial subtori. 
+\end{definition}
+    \begin{corollary}
+       Any abelian variety $A$ is isogenous to a product of the form
+
+$$
+A_{1}^{n_{1}} \times \cdots \times A_{s}^{n_{s}},
+$$
+
+where the $A_{i}$ 's are simple, pairwise nonisogenous abelian varieties.
+
+    \end{corollary}
+\begin{proof}
+    The follows by induction. It is clear that an abelian variety of dimension 1 is simple. Now, for an abelian variety $A$ of dimension $n$, there are two cases to consider. If $A$ is simple itself, there is nothing to prove. But if not, by \ref{abe} we get an isogenous decomposition of $A$. Now, by applying the induction hypothesis, the claim follows. 
+\end{proof}
+\end{remark}
+\subsection{Jacobians over $\mathbb{C}$}
+In this section, we will sketch the construction of the Jacobian of a compact Riemann surface. The Jacobian will be a complex torus carrying a nondegenerate Riemann form, an abelian variety.The Jacobian is one of the central tools in studying curves and is why abelian varieties enter the picture. If we combine the theory of Jacobians with Theorem \ref{5.1.5}, we get a nice proof that all compact Riemann surfaces can be embedded into projective space. 
+\\
+
+\textbf{Historical Remark:}\\
+The concept of abelian varieties originated in the 19th century when attempting to compute or describe integrals of the form $\int R(t, \sqrt{P(t)}) d t$, where $R$ is a rational function and $P$ is a polynomial. More broadly, integrals $\int R(t, s) d t$ were investigated, subject to an algebraic relation $P(s, t)=0$. These integrals were eventually termed abelian integrals.\\
+
+For instance, let's consider the integral $u=\int_{0}^{x} 1 / \sqrt{1-t^{2}} d t$. It is widely known from calculus that $u=\sin ^{-1}(x)$, making it more convenient to examine the inverse function of $u$. In simpler terms, we work with the function $S$ that satisfies $x=S(u)$, revealing that $S$ is, in fact, the sine function. Remarkably, it has a periodic nature, $S(u+2 \pi)=S(u)$, and adheres to a differential equation $S(u)^{2}+S^{\prime}(u)^{2}=1$. To be precise, the mapping $u \rightarrow\left(S(u), S^{\prime}(u)\right)$ parameterizes the curve $x^{2}+y^{2}=1$.
+
+
+A significant breakthrough by Abel unveiled that when delving into integrals of the form $u=\int_{0}^{x} 1 / \sqrt{Q(t)} d t$ where $\operatorname{deg}(Q) \geq 5$, an expansion into additional variables becomes necessary. \\
+
+Consider a polynomial \( P \) of degree \( 2g + 2 \) with distinct roots. We construct a Riemann surface \( X \) by gluing two affine curves: \( y^2 = P(x) \) and \( v^2 = P^*(u) = u^{2g + 2}P(u^{-1}) \), via the mapping \( (u, v) \mapsto (x^{-1}, yx^{-1-g}) \). On \( X \), the set \( \{dx/y, xdx/y, \ldots, x^{g-1}dx/y\} \) forms a basis for the space of regular differentials. See, \cite{hindry-silverman-diophantine}, exercise A.4.2. \\
+
+Consider a differential form \( \omega = dx/y \). Let \( \gamma \) be a path on \( X \) connecting the points \( (a, \sqrt{P(a)}) \) and \( (b, \sqrt{P(b)}) \). The line integral \( \int_\gamma \omega \) on \( X \) then defines the concept of the multi-valued integral \( \int_a^b 1/\sqrt{P(t)} dt \). The choice of \( \gamma \) resolves any ambiguity inherent in the integral's definition. This explains the motivation behind considering differentials, paths and integrals. \\
+
+
+We build on this and elaborate on how the integral depends on the chosen path, we turn to the theory of homology. Suppose \( \gamma_1, \ldots, \gamma_{2g} \) form a homology basis for \( H_1(X, \mathbb{Z}) \), the first homology group of \( X \). \\
+
+Given two paths \( \gamma \) and \( \gamma' \) that connect the same points \( A \) and \( B \) on \( X \), the path \( \gamma \) followed by \( \gamma' \) in reverse defines a closed path. As such, this loop is homologous to a sum of the form \( \sum m_i \gamma_i \), where \( m_i \) are integers. Hence, for any regular differential 1-form on \( X \), the integral along \( \gamma \) minus the integral along \( \gamma' \) equals the sum of integrals along these homology basis elements, each multiplied by its respective coefficient \( m_i \).
+
+\begin{definition}
+Let $X$ be a Riemann surface. Let \( \gamma_1, \ldots, \gamma_{2g} \) form a homology basis for \( H_1(X, \mathbb{Z}) \), the first homology group of \( X \). Let $\omega_{1}, \ldots, \omega_{g}$ be a basis of the vector space of regular 1-forms, and let $\Lambda$ be the $g \times 2 g$ matrix with entries
+
+$$
+\Lambda=\left(\Lambda_{i}^{j}\right)_{\substack{1 \leq i \leq 2 g \\ 1 \leq j \leq g}}=\left(\int_{\gamma_{i}} \omega_{j}\right)_{\substack{1 \leq i \leq 2 g \\ 1 \leq j \leq g}} .
+$$
+
+We call $\Lambda$ a period matrix of $X$, and we let $L_{\Lambda}$ be the $\mathbb{Z}$-module generated by the columns of $\Lambda$. 
+\end{definition}\\
+
+It is important to note that, choosing a different basis for the homology and the space of 1-forms will give another period matrix $\Lambda'$.
+\begin{theorem}[Riemann's period relations]
+Let $\gamma_{1}, \ldots, \gamma_{2 g}$ be a basis for the homology group $H_{1}(X, \mathbb{Z})$, chosen to satisfy the following property: For each $1 \leq i \leq g$,
+
+$$
+\gamma_{i} \cdot \gamma_{j}= \begin{cases}1 & \text { if } j=i+g \\ 0 & \text { otherwise. }\end{cases}
+$$
+
+Then for any nonzero regular 1 -forms $\omega$ and $\omega^{\prime}$,
+
+$$
+\begin{aligned}
+\sum_{k=1}^{g}\left(\int_{\gamma_{k}} \omega \int_{\gamma_{g+k}} \omega^{\prime}-\int_{\gamma_{k}} \omega^{\prime} \int_{\gamma_{g+k}} \omega\right) & =0 . \\
+\sqrt{-1} \sum_{k=1}^{g}\left(\overline{\int_{\gamma_{g+k}} \omega} \int_{\gamma_{k}} \omega-\int_{\gamma_{g+k}} \omega \overline{\int_{\gamma_{k}} \omega}\right) & >0 .
+\end{aligned}
+$$
+
+    \begin{proof}
+        See, \cite{griffiths2014principles},Page, 231. 
+    \end{proof}
+\end{theorem}
+We also have another criterion/definition for a complex torus to be an Abelian Variety. 
+
+\begin{theorem}\label{riemann}
+    Let $V$ be a complex vector space of dimension $g$, and $\Lambda$ a lattice of full rank. Fix a basis $\left(e_{1}, \ldots, e_{g}\right)$ for $V$, and a basis $\left(\lambda_{1}, \ldots, \lambda_{2 g}\right)$ for $\Lambda$. Let $P$ be the period matrix of $\Lambda$, i.e. the $g \times 2 g$ matrix such that $X \cong \mathbb{C}^{g} / P \mathbb{Z}^{2 g}$. Then, $X$ is projective if and only if there is a non-degenerate alternating matrix $E \in M_{2 g}(\mathbb{Z})$ such that
+
+1)$P E^{-1} P^{T}=0$;
+
+2) $i P E^{-1} \bar{P}^{T}>0$.
+
+\end{theorem}
+\begin{remark}
+Let us address the decomposition of the lattice \( \Lambda \) into two components \( \Lambda_{1} \) and \( \Lambda_{2} \), each being a \( g \times g \) matrix, we can approach Riemann's relations from a perspective of matrices:
+
+\[
+\Lambda_{1} \Lambda_{2} = \Lambda_{2} \Lambda_{1} \quad \text{and} \quad -i(\overline{\Lambda_{1}} \Lambda_{2} - \overline{\Lambda_{2}} \Lambda_{1}) \text{is positive definite}.
+\]
+
+
+Assume that \( \Lambda_{1} Y = 0 \). This assumption leads us to the following equation:
+
+\[
+\bar{Y}(-i(\overline{\Lambda_{1}} \Lambda_{2} - \overline{\Lambda_{2}} \Lambda_{1})) Y = 0.
+\]
+
+Given the positive definiteness of the matrix involved, the only solution to this equation is \( Y = 0 \). Therefore, \( \Lambda_{1} \) must be invertible. This insight allows for a transformation from differential forms into Matrices, by considering \( \Lambda_{1} \) as the identity matrix, and by redefining \( \Lambda_{2} \) as a new matrix \( \tau = \Lambda_{1}^{-1} \Lambda_{2} \). Under this new framework, the period matrix \( \Lambda \) becomes \( (I, \tau) \), and Riemann's relations confirm that \( \tau \) is symmetric, with its imaginary part, \( \operatorname{Im}(\tau) \), being positively definite.
+
+\end{remark}
+
+\begin{corollary}
+    The column vectors of $\Lambda$ generate a lattice $L_{\Lambda}$ inside $\mathbb{C}^{g}$.
+
+\end{corollary}
+
+\begin{proof}
+    We use the previous discussion to get the new basis, we have the lattice $\Lambda$ of the form, $\Z^g+\tau\Z^g$.   
+    \end{proof}
+Finally, we are prepared to define the Jacobian of a Riemann surface. 
+
+\begin{definition}
+   Let $X$ be a be a Riemann surface. Let $V^{*}$ denote the dual vector space of a complex vector space $V$, let $H^{0}\left(X, \Lambda_{X}^{1}\right)$ be the vector space of regular differentials on $X$, and let $H_{1}(X, \mathbb{Z})$ be the homology group of $X$. We can identify $H_{1}(X, \mathbb{Z})$ as a lattice in $H^{0}\left(X, \Lambda_{X}^{1}\right)^{*}$ via the map
+
+$$
+H_{1}(X, \mathbb{Z}) \longrightarrow H^{0}\left(X, \Lambda_{X}^{1}\right)^{*}, \quad \gamma \longmapsto\left(\omega \mapsto \int_{\gamma} \omega\right)
+$$
+
+Then the Jacobian of $X$ is equal to
+
+$$
+\operatorname{Jac}(X)=H^{0}\left(X, \Lambda_{X}^{1}\right)^{*} / H_{1}(X, \mathbb{Z}) .
+$$
+
+\end{definition}
+
+\begin{remark}
+   One can explicitly construct a Riemann form with respect to the lattice $L_{\Lambda}$. We may assume the lattice to be normalized, $L_{\Lambda}=\mathbb{Z}^{g}+\tau \mathbb{Z}^{g}$.\\
+   Consider, $H(z, w)= z^{t} \operatorname{Im}(\tau)^{-1} \bar{w}$. This form is positive definite from Riemann's relations, and if $k, \ell, m, n$ are vectors with integer coordinates, then $\operatorname{Im} H(m+\tau n, k+\tau \ell)= m^{t} \ell-n^{t}k$ is an integer. \\
+   Hence $H$ is a Riemann form. By Theorem \ref{5.1.5}, Jacobian is a projective Variety. \\
+   More precisely, for each fixed basepoint $a \in X$ we define a holomorphic map
+
+$$
+\Phi_{a}: X \longrightarrow \operatorname{Jac}(X)=\mathbb{C}^{g} / L_{\Lambda}, \quad b \longrightarrow\left(\int_{a}^{b} \omega_{1}, \ldots, \int_{a}^{b} \omega_{g}\right) \bmod L_{\Lambda} .
+$$
+
+\end{remark}
+
+\begin{definition}
+    
+The map $\Phi_{a}$ is called the Jacobian embedding of $X$. \\
+\end{definition}
+
+\begin{remark}
+    Moreover, we observe that up to translation, the map $\Phi_{a}$ is independent of $a$. Thus $\Phi_{a^{\prime}}(b)=\Phi_{a}(b)-\Phi_{a}\left(a^{\prime}\right)$. So if we extend $\Phi_{a}$ linearly to the divisor group, then it will be completely independent of $a$ on the group of divisors of degree zero. We denote this map by $\Phi$,
+
+$$
+\Phi: \operatorname{Div}^{0}(X) \longrightarrow \operatorname{Jac}(X), \quad \sum n_{i}\left(b_{i}\right) \longmapsto \sum n_{i} \Phi_{a}\left(b_{i}\right) .
+$$
+\end{remark}
+
+
+
+
+The map $\Phi$ is very important and the same can also be seen from the following celebrated theorem due to Abel and Jacobi:
+
+\begin{theorem}
+    The map $\Phi: \operatorname{Div}^{0}(X) \longrightarrow \operatorname{Jac}(X)$ is surjective, and its kernel is exactly the subgroup of principal divisors.
+
+\end{theorem}
+\begin{proof}
+    See, \cite{hindry-silverman-diophantine},section A.6. 
+\end{proof}
+\begin{corollary}
+    Assume that $X$ has genus $g \geq 1$. Then the map $\Phi_{a}: X \rightarrow \operatorname{Jac}(X)$ is an embedding.\\
+In particular, if $X$ has genus one, then $X$ is isomorphic to its Jacobian. Further, a divisor $\sum n_{i}\left(P_{i}\right)$ will be principal if and only if $\sum n_{i}=0$ and $\sum n_{i} P_{i}=0$.
+\end{corollary}
+\begin{proof}
+    See, \cite{hindry-silverman-diophantine},section A.6. 
+\end{proof}
+
+\begin{theorem}[Abel's theorem]
+    The map $\Phi$ descends to an isomorphism of groups, $\Phi: \operatorname{Pic}^{0}(X) \longrightarrow \operatorname{Jac}(X)$
+\end{theorem}
+\begin{proof}
+    See, \cite{hindry-silverman-diophantine},section A.6. 
+\end{proof}
+
+\subsection{Modular Jacobians and Hecke operators}
+The main idea of this section is to explore the relationships between Jacobians of modular curves and the action of double coset operators.\\
+
+ Let's recall the double coset operator. Assume we have two congruence subgroups, $\Gamma_{1}$ and $\Gamma_{2}$, belonging to $\mathrm{SL}_{2}(\mathbb{Z})$. Additionally, suppose we have an element $\alpha$ from $\mathrm{GL}_{2}^{+}(\mathbb{Q})$. Defining $\Gamma_{3}$ as $\Gamma_{3}=\alpha^{-1} \Gamma_{1} \alpha \cap \Gamma_{2}$, we can identify representatives, denoted as $\left\{\gamma_{2, j}\right\}$, for which $\Gamma_{3} \backslash \Gamma_{2}$ can be represented as $\bigcup_{j} \Gamma_{3} \gamma_{2, j}$. Using these, we can determine another set of representatives, $\left\{\beta_{j}\right\}=\left\{\alpha \gamma_{2, j}\right\}$, satisfying $\Gamma_{1} \alpha \Gamma_{2}=\bigcup_{j} \Gamma_{1} \beta_{j}$. Introducing $\Gamma_{3}^{\prime}$ as $\Gamma_{3}^{\prime}=\alpha \Gamma_{3} \alpha^{-1}=\Gamma_{1} \cap \alpha \Gamma_{2} \alpha^{-1}$, we have the following:
+
+$$
+\Gamma_{2} \longleftarrow \Gamma_{3} \stackrel{\sim}{\longrightarrow} \Gamma_{3}^{\prime} \longrightarrow \Gamma_{1}
+$$
+
+Here, the isomorphism between groups is given by $\gamma \mapsto \alpha \gamma \alpha^{-1}$, with the remaining arrows are simply inclusions. \\
+Now, these groups correspond to modular curves denoted by $X_{1}, X_{2}, X_{3}$, and $X_{3}^{\prime}$, giving us:
+
+$$
+X_{2} \stackrel{\pi_{2}}{\longrightarrow} X_{3} \stackrel{\sim}{\longrightarrow} X_{3}^{\prime} \stackrel{\pi_{1}}{\longrightarrow} X_{1}
+$$
+
+The map between these modular curves is described by $\Gamma_{3} \tau \mapsto \Gamma_{3}^{\prime} \alpha(\tau)$, denoted as $\alpha$. Consider a point on $X_{2}$. When mapped through $\pi_{1} \circ \alpha \circ \pi_{2}^{-1}$, this point corresponds to multiple points on $X_{1}$, shown as:
+
+$$
+\Gamma_{2} \tau \stackrel{\pi_{2}^{-1}}{\longrightarrow}\left\{\Gamma_{3} \gamma_{2, j}(\tau)\right\} \stackrel{\alpha}{\longrightarrow}\left\{\Gamma_{3}^{\prime} \beta_{j}(\tau)\right\} \stackrel{\pi_{1}}{\longrightarrow}\left\{\Gamma_{1} \beta_{j}(\tau)\right\}
+$$
+\\
+In this mapping, $\pi_{2}^{-1}$ associates a point with its corresponding points on the layer above. The multiplicity of each associated point depends on its ramification degree, given by $$\pi_{2}^{-1}(x)=\left\{e_{y} \cdot y: y \in X_{3}, \pi_{2}(y)=x\right\}.$$ \\
+This essentially gives an interpretation of the double coset operator as a reverse map of divisor groups: 
+$$
+\left[\Gamma_{1} \alpha \Gamma_{2}\right]_{2}: \operatorname{Div}\left(X_{2}\right) \longrightarrow \operatorname{Div}\left(X_{1}\right),
+$$
+We now consider the linear extension of the map given by \( \Gamma_{2} \tau \mapsto \sum_{j} \Gamma_{1} \beta_{j}(\tau) \) that takes elements from \( X_{2} \) into the divisor group \( \operatorname{Div}(X_{1}) \). We can thus interpret the operation on divisor groups involving double cosets as a sequentialapplication of both forward and reverse maps. 
+
+\[
+\left[\Gamma_{1} \alpha \Gamma_{2}\right]_{2} = (\pi_{1})_{D} \circ \alpha_{D} \circ \pi_{2}^{D}.
+\]
+
+This implies that the operation can be carried over to the level of Picard groups, 
+
+\[
+\left[\Gamma_{1} \alpha \Gamma_{2}\right]_{2} = (\pi_{1})_{P} \circ \alpha_{P} \circ \pi_{2}^{P}: \operatorname{Pic}^{0}(X_{2}) \longrightarrow \operatorname{Pic}^{0}(X_{1})
+\]
+
+The effect of this map on an element represented by a formal sum of \( \tau \)'s each scaled by an integer \( n_{\tau} \) within \( \Gamma_{2} \) is expressed as:
+
+\[
+\left[\Gamma_{1} \alpha \Gamma_{2}\right]_{2}\left[\sum_{\tau} n_{\tau} \Gamma_{2} \tau\right] = \left[\sum_{\tau} n_{\tau} \sum_{j} \Gamma_{1} \beta_{j}(\tau)\right].
+\]
+
+Let us discuss this in terms of Jacobians and modular forms, let us denote \( \Gamma \) as a congruence subgroup of \( \mathrm{SL}_{2}(\mathbb{Z}) \). We know from our brief exposition into the differential forms, there is a one-to-one correspondence between holomorphic differentials \( \Omega_{\mathrm{hol}}^{1}(X(\Gamma)) \) and weight 2 cusp forms \( \mathcal{S}_{2}(\Gamma) \). In essence, each cusp form \( f \) is associated with a unique holomorphic differential \( \omega(f) \), \( f(\tau) d \tau \) defined \( X(\Gamma) \). \\
+
+Consequently, the map \( \omega: \mathcal{S}_{2}(\Gamma) \rightarrow \Omega_{\mathrm{hol}}^{1}(X(\Gamma)) \) is a linear isomorphism. This identification extends to their dual spaces through the mapping \( \omega^{\wedge} \) and we have: 
+
+\[
+\mathcal{S}_{2}(\Gamma)^{\wedge} = \omega^{\wedge}(\Omega_{\mathrm{hol}}^{1}(X(\Gamma))^{\wedge}).
+\]
+
+Within the framework of modular forms, the subgroup \( \mathrm{H}_{1}(X(\Gamma), \mathbb{Z}) \) is associated with \( \mathcal{S}_{2}(\Gamma)^{\wedge} \), and would be denoted as \( \omega^{\wedge}(\mathrm{H}_{1}(X(\Gamma), \mathbb{Z})) \) in differential terms. \\
+
+In this setting, the Jacobian of \( X(\Gamma) \) is appropriately redefined as a quotient of the dual space of the weight 2 cusp forms. This gives us the following definition.
+
+\begin{definition}
+    For $\Gamma$ a congruence subgroup of the full Modular group, we have that 
+\[ \operatorname{Jac}(X(\Gamma))=\mathcal{S}_{2}(\Gamma)^{\wedge} / \mathrm{H}_{1}(X(\Gamma), \mathbb{Z}) \]
+
+\end{definition}
+
+\subsection{Abelian Varieties and Modularity}
+
+Let us recall the weight-2 Hecke operators, $T=T_{p}$ and $T=\langle d\rangle$, act on the dual space via: 
+
+$$
+T: \mathcal{S}_{2}\left(\Gamma_{1}(N)\right)^{\wedge} \longrightarrow \mathcal{S}_{2}\left(\Gamma_{1}(N)\right)^{\wedge}, \quad \varphi \mapsto \varphi \circ T.
+$$
+
+This action then descends to the quotient, $\mathrm{J}_{1}(N)$. As such, these operators serve as endomorphisms on the kernel $\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)$, which is a finitely generated Abelian group. Consequently we have that the characteristic polynomial, $f(x)$, for $T_{p}$ when acting on $\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)$ has integer coefficients and is monic. Furtheremore, We know from linear algebra that operators satisfy $f\left(T_{p}\right)=0$ for $\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)$. Besides, due to the C-linear nature of $T_{p}$, this equality holds true for both $\mathcal{S}_{2}\left(\Gamma_{1}(N)\right)^{\wedge}$ and $\mathcal{S}_{2}\left(\Gamma_{1}(N)\right)$.  As a consequence, the eigenvalues of $T_{p}$ must satisfy $f(x)$, thus being algebraic integers. This essentially proves:
+
+\begin{theorem}
+    If $f\in \mathcal{S}_{2}\left(\Gamma_{1}(N)\right)$ is a normalised eigenform for the Hecke operators $T_{p}$, then the corresponding eigenvalues $a_{n}(f)$ are algebraic integers.
+\end{theorem}
+
+To be a bit more general, an idea would be to see the Hecke operators within an algebraic structure rather than inside just a set. This hints us towards the definition of Hecke Algebras.  When we talk about the Hecke algebra over $\mathbb{Z}$, we're essentially referring to the endomorphisms of $\mathcal{S}_{2}\left(\Gamma_{1}(N)\right)$, defined over $\mathbb{Z}$ by the inclusion of Hecke operators. To define precisely, we have the following definition. 
+
+\begin{definition}
+The Hecke Algebra over $\mathbb{Z}$ is the algebra of endomorphisms generated over $\mathbb{Z}$ by the Hecke operators. Set theoretically, it is given by $$
+\mathbb{T}_{\mathbb{Z}}=\mathbb{Z}\left[\left\{T_{n},\langle n\rangle: n \in \mathbb{Z}^{+}\right\}\right].
+$$     
+ \end{definition}
+
+Similarly, The Hecke Algebra    $\mathbb{T}_{\mathbb{C}}$ can be defined over $\mathbb{C}$.
+
+Each level $N$ 
+ has a distinct Hecke algebra. We often leave out $N$ from our notation since it's implied within the context. From this point onwards, 
+the text will be mainly algebraic instead of focusing particularly on analytic aspects of objects like modular forms or cusp forms. \\
+
+ If we consider $f(\tau)=\sum_{n=1}^{\infty} a_{n}(f) q^{n}$ as an eigenform, the mapping:
+
+$$
+\lambda_{f}: \mathbb{T}_{\mathbb{Z}} \longrightarrow \mathbb{C}, \quad T f=\lambda_{f}(T) f
+$$
+
+has its image as a finitely generated $\mathbb{Z}$-module. This is because if we view $\mathbb{Z}$-module $\mathbb{T}_{\mathbb{Z}}$ as a ring of endomorphisms of the finitely generated free $\mathbb{Z}$-module $\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)$ then it is finitely generated as well. This follows from the following lemma. 
+
+\begin{lemma}
+    Let $M$ be a free $\mathbb{Z}$-module of rank $r$. Show that the ring of endomorphisms of $M$ is a free $\mathbb{Z}$-module of rank $r^{2}$, and so any subring is a free $\mathbb{Z}$-module of finite rank.
+
+    \begin{proof}
+    Observe as in the case of a finite-dimensional vector space, Given a free \(\mathbb{Z}\)-module \(M\) of rank \(r\) with a basis \(\{e_1, e_2, ..., e_r\}\), any endomorphism \(f \in \text{End}_{\mathbb{Z}}(M)\) can be uniquely determined by its action on the basis elements. That is, for each basis element \(e_i\), the image \(f(e_i)\) can be expressed as a \(\mathbb{Z}\)-linear combination of the basis elements:
+
+$$
+f(e_i) = a_{1i}e_1 + a_{2i}e_2 + ... + a_{ri}e_r
+$$
+
+where each \(a_{ji} \in \mathbb{Z}\).
+The above expression for \(f(e_i)\) essentially gives us the columns of a matrix representation of the endomorphism \(f\) with respect to the basis \(\{e_1, ..., e_r\}\). There will be \(r\) such columns, each with \(r\) entries from \(\mathbb{Z}\), making up a total of \(r^2\) entries. Consider the set of all such matrices that is a $\Z$ module isomorphic to \(\mathbb{Z}^{r^2}\).\\
+
+The isomorphism between \(\text{End}_{\mathbb{Z}}(M)\) and \(\mathbb{Z}^{r^2}\) is given by the correspondence between each endomorphism and its \(r \times r\) matrix representation with respect to the basis of \(M\). Every such matrix corresponds to a unique endomorphism, and every endomorphism can be uniquely represented by such a matrix.
+
+To precisely state a basis of the ring of endomorphisms of $M$ as $\Z-$ module, consider the \(r^2\) endomorphisms that correspond to the elementary matrices where each matrix has a single entry of 1 in a unique position and 0s elsewhere. These elementary matrices \(E_{ij}\) are \(r \times r\) matrices where the entry in the \(i\)-th row and \(j\)-th column is 1 and all other entries are 0. The corresponding endomorphism \(f_{ij}\) maps the basis vector \(e_j\) to the basis vector \(e_i\) and all other basis vectors to 0:
+
+$$
+f_{ij}(e_k) =
+\begin{cases}
+e_i & \text{if } j = k, \\
+0 & \text{otherwise}.
+\end{cases}
+$$
+Since any $r \times r$ matrix over $\Z$ is can expressed uniquely as a $\Z-$linear combination of these matrices, we have that the matrices that these elementary matrices correspond to form a basis of \(\text{End}_{\mathbb{Z}}(M)\).
+Therefore, \(\text{End}_{\mathbb{Z}}(M)\) is free of rank \(r^2\), since its elements can be put in a one-to-one correspondence with the elements of a free \(\mathbb{Z}\)-module of rank \(r^2\), which is \(\mathbb{Z}^{r^2}\).
+    \end{proof}
+\end{lemma}
+     
+
+
+Given the image $\mathbb{Z}\left[\left\{a_{n}(f): n \in \mathbb{Z}^{+}\right\}\right]$, we have that despite of infinitely many eigenvalues, it is still a $\mathbb{Z}$-module of finite rank. More precisey we have the following proposition. 
+
+
+\begin{proposition}
+Consider $f(\tau)=\sum_{n=1}^{\infty} a_{n}(f) q^{n}$ as an eigenform, consider the map:
+
+$$
+\lambda_{f}: \mathbb{T}_{\mathbb{Z}} \longrightarrow \mathbb{C}, \quad T f=\lambda_{f}(T) f.
+$$
+Let
+$$
+I_{f}=\operatorname{ker}\left(\lambda_{f}\right)=\left\{T \in \mathbb{T}_{\mathbb{z}}: T f=0\right\}
+$$ be the kernel of the given mapping.  Then we have a $\mathbb{Z}$-module isomorphism 
+
+$$
+\mathbb{T}_{\mathbb{Z}} / I_{f} \stackrel{\sim}{\longrightarrow} \mathbb{Z}\left[\left\{a_{n}(f)\right\}\right]
+$$
+    
+\end{proposition}
+\begin{proof}[Rough sketch]
+Let $f \in \mathcal{S}_{2}\left(\Gamma_{1}(N)\right)$ be a normalized eigenform. Thus $f \in \mathcal{S}_{2}(N, \chi)$ for some Dirichlet character $\chi:(\mathbb{Z} / N \mathbb{Z})^{*} \longrightarrow \mathbb{C}^{*}$ and $\lambda_{f}(\langle d\rangle)=\chi(d)$ for all $d \in(\mathbb{Z} / N \mathbb{Z})^{*}$. The map $\lambda_f$ gives a $\mathbb{Z}$-module surjective map onto its image $\mathbb{Z}\left[\left\{a_{n}(f), \chi(d)\right\}\right]$. The surjectivity is clear due to the fact that the hecke algebra is generated by diamond operators and $T_p$ operators together with the fact that eigenvalues of $T_p$ operators are given by the fourier coefficients of $f$, and $\lambda_{f}(\langle d\rangle)=\chi(d).$ Modding out by the kernel gives the isomorphism by the third isomorphism theorem. $\mathbb{T}_{\mathbb{Z}} / I_{f} \stackrel{\sim}{\longrightarrow}$ $\mathbb{Z}\left[\left\{a_{n}(f), \chi(d)\right\}\right]$. Furthermore, For each $d \in(\mathbb{Z} / N \mathbb{Z})^{*}$ take two primes $p$ and $p^{\prime}$ both congruent to $d$ modulo $N$. Generalising on \ref{3.1.10}, one can define $$ 
+T_{p^r}=T_{p}T_{p^{r-1}}-p^{k-1}<p>T_{p^{r-2}}.
+$$
+In particular, we can use express $\chi(d)$ in terms of $a_{p}(f)$, $a_{p^{2}}(f), a_{p^{\prime}}(f)$, and $a_{p^{\prime 2}}(f)$. This shows, that in fact $\chi(d)$'s are redundant in, $\mathbb{Z}\left[\left\{a_{n}(f), \chi(d)\right\}\right]$. Thus we have that,
+
+$$\mathbb{T}_{\mathbb{Z}} / I_{f} \stackrel{\sim}{\longrightarrow}\mathbb{Z}\left[\left\{a_{n}(f)\right\}\right]$$.
+    
+\end{proof}
+
+\begin{definition}
+    Let $f \in \mathcal{S}_{2}\left(\Gamma_{1}(N)\right)$ be a normalized eigenform, $f(\tau)=$ $\sum_{n=1}^{\infty} a_{n} q^{n}$. The field $\mathbb{K}_{f}=\mathbb{Q}\left(\left\{a_{n}\right\}\right)$ generated by the Fourier coefficients of $f$ is called the number field of $f$.
+\end{definition}
+
+\textbf{Note:}
+This is a number field because of the finite rank of the $\Z$-module, $\mathbb{Z}\left[\left\{a_{n}(f)\right\}\right]$ implying the finite degree of the extension over $\Q$. 
+
+Consider an arbitrary embedding \(\sigma: \mathbb{K}_{f} \hookrightarrow \mathbb{C}\). More precisely, if \(f(\tau)=\sum_{n=1}^{\infty} a_{n} q^{n}\), with \(\tau\) with \(a_{n}\) being their Fourier coefficients, then, we denote the action with a superscript, and the conjugate of $f$ \(f^{\sigma}(\tau)=\sum_{n=1}^{\infty} a_{n}^{\sigma} q^{n}\) is obtained.
+
+It is also noteworthy that the action gives rise to yet another eigenform.
+More precisely,
+
+\begin{theorem}\label{newfrm}
+   Let $f$ be a weight 2 normalized eigenform of the Hecke operators, so that $f \in \mathcal{S}_{2}(N, \chi)$ for some $N$ and $\chi$. Let $\mathbb{K}_{f}$ be its number field. For any embedding $\sigma: \mathbb{K}_{f} \hookrightarrow \mathbb{C}$ the conjugated $f^{\sigma}$ is also a normalized eigenform in $\mathcal{S}_{2}\left(N, \chi^{\sigma}\right)$ where $\chi^{\sigma}(n)=\chi(n)^{\sigma}$. If $f$ is a newform then so is $f^{\sigma}$.
+ 
+\end{theorem}
+\begin{proof}
+    See, \cite{diamond2005first}, Theorem 6.5.4.
+\end{proof}
+\begin{corollary}
+    The space $\mathcal{S}_{2}\left(\Gamma_{1}(N)\right)$ has a basis of forms with rational integer coefficients.
+
+    \begin{proof}
+        Consider a newform \(f\) of level \(M\), where \(M\) divides \(N\). Let \(\mathbb{K}=\mathbb{K}_{f}\) represent the number field associated with \(f\). Here, \(\mathcal{O}_{\mathbb{K}}\) denotes the ring of integers of \(\mathbb{K}\), treated as a \(\mathbb{Z}\)-module. Let \(\left\{\alpha_{1}, \ldots, \alpha_{d}\right\}\) be a basis for \(\mathcal{O}_{\mathbb{K}}\) as a \(\mathbb{Z}\)-module, and let \(\left\{\sigma_{1}, \ldots, \sigma_{d}\right\}\) be the embeddings of \(\mathbb{K}\) into \(\mathbb{C}\).
+
+Consider the matrix \(A\) formed by the basis elements and their corresponding embeddings:
+
+\[A=\left[\begin{array}{ccc}
+\alpha_{1}^{\sigma_{1}} & \cdots & \alpha_{1}^{\sigma_{d}} \\
+\vdots & \ddots & \vdots \\
+\alpha_{d}^{\sigma_{1}} & \cdots & \alpha_{d}^{\sigma_{d}}
+\end{array}\right]\]
+
+Additionally, define vectors \(\vec{f}\) and \(\vec{g}\) as follows:
+
+\[\vec{f}=\left[\begin{array}{c}
+f^{\sigma_{1}} \\
+\vdots \\
+f^{\sigma_{d}}
+\end{array}\right], \quad \vec{g}=A \vec{f}\]
+
+In explicit terms, \(g_{i}=\sum_{j=1}^{d} \alpha_{i}^{\sigma_{j}} f^{\sigma_{j}}\) for \(i=1, \ldots, d\). The linear independence of the basis \(\{\alpha_{1}, \ldots, \alpha_{d}\}\) implies that \(\operatorname{span}\left(\left\{g_{1}, \ldots, g_{d}\right\}\right)=\operatorname{span}\left(\left\{f^{\sigma_{1}}, \ldots, f^{\sigma_{d}}\right\}\right)\) due to the invertibility of matrix \(A\).
+
+Each \(g_{i}\) can be expressed as \(g_{i}(\tau)=\sum_{n} a_{n}\left(g_{i}\right) q^{n}\), where \(a_{n}\left(g_{i}\right)\) are algebraic integers. For any automorphism \(\sigma: \mathbb{C} \longrightarrow \mathbb{C}\), the action on the embeddings \(\sigma_{j}\) extends to \(\sigma_{j} \sigma\), where composition is performed from left to right.
+
+This leads to the crucial result that \(g_{i}^{\sigma}=\sum_{j=1}^{d} \alpha_{j}^{\sigma_{j} \sigma} f^{\sigma_{j} \sigma}=g\). In simpler terms, each coefficient \(a_{n}\left(g_{i}\right)\) remains fixed under all automorphisms of \(\mathbb{C}\), proving that \(a_{n}\left(g_{i}\right)\) lies in the intersection \(\overline{\mathbb{Z}} \cap \mathbb{Q}=\mathbb{Z}\). Iterating this argument for each newform \(f\) whose level divides \(N\) establishes the desired conclusion.
+    \end{proof}
+\end{corollary}
+
+Since $\mathbb{T}_{\mathbb{z}}$ acts on the Jacobian $\mathrm{J}_{1}\left(M_{f}\right)$, the $\operatorname{subgroup} I_{f} \mathrm{~J}_{1}\left(M_{f}\right)$ of $\mathrm{J}_{1}\left(M_{f}\right)$ makes sense.
+
+\begin{definition}
+    The Abelian variety associated to $f$ is defined as the quotient
+
+$$
+A_{f}=\mathrm{J}_{1}\left(M_{f}\right) / I_{f} \mathrm{~J}_{1}\left(M_{f}\right) .
+$$
+
+\end{definition}
+By this definition $\mathbb{T}_{\mathbb{Z}} / I_{f}$ acts on $A_{f}$ and hence so does its isomorphic image $\mathbb{Z}\left[\left\{a_{n}\right\}\right]$.
+
+\vspace{1cm}
+
+
+To study how \textbf{Jacobians decompose} into \textbf{Abelian Varieties $A_f$} let us now, introduce an equivalence relation on newforms denoted as \(\tilde{f} \sim f\), defined by \(\tilde{f}=f^{\sigma}\) for some automorphism \(\sigma: \mathbb{C} \longrightarrow \mathbb{C}\). Symbolically,
+
+\[ \tilde{f} \sim f \Longleftrightarrow \tilde{f}=f^{\sigma} \quad \text { for some automorphism } \sigma: \mathbb{C} \longrightarrow \mathbb{C} . \]
+
+Let \([f]\) represent the equivalence class of \(f\), defined as
+
+\[ [f]=\left\{f^{\sigma}: \sigma \text { is an automorphism of } \mathbb{C}\right\} . \]
+
+The cardinality of \([f]\) corresponds to the number of embeddings \(\sigma: \mathbb{K}_{f} \hookrightarrow \mathbb{C}\). According to \ref{newfrm} each \(f^{\sigma} \in[f]\) is a newform at level \(M_{f}\).
+
+Define the subspace \(V_{f}\) of \(\mathcal{S}_{2}\left(\Gamma_{1}\left(M_{f}\right)\right)\) associated with \(f\) and its equivalence class as
+
+\[ V_{f}=\operatorname{span}([f]) \subset \mathcal{S}_{2}\left(\Gamma_{1}\left(M_{f}\right)\right), \]
+
+which has a dimension of \(\left[\mathbb{K}_{f}: \mathbb{Q}\right]\), representing the number of embeddings.
+
+By restricting the subgroup \(\mathrm{H}_{1}\left(X_{1}\left(M_{f}\right), \mathbb{Z}\right)\) of \(\mathcal{S}_{2}\left(\Gamma_{1}\left(M_{f}\right)\right)^{\wedge}\) to functions on \(V_{f}\), a subgroup of the dual space \(V_{f}^{\wedge}\) is obtained:
+
+\[ \Lambda_{f}=\left.\mathrm{H}_{1}\left(X_{1}\left(M_{f}\right), \mathbb{Z}\right)\right|_{V_{f}} . \]
+
+With this, a well-defined homomorphism is established by restricting to \(V_{f}\):
+
+\[ \mathrm{J}_{1}\left(M_{f}\right) \longrightarrow V_{f}^{\wedge} / \Lambda_{f}, \quad [\varphi] \mapsto \varphi|_{V_{f}}+\Lambda_{f} \text { for } \varphi \in \mathcal{S}_{2}\left(\Gamma_{1}\left(M_{f}\right)\right)^{\wedge} . \]
+
+This homomorphism provides mapping from the Jacobian \(\mathrm{J}_{1}\left(M_{f}\right)\) to the dual space quotient \(V_{f}^{\wedge} / \Lambda_{f}\), linking the structure of the Jacobian to the properties of the associated newform \(f\) and its equivalence class.
+
+\begin{proposition}\label{reqdfrproof}
+   Let $f \in \mathcal{S}_{2}\left(\Gamma_{1}\left(M_{f}\right)\right)$ be a newform with number field $\mathbb{K}_{f}$. Then restricting to $V_{f}$ induces an isomorphism
+
+$$
+A_{f} \stackrel{\sim}{\longrightarrow} V_{f}^{\wedge} / \Lambda_{f}, \quad[\varphi]+\left.I_{f} \mathrm{~J}_{1}\left(M_{f}\right) \mapsto \varphi\right|_{V_{f}}+\Lambda_{f} \text { for } \varphi \in \mathcal{S}_{2}\left(\Gamma_{1}\left(M_{f}\right)\right)^{\wedge},
+$$
+
+and the right side is a complex torus of dimension $\left[\mathbb{K}_{f}: \mathbb{Q}\right]$.
+\begin{proof}
+
+See \cite{diamond2005first}, Proposition, 6.6.4.
+    
+\end{proof} 
+\end{proposition}
+
+Let us now define isogenies in higher dimension. 
+
+\begin{definition}
+    An isogeny is a holomorphic homomorphism between complex tori that surjects and has finite kernel.
+\end{definition}
+
+
+\begin{lemma}\label{lift}
+For any $\gamma \in \Gamma_{1}(N)$ and any positive integer $n \mid N / M_{f}$, we have that \\
+$\left[\begin{array}{ll}n & 0 \\ 0 & 1\end{array}\right] \gamma\left[\begin{array}{ll}n & 0 \\ 0 & 1\end{array}\right]^{-1} \in \Gamma_{1}\left(M_{f}\right)$. Furthermore, suppose that the path $\alpha:[0,1] \longrightarrow \mathcal{H}$ is the lift of a loop in $X_{1}(N)$. Then the path $\tilde{\alpha}(t)=n \alpha(t)$ is the lift of a loop in $X_{1}\left(M_{f}\right)$.
+\begin{proof}
+    Let $\gamma=\left[\begin{array}{ll}a & b \\ c & d\end{array}\right]  \in \Gamma_1(N)$. The action of a matrix \( A = \begin{bmatrix} n & 0 \\ 0 & 1 \end{bmatrix} \) via conjugation on \( \gamma = \begin{bmatrix} a & b \\ c & d \end{bmatrix} \in \Gamma_1(N) \) is given by \( A \gamma A^{-1} \). Let's compute this explicitly. The inverse of \( A \) is \( A^{-1} = \begin{bmatrix} \frac{1}{n} & 0 \\ 0 & 1 \end{bmatrix} \).
+
+Now, the product \( A \gamma A^{-1} \) is given by:
+
+\[ A \gamma A^{-1} = \begin{bmatrix} n & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} a & b \\ c & d \end{bmatrix} \begin{bmatrix} \frac{1}{n} & 0 \\ 0 & 1 \end{bmatrix} \]
+
+Multiplying these matrices, we get:
+
+\[B= A \gamma A^{-1} = \begin{bmatrix} n & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} a & b \\ c & d \end{bmatrix} \begin{bmatrix} \frac{1}{n} & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} a & bn \\ \frac{c}{n} & d \end{bmatrix} \].  \\
+We must show that the matrix $B \in \Gamma_1(M_f).$ To begin, note that, matrix $B$ has integer entries because $\gamma \in \Gamma_1(N)$ which means that $N$ divides $c$. But, $n \mid N / M_{f}$. Thus we have that $\frac{c}{n}=\frac{c}{N}.M_f.k$, for some integer $k$. Thus we get that $B \in M_2(\Z).$ Furthermore, Matrices $B, \gamma$ have the same determinant. It remains to show the congruence condition for $\Gamma_1(M_f)$. But this is also clear because the congruence conditions for $N$ automatically imply congruence conditions for any divisor of $N$, particularly for $M_f$. Lastly, from the equation, $\frac{c}{n}=\frac{c}{N}.M_f.k$, we also have that $M_f \mid \frac{c}{n}$, which finishes the first claim. \\
+
+Now, we prove the latter part, which follows from the first part. 
+
+Consider a path $\alpha$, which is the lift of a loop in $H\ \Gamma_1(N)$. Thus, this just means that under the action of some, $\gamma \in \Gamma_1(N)$, $\alpha(0)$ is mapped to $\alpha(1)$, so under quotient we have a loop. Thus to finish the proof we need a matrix $\gamma'\in \Gamma_1(M_f)$ which essentially sends $\tilde(\alpha(0))$ to $\tilde(\alpha(1))$. Given a positive integer $n$ and given a $\gamma$ take \( A = \begin{bmatrix} n & 0 \\ 0 & 1 \end{bmatrix} \). Taking $\gamma'=A\gamma A^{-1}$ finishes the claim.  
+\end{proof}
+\end{lemma}
+\textbf{Note about the cusps}: We will initially have a lift to $\mathcal{H}^{*}$. But what the matrix $B$ does is nothing but the scaling of the original path by $n$. So if we are avoiding cusps in the earlier case by having a lift to $\mathcal{H}$, we will avoid them now as well, because one suddenly cannot get a rational number(or $\infty$) because we are just scaling by $n$.
+\begin{theorem}
+    The Jacobian associated with the modular group \(\Gamma_{1}(N)\) is isogeneous to a direct sum of Abelian varieties linked to equivalence classes of newforms:
+
+\[ \mathrm{J}_{1}(N) \longrightarrow \bigoplus_{f} A_{f}^{m_{f}} \]
+
+In this expression, the summation is taken over a set of representatives \(f \in \mathcal{S}_{2}\left(\Gamma_{1}\left(M_{f}\right)\right)\) at levels \(M_{f}\) that divide \(N\). Each \(m_{f}\) represents the number of divisors of \(N / M_{f}\).
+
+\begin{proof}\cite{diamond2005first}
+   By, \ref{3.3.9} the space \(\mathcal{S}_{2}\left(\Gamma_{1}(N)\right)\) has a basis \(\mathcal{B}_{2}(N)\), defined as the union over equivalence class representatives \(f\), divisors of \(N / M_{f}\), and embeddings of \(\mathbb{K}_{f}\) in \(\mathbb{C}\):
+
+\[ \mathcal{B}_{2}(N)=\bigcup_{f} \bigcup_{n} \bigcup_{\sigma} f^{\sigma}(n \tau) \]
+
+Here, the first union is taken over equivalence class representatives, the second over divisors of \(N / M_{f}\), and the third over embeddings of \(\mathbb{K}_{f}\) in \(\mathbb{C}\).  Each \(m_{f}\) is at most the number of divisors of \(N / M_{f}\).
+
+For each pair \((f, n)\), let \(d=\left[\mathbb{K}_{f}: \mathbb{Q}\right]\), and let \(\sigma_{1}, \ldots, \sigma_{d}\) be the embeddings of \(\mathbb{K}_{f}\) in \(\mathbb{C}\). Define the map \(\Psi_{f, n}: \mathcal{S}_{2}\left(\Gamma_{1}(N)\right)^{\wedge} \longrightarrow V_{f}^{\wedge}\) as follows:
+
+\[ \psi\left(\sum_{j=1}^{d} z_{j} f^{\sigma_{j}}(\tau)\right)=\sum_{j=1}^{d} z_{j} n \varphi\left(f^{\sigma_{j}}(n \tau)\right) \]
+
+This map takes \(\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)\) into \(\Lambda_{f}=\left.\mathrm{H}_{1}\left(X_{1}\left(M_{f}\right), \mathbb{Z}\right)\right|_{V_{f}}\). To see this, consider \(\varphi=\int_{\alpha}\) for some loop \(\alpha\) in \(X_{1}(N)\). Consequently we have ,
+
+\[ \psi\left(f^{\sigma}(\tau)\right)=n \int_{\alpha} f^{\sigma}(n \tau) d \tau=\int_{\tilde{\alpha}} f^{\sigma}(\tau) d \tau \]
+
+where \(\tilde{\alpha}(t)=n \alpha(t)\). Note that the holomorphic differential \(\omega\left(f^{\sigma}(n \tau)\right)\) on \(X_{1}(N)\) is identified with its pullback to \(\mathcal{H}\), and \(\alpha\) is identified with some lift in \(\mathcal{H}\). Consequently, \(\tilde{\alpha}\) is the lift of a loop in \(X_{1}\left(M_{f}\right)\) which follows from our previous lemma \ref{lift}.
+\\
+Furthermore, \(\Psi_{f, n}\) takes \(\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)\) to \(\Lambda_{f}\) as claimed.
+
+Taking the product map over all pairs \((f, n)\) gives:
+
+\[ \Psi=\prod_{f, n} \Psi_{f, n}: \mathcal{S}_{2}\left(\Gamma_{1}(N)\right)^{\wedge} \longrightarrow \bigoplus_{f, n} V_{f}^{\wedge}=\bigoplus_{f}\left(V_{f}^{\wedge}\right)^{m_{f}} \]
+
+A Counting of dimensions argument shows that \(\Psi\) is a vector space isomorphism.
+
+This isomorphism descends to an isomorphism of quotients:
+
+\[ \bar{\Psi}: \mathrm{J}_{1}(N) \stackrel{\sim}{\longrightarrow} \bigoplus_{f}\left(V_{f}^{\wedge}\right)^{m_{f}} / \Psi\left(\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)\right) \]
+
+Since \(\Psi\left(\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)\right) \subset \bigoplus_{f} \Lambda_{f}^{m_{f}}\) is a containment of Abelian groups of the same rank, the natural surjection:
+
+\[ \pi: \bigoplus_{f}\left(V_{f}^{\wedge}\right)^{m_{f}} / \Psi\left(\mathrm{H}_{1}\left(X_{1}(N), \mathbb{Z}\right)\right) \longrightarrow \bigoplus_{f}\left(V_{f}^{\wedge} / \Lambda_{f}\right)^{m_{f}} \]
+
+has a finite kernel. By \ref{reqdfrproof} , there is an isomorphism:
+
+\[ i: \bigoplus_{f}\left(V_{f}^{\wedge} / \Lambda_{f}\right)^{m_{f}} \stackrel{\sim}{\longrightarrow} \bigoplus_{f} A_{f}^{m_{f}} \]
+
+Hence, \(i \circ \pi \circ \bar{\Psi}: \mathrm{J}_{1}(N) \longrightarrow \bigoplus_{f} A_{f}^{m_{f}}\) is the desired isogeny. 
+\end{proof}
+\end{theorem}
+
+To conclude this chapter, we present a version of the Modularity Theorem involving Abelian varieties. While we develop results in the larger context of \(\Gamma_{1}(N)\) for generality, we state versions of the Modularity Theorem in the restricted context of \(\Gamma_{0}(N)\), making them slightly sharper.
+
+Specifically, for each newform \(f \in \mathcal{S}_{2}\left(\Gamma_{0}\left(M_{f}\right)\right)\), let
+
+\[ A_{f}^{\prime}=\mathrm{J}_{0}\left(M_{f}\right) / I_{f} \mathrm{~J}_{0}\left(M_{f}\right) . \]
+
+This is another Abelian variety associated with \(f\). The proofs in the earlier case transfer to \(\Gamma_{0}(N)\), showing,
+
+\begin{theorem}[Isogeneous decomposition ]\label{Decomp}
+    There is an isomorphism
+
+\[ A_{f}^{\prime} \stackrel{\sim}{\longrightarrow} V_{f}^{\wedge} / \Lambda_{f}^{\prime} \quad \text { where } \Lambda_{f}^{\prime}=\left.\mathrm{H}_{1}\left(X_{0}\left(M_{f}\right), \mathbb{Z}\right)\right|_{V_{f}} \]
+
+and an isogeny
+
+\[ \mathrm{J}_{0}(N) \longrightarrow \bigoplus_{f}\left(A_{f}^{\prime}\right)^{m_{f}} \]
+
+where now the sum is taken over the equivalence classes of newforms \(f \in \mathcal{S}_{2}\left(\Gamma_{0}\left(M_{f}\right)\right)\).
+ \\
+ 
+\end{theorem} 
+ The introduction of \(A_{f}^{\prime}\) serves to phrase the following version of the Modularity Theorem entirely in terms of \(\Gamma_{0}(N)\). By incorporating Abelian varieties, this version associates a modular form, in fact a newform, to an elliptic curve. 
+
+ \begin{theorem}[\textbf{Modularity theorem}]
+     Let $E$ be a complex elliptic curve with $j(E) \in \mathbb{Q}$. Then for some positive integer $N$ and some newform $f \in \mathcal{S}_{2}\left(\Gamma_{0}(N)\right)$ there exists a surjective holomorphic homomorphism of complex tori
+
+$$
+A_{f}^{\prime} \longrightarrow E.
+$$
+
+ \end{theorem}
+
+ Let us now shift our attention back to the example of the Modular curve, $X_0(38)$ and demonstrate some of the things that we discussed in this chapter pertaining to this curve. We recall from our previous computations that this is a genus 4 curve. \\
+ 
+The Jacobian \( \mathrm{J}_0(N) \) of a modular curve \( X_0(N) \) is an abelian variety whose dimension is equal to the genus \( g \) of the curve. The Jacobian is a \( g \)-dimensional complex torus. Theorem \ref{Decomp} states that the Jacobian \( \mathrm{J}_0(N) \) can be decomposed into a direct sum of abelian varieties associated with newforms. Each of these abelian varieties, say \( A_f' \), corresponds to a newform \( f \) and is an abelian variety of some dimension. The dimension of each abelian variety \( A_f' \) in the decomposition contributes to the total dimension of the Jacobian. The sum of the dimensions of these individual abelian varieties must equal the genus of the modular curve. The modular curve's genus \( g \) gives the total number of 'independent directions' or 'degrees of freedom' in the Jacobian. In simpler terms, each abelian variety \( A_f' \) takes up some degrees of freedom. The dimension of each \( A_f' \) tells us how many degrees of freedom it occupies. \\
+For example let us suppose the genus of \( X_0(N) \) is 3 for some N. If the Jacobian decomposes into two Abelian varieties, one could be 1-dimensional and the other 2-dimensional, totalling 3.\\
+
+Thus, we need to calculate the newforms associated to the Modular curve $X_0(38)$. We will intensively use \hyperlink{http://magma.maths.usyd.edu.au/magma/handbook/modular_symbols}{Magma} for some of the computations. As it turns out, an efficient way to do so is via Modular symbols. We encourage the readers to go through \cite{SteinModularForms2007}. 
+
+Since, this is only an example and the modular symbols are not as much relevant for the further discussion, we will not develop the theory of Modular symbols. We chose to instead emphasize on the fact that Modular symbols lie at the heart of these computations and it should not be forgiven.
+In \cite{SteinModularForms2007}, Stein describes how to use modular symbols to construct a basis of $S_{2}\left(\Gamma_{0}(N)\right)$ consisting of modular forms that are eigenvectors for every element of the ring $\mathbb{T}^{\prime}$ generated by the Hecke operator $T_{p}$, with $p \nmid N$. Recall that such eigenvectors are called eigenforms.\\
+
+
+Consider \( M \) as a positive integer which is a 
+divisor of \( N \). In \cite{Lang1995}, Serge lang describes a way to link the space of modular forms of level \( M \), \( S_{2}(M) \), to the space \( S_{2}(\Gamma_{0}(N)) \).
+For every divisor \( d \) of \( N/M \), there is a map, the so-called degeneracy map \( \beta_{M, d} \), which takes a modular form \( f \) in \( S_{2}(M) \) and maps it to \( S_{2}(\Gamma_{0}(N)) \) by the rule \( \beta_{M, d}(f(q)) = f(q^d) \). This 
+ map essentially adjusts the level of the modular form from \( M \) to \( N \), accommodating the change by raising the modular argument \( q \) to the power \( d \).\\
+
+Let us recall the Newspace \( S_{2}(\Gamma_{0}(N))_{\text{new}} \). This subspace can be understood as the orthogonal complement, in the sense of Hecke operators, of the space spanned by all images of the degeneracy maps \( \beta_{M, d} \) for all choices of \( M \) and \( d \).\\
+
+Drawing on the foundational work of Atkin and Lehner discussed in Chapter 3, we understand that the space \( S_{2}(\Gamma_{0}(N)) \) can be decomposed as a direct sum of the images of these new spaces under the degeneracy maps. More formally, this is expressed as:
+
+\[
+S_{2}(\Gamma_{0}(N)) = \bigoplus_{\substack{M|N \\ d|N/M}} \beta_{M, d}(S_{2}(M)_{\text{new}}).
+\]
+
+Consequently, to calculate \( S_{2}(\Gamma_{0}(N)) \), it is sufficient to compute \( S_{2}(M)_{\text{new}} \) for each positive divisor \( M \) of \( N \) and then consider the images of these spaces under the respective degeneracy maps.
+
+As explained before, we follow \cite{SteinModularForms2007}. We first define the space of modular symbols of level 38 and find out its cuspidal subspace. We then find out the new form decomposition of the cuspidal subspace of M. We do all of this by applying the following series of commands in Magma: 
+
+\begin{verbatim}
+M := ModularSymbols(38);
+M_cusp := CuspidalSubspace(M);
+M_dec := NewformDecomposition(M_cusp); 
+Eigenform(M_dec[1],10);
+Eigenform(M_dec[2],10);
+Eigenform(M_dec[3],10);
+\end{verbatim}
+
+We get the output as follows: 
+
+\begin{verbatim}
+q - q^2 + q^3 + q^4 - q^6 - q^7 - q^8 - 2*q^9 + O(q^10)
+q + q^2 - q^3 + q^4 - 4*q^5 - q^6 + 3*q^7 + q^8 - 2*q^9 + O(q^10)
+q - 2*q^3 - 2*q^4 + 3*q^5 - q^7 + q^9 + O(q^10)
+\end{verbatim}
+
+Let us fix some notations. 
+\begin{align}
+f_1 &= q - q^2 + q^3 + q^4 - q^6 - q^7 - q^8 - 2q^9 + O(q^{10}) \\
+f_2 &= q + q^2 - q^3 + q^4 - 4q^5 - q^6 + 3q^7 + q^8 - 2q^9 + O(q^{10}) \\
+g_1 &= q - 2q^3 - 2q^4 + 3q^5 - q^7 + q^9 + O(q^{10})
+\end{align}
+
+Note that, $f_1, f_2$ are newforms of level 38 with trivial character and $g_1$ is a newform of level 19 with trivial character.  This coincides with the information that we have on the LMFDB Page for the Modular curve $X_0(38).$
+
+Consider \( g_1 \) and \( g_2 \), where \( g_2(z) = g_1(2z) \). Our goal is to show that they are linearly independent. To demonstrate this, we investigate the q-expansions of both functions. Recall that q-expansions provide a unique power series representation for modular forms.
+
+Assume, for argument's sake, there exist constants \( c_1 \) and \( c_2 \) such that \( c_1 g_1 + c_2 g_2 = 0 \). Mathematically, this can be expressed in terms of their q-expansions as:
+
+\[
+c_1 \cdot \sum_{n} a_n q^n + c_2 \cdot \sum_{n} b_n q^n = 0.
+\]
+
+Here, \( a_n \) and \( b_n \) are the coefficients in the q-expansions of \( g_1 \) and \( g_2 \), respectively. The crucial observation is that the odd-powered terms in this expansion are exclusively contributed by \( g_1 \). The absence of odd powers in \( g_2 \)'s expansion is because it is defined as \( g_1(2z) \). Note here that, since \( q = e^{2 \pi i z} \), replacing \( z \) by \( 2z \) amounts to replacing \( q \) by \( q^2 \), so that the q-series of \( g_2 \) is given by
+\( q^2 - 2q^6 - 2q^8 + O(q^{10}) \).
+Specifically, the cancellation of odd terms in the series shows that \( c_1 \) must be zero. Once \( c_1 = 0 \) is established, \( c_2 \) must also be zero to nullify the even terms, due to the structure of \( g_2 \).
+
+Thus, \( c_1 = c_2 = 0 \) is the only solution, proving that \( g_1 \) and \( g_2 \) are linearly independent.
+
+Since the dimension of the newspace is 2 since by definition $f_1,f_2$ generate the Newspace., and we have found two linearly independent functions within it, \( g_1 \) and \( g_2 \) generate the old space in \( S_2(38) \). 
+
+Thus, $f_1, f_2, g_1, g_2$ form a basis of $S_2(38)$. Note that, this is coherent with our previous discussion since $g_2$ is given by $q$ with $q^d$ for $d=2$ which is a divisor of $\frac{38}{19}$. This amounts to saying that $g_2$ was obtained by taking the image of degeneracy map with respect to $M=19, d=2$ of $g_1$. \\ Thus, everything connects so beautifully. 
+
+Let us now end our discussion by stating the isogenous decomposition as stated in \ref{Decomp}.
+Note that, since 2 divides 38, only relevant newforms are from level 2, level 19 and level 38. The space $S_2(2)$ is trivial so only relevant newforms come from level 19 and 38. 
+
+In conclusion, we get that, 
+
+$$
+J_0(38) \cong A_{f_1}' \bigoplus A_{f_2}' \bigoplus (A_{g_1}')^2
+$$
+where the congruence is upto an isogeny and the abelian variety $(A_{g_1}')$ appears with multiplicity 2 because the number of divisors of 19 are 2.
+
+
+
+
+
+ 
