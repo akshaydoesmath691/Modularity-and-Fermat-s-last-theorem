@@ -1,0 +1,69 @@
+Magma commands used for some computations on the Modular curve X_0(38)
+1) To get the model for the Modular curve X_0(38)
+
+To get the relations of degree 2 and degree 3, 
+we can just plug in the following commands in Magma: 
+M := ModularSymbols(38);
+M_cusp := CuspidalSubspace(M);
+M_dec := NewformDecomposition(M_cusp);
+Relations(CuspidalSubspace(ModularForms(Gamma0(38))), 3, 20);
+Relations(CuspidalSubspace(ModularForms(Gamma0(38))), 2, 20);
+
+#Output
+Degree 3:
+    $a^2*c - a*b^2 - a*b*d - a*d^2 - b^2*c - b^2*d - b*c*d - b*d^2 - c^3 -
+        2*c^2*d - 2*c*d^2 - d^3,\\
+        
+    a^2*d + a*d^2 - b^3 + 3*b^2*c + 2*b^2*d - 3*b*c^2 - 4*b*c*d - 2*b*d^2 + c^3
+        + 2*c^2*d + 2*c*d^2 + d^3,\\
+        
+    a*b*c - b^3 - b^2*d - b*c^2 - b*c*d - b*d^2,
+    a*c^2 - b^2*c - b*c*d - c^3 - c^2*d - c*d^2,
+    a*c*d - b^2*d - b*d^2 - c^2*d - c*d^2 - d^3 \\
+    $
+
+Degree 2:
+    $a*c - b^2 - b*d - c^2 - c*d - d^2$
+
+A quick check in Magma shows that the curve given by:
+
+\begin{align*} 
+x^2w + xw^2 - y^3 + 3y^2z + 2y^2w - 3yz^2 - 4yzw - 2yw^2 + z^3
+        + 2z^2w + 2zw^2 + w^3, \\
+xz - y^2 - yw - z^2 - zw - w^2
+\end{align*}
+
+defines a curve of genus 4 which has bad reduction at the primes 19 and 2.
+
+2)To find the Jacobian decomposition for the Modular curve X_0(38)
+
+#Magma Commands to get the basis of newforms 
+M_cusp := CuspidalSubspace(M);
+M_dec := NewformDecomposition(M_cusp); 
+Eigenform(M_dec[1],10);
+Eigenform(M_dec[2],10);
+Eigenform(M_dec[3],10);
+
+We get the output as follows: 
+
+\begin{verbatim}
+q - q^2 + q^3 + q^4 - q^6 - q^7 - q^8 - 2*q^9 + O(q^10)
+q + q^2 - q^3 + q^4 - 4*q^5 - q^6 + 3*q^7 + q^8 - 2*q^9 + O(q^10)
+q - 2*q^3 - 2*q^4 + 3*q^5 - q^7 + q^9 + O(q^10)
+\end{verbatim}
+
+Let us fix some notations. 
+\begin{align}
+f_1 &= q - q^2 + q^3 + q^4 - q^6 - q^7 - q^8 - 2q^9 + O(q^{10}) \\
+f_2 &= q + q^2 - q^3 + q^4 - 4q^5 - q^6 + 3q^7 + q^8 - 2q^9 + O(q^{10}) \\
+g_1 &= q - 2q^3 - 2q^4 + 3q^5 - q^7 + q^9 + O(q^{10})
+\end{align}
+
+$f_1, f_2, g_1, g_2$ form a basis of $S_2(38)$. Note that, this is coherent with our previous discussion since $g_2$ is given by $q$ with $q^d$ for $d=2$ which is a divisor of $\frac{38}{19}$. This amounts to saying that $g_2$ was obtained by taking the image of degeneracy map with respect to $M=19, d=2$ of $g_1$. \\
+In conclusion, we get that, 
+
+$$
+J_0(38) \cong A_{f_1}' \bigoplus A_{f_2}' \bigoplus (A_{g_1}')^2
+$$
+where the congruence is upto an isogeny and the abelian variety $(A_{g_1}')$ appears with multiplicity 2 because the number of divisors of 19 are 2.
+
